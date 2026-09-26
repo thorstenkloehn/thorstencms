@@ -6,10 +6,9 @@ Statische Veröffentlichung allgemeiner Informationsseiten und Blogs.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die Auswahl priorisiert langjährige Generatoren; Astro ergänzt komponentenbasierte Seiten. Build Awesome führt die Eleventy-Linie fort.
 
-- **Hugo:** Redaktionsoberfläche muss separat ergänzt werden.
-- **Jekyll:** Ruby-Abhängigkeiten und Plugins müssen zusammenpassen.
-- **Pelican:** Theme und Plugins bestimmen viele Portalmerkmale.
-- **Build Awesome (Eleventy):** Umbenennung bei Paketwahl und Wartung berücksichtigen.
-- **Astro:** Interaktive Komponenten vergrößern die Build-Umgebung.
+- **Hugo:** Eignet sich hervorragend für inhaltsstarke Webauftritte und Blogs mit hierarchischen Taxonomien und schnellem Live-Reload beim Verfassen von Beiträgen.
+- **Jekyll:** Klassischer seitenbasierter Blog-Generator mit nativer Datums- und Artikellogik, unterstützt durch das weltweite GitHub-Pages-Hosting.
+- **Pelican:** Flexibler Python-Generator mit Jinja2-Templating, ideal für mehrsprachige Content-Websites ohne JavaScript-Buildschritt.
+- **Build Awesome (Eleventy):** Extrem flexibler statischer Generator mit freier Vorlagenwahl (Nunjucks, Liquid, Markdown) und schlanker Ausgabestruktur.
+- **Astro:** Optimiert für inhaltsgetriebene Marketing- und Informationsseiten; liefert standardmäßig null Kilobyte Client-JavaScript aus.

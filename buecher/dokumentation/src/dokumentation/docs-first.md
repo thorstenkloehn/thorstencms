@@ -6,10 +6,9 @@ Systeme für thematisch gegliederte Dokumentationswebsites.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die beiden etablierten Generatoren stehen vor den stärker komponentenorientierten Frameworks. Interaktivität ist eine zusätzliche Anforderung, kein Reifebeleg.
 
-- **Sphinx:** Erweiterungen müssen im Build aufeinander abgestimmt sein.
-- **MkDocs:** Theme- und Plugin-Reife separat bewerten.
-- **Docusaurus:** Node.js- und React-Abhängigkeiten gehören zur laufenden Pflege.
-- **VitePress:** Komponenten benötigen Vue-Kenntnisse.
-- **Starlight:** Astro-Komponenten und Erweiterungen müssen kompatibel sein.
+- **Sphinx:** Etablierter Standard für modulare Softwareportale mit mehrstufiger Seitenhierarchie und Quellcode-Verlinkung.
+- **MkDocs:** Ermöglicht die rasche Bereitstellung performanter Dokumentationsportale mit vorkonfigurierter Volltextsuche und responsiver Navigationsleiste.
+- **Docusaurus:** Ausgelegt auf umfangreiche Entwicklerportale mit Versionsverwaltung älterer Dokumentationsstände und integrierter Blog-Komponente.
+- **VitePress:** Liefert ein reaktionsschnelles Portal-Layout für quelloffene Werkzeuge mit schneller statischer Vorab-Kompilierung.
+- **Starlight:** Schlankes Dokumentationsportal auf Astro-Basis mit Fokus auf barrierefreie Seitennavigation und minimalen JavaScript-Ballast im Browser.

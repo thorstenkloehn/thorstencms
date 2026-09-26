@@ -1,15 +1,14 @@
 # Semantische und RAG-Systeme
 
-[Übergeordnete Kategorie: Evolution digitaler Wissenssysteme](../wissenssysteme.md)
+[Übergeordnete Kategorie: Digitale Wissenssysteme](../wissenssysteme.md)
 
 Bedeutungsorientiertes Erschließen von Dokumenten und Wissen.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,12 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-Ein RAG-Framework ist noch kein fertiges Wiki. Inhaltsrechte, Quellenreferenzen und Aktualisierung der Indizes bleiben Teil der Integration.
+Ein semantisches Wissenssystem erschließt Inhalte über Bedeutungsähnlichkeiten, Entitäten und Wissensgraphen. Es ergänzt strukturierte Wikis, ersetzt jedoch weder redaktionelle Pflege noch Zugriffsrechte.
 
-- **Haystack:** Anwendung, Index und Evaluation müssen integriert werden.
-- **LlamaIndex:** Gehostete Angebote sind von der offenen Bibliothek zu trennen.
-- **LangChain:** Framework liefert keine fertige Wissensredaktion.
-
-- **AnythingLLM:** Nur der PostgreSQL-Betrieb bleibt ausgewählt: Prisma-Datenbank gemäß Quellhinweis umstellen und pgvector als Vektorspeicher einrichten. Die Standardinstallation mit SQLite erfüllt den Filter nicht. Dieser zusätzliche Anpassungsbedarf begrenzt die Reife dieser Betriebsvariante.
-
-- **LangGraph:** Framework für selbst entwickelte Abläufe, keine fertige Redaktionsanwendung. [RAG-Abläufe](https://docs.langchain.com/oss/python/langgraph/agentic-rag) lassen sich damit orchestrieren. PostgreSQL-Checkpointer und Store ausdrücklich konfigurieren; für Dokumente und Vektoren bei Bedarf [langchain-postgres](https://github.com/langchain-ai/langchain-postgres) einsetzen. Für Dokumentationspflege müssen Dateibearbeitung, Review und Build als Werkzeuge eingebunden werden.
+- **Haystack:** Ermöglicht hybride Sucharchitekturen aus traditioneller Volltextsuche (BM25) und dichter Vektorsuche für komplexe Wissensbestände.
+- **LlamaIndex:** Bietet Datenstrukturen zur Extraktion und Traversierung hierarchischer Wissensgraphen aus verknüpften Notizen und Dokumenten.
+- **LangChain:** Verbindet Wissensspeicher mit Abfrageketten; die semantische Konsistenz erfordert anwendungsspezifische Filterregeln.
+- **AnythingLLM:** Bietet getrennte Arbeitsbereiche (Workspaces) für unterschiedliche Wissensthemen. Zur Einhaltung des Speicherfilters ist die [Umstellung auf PostgreSQL und pgvector](../software.md#sonderfall-anythingllm) erforderlich.
+- **LangGraph:** Modelliert mehrschrittige Recherchepfade und Begriffsklärungen als zustandsbehaftete Graphen mit expliziten Verzweigungsregeln.

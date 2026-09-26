@@ -9,7 +9,7 @@ von Wissenssystemen, Content-Management-Systemen, Docs-as-Code, Webframeworks, L
 Status: Thematische Einführungen und gefilterte Open-Source-Auswahlen
 für acht Hauptkategorien und 52 Unterkategorien. Enthalten bleiben nur
 PostgreSQL- oder dateibasierte Betriebsvarianten, mit Lizenzen, Reifegraden,
-Speicherwegen und Quellen. Die Listen enthalten genau fünf Einträge.
+Speicherwegen und Quellen. Die Listen enthalten je nach Beleglage bis zu fünf Einträge.
 Installationsanleitungen werden später ergänzt.
 
 ### Buch bauen und lesen

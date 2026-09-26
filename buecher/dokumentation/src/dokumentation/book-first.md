@@ -6,10 +6,9 @@ Werkzeuge für zusammenhängende Publikationen mit Kapiteln und festem Lesepfad.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Sphinx und Asciidoctor eignen sich für umfangreiche technische Texte; mdBook ist auf Markdown-Bücher zugeschnitten. Pandoc ist eine Konvertierungsbasis, Quarto ergänzt ausführbare Inhalte.
 
-- **Sphinx:** Erweiterungen müssen im Build aufeinander abgestimmt sein.
-- **Asciidoctor:** Für ein vollständiges Portal werden zusätzliche Struktur- und Build-Bausteine benötigt.
-- **Pandoc:** Konverter; keine gemeinsame Redaktionsoberfläche.
-- **mdBook:** Mehrere Produktversionen und komplexe Portale benötigen zusätzliche Organisation.
-- **Quarto:** Codeausführung benötigt passende Laufzeitumgebungen.
+- **Sphinx:** Unterstützt klassische Buchstrukturen mit automatischen Sachregistern, Glossaren und hochqualitativer LaTeX-/PDF-Ausgabe.
+- **Asciidoctor:** Hervorragend für vollwertige Fachbücher (`doctype: book`) mit formalen Kapiteln, Anhängen und präzisem PDF-Layouting via asciidoctor-pdf.
+- **Pandoc:** Eignet sich zur Generierung valider EPUB- und Druck-PDF-Bücher direkt aus versionierten Manuskriptdateien.
+- **mdBook:** Optimiert für digitale Online-Bücher mit leicht navigierbarem Inhaltsverzeichnis, Volltextsuche und schnellem Seitenwechsel.
+- **Quarto:** Integriert datengetriebene Auswertungen in Buchprojekte; kompiliert wissenschaftliche Monografien simultan als HTML-Webbuch und druckfertiges PDF.

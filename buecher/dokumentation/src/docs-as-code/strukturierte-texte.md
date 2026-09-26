@@ -1,15 +1,14 @@
 # Strukturierte Textauszeichnung und API-Dokumentation
 
-[Übergeordnete Kategorie: Evolution digitaler Docs-as-Code](../docs-as-code.md)
+[Übergeordnete Kategorie: Docs-as-Code](../docs-as-code.md)
 
 Werkzeuge für strukturierten Text, Quellcode-Referenzen und reproduzierbare Ausgabe.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die Liste nennt heutige Werkzeuge für das Architekturprinzip. Sie ist keine Behauptung, alle Projekte seien bereits in der historischen Vorläufergeneration entstanden.
 
-- **Doxygen:** Ein vollständiger Review- und Veröffentlichungsprozess kommt aus der Umgebung.
-- **Sphinx:** Erweiterungen müssen im Build aufeinander abgestimmt sein.
-- **Asciidoctor:** Für ein vollständiges Portal werden zusätzliche Struktur- und Build-Bausteine benötigt.
-- **Pandoc:** Konverter; keine gemeinsame Redaktionsoberfläche.
-- **Jekyll:** Ruby-Abhängigkeiten und Plugins müssen zusammenpassen.
+- **Doxygen:** Etablierter Standard zur Extraktion strukturierter Schnittstellenreferenzen direkt aus Quellcode-Kommentaren (C++, Java, C).
+- **Sphinx:** Führend bei semantischen Querverweisen in reStructuredText und MyST-Markdown mit präziser Typprüfung für Programmiersprachen-Domänen.
+- **Asciidoctor:** Leistungsfähige AsciiDoc-Verarbeitung für technische Dokumente mit modularen Dateieinbindungen (`include`), Callouts und bedingter Kompilierung.
+- **Pandoc:** Dient als universelle Syntax-Brücke zur formatverlustarmen Transformation zwischen unterschiedlichen Auszeichnungssprachen.
+- **Jekyll:** Kombiniert Markdown-Texte mit strukturierten YAML-Frontmatter-Metadaten für templategestützte Publikationsprozesse.

@@ -1,15 +1,14 @@
 # Kollaborative Arbeitsräume und Docs-as-Code
 
-[Übergeordnete Kategorie: Evolution digitaler Wissenssysteme](../wissenssysteme.md)
+[Übergeordnete Kategorie: Digitale Wissenssysteme](../wissenssysteme.md)
 
 Gemeinsame Wissenspflege im Browser oder über versionierte Dateien.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,11 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-XWiki mit PostgreSQL und das dateibasierte DokuWiki decken Browserredaktion ab. Sphinx und mdBook bearbeiten Inhaltsdateien; Zusammenarbeit erfolgt über einen separaten Review-Prozess.
+Kollaborative Arbeitsräume verbinden gemeinsame Bearbeitung im Browser mit versionierten Datei- und Codebeständen. Berechtigungen, Review-Prozesse und Speicherstrukturen müssen zum Arbeitsalltag des Teams passen.
 
-- **XWiki:** Individuelle Wiki-Anwendungen erhöhen den Betriebsaufwand.
-- **Sphinx:** Erweiterungen müssen im Build aufeinander abgestimmt sein.
-- **DokuWiki:** Kompatibilität zusätzlicher Plugins gesondert prüfen.
-- **mdBook:** Mehrere Produktversionen und komplexe Portale benötigen zusätzliche Organisation.
-
-- **Wiki.js:** Für diese Auswahl PostgreSQL als Anwendungsdatenbank konfigurieren. Zusätzliche Speicherziele sind optional und nicht Bestandteil der gewählten Variante.
+- **XWiki:** Dient als zentraler Enterprise-Arbeitsraum mit differenzierten Benutzerrechten und formulargestützten Workflows im Browser.
+- **Sphinx:** Verlagert Arbeitsräume in Code-Repositories; Dokumentation wird im Team dezentral über Git und Pull Requests gepflegt.
+- **DokuWiki:** Bietet unkomplizierte Team-Arbeitsbereiche über Namensräume, ohne separaten Datenbankbetrieb zu erfordern.
+- **mdBook:** Schlanker, fokussierter Handbuch-Arbeitsraum für Software- und Entwicklungsteams mit klar gegliederter Kapitelführung.
+- **Wiki.js:** Kombiniert grafische Team-Arbeitsbereiche mit optionalem bidirektionalem Git-Speicherabgleich; für die relationale Datenhaltung ist PostgreSQL zu konfigurieren.

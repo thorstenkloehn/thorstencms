@@ -1,46 +1,46 @@
-# Dokumentenerstellung, Wikis und Notebooks
+# Dokumentenerstellung, Wikis und interaktive Dokumente
 
-Dokumentation kann als fortlaufendes Buch, als vernetzte Sammlung oder als
-ausführbares Dokument organisiert sein. Die Ausgangsübersicht unterscheidet
-mehrere Aufgabenfelder:
+Ein Handbuch für neue Mitarbeitende braucht eine andere Leseführung als die
+Referenz einer Programmierschnittstelle. Vor der Werkzeugwahl hilft deshalb
+eine konkrete Frage: Was soll jemand mit dem fertigen Inhalt tun können?
 
-| Form | Schwerpunkt |
-| --- | --- |
-| Book-First | Zusammenhängende Bücher und Handbücher mit Lesereihenfolge |
-| Docs-First | Thematisch gegliederte Dokumentationsportale und Referenzen |
-| Notebooks | Text, Berechnungen und Ergebnisse in einem Dokument |
-| Webseiten-Generatoren | Veröffentlichung allgemeiner Informationsseiten |
-| Wikis und Wissensdatenbanken | Gemeinsam gepflegte, verknüpfte Inhalte |
-| RAG- und KI-Wissenssysteme | Suche und Antworten auf Basis eines Dokumentbestands |
-| Programmatische Dokumentenerstellung | Wiederholbare Erzeugung von Dokumenten aus Daten |
+## Vom Anwendungsfall zur Dokumentationsform
 
-Diese Formen überschneiden sich. Ein Buch kann Teil eines Wissensportals sein;
-ein Wiki kann ergänzend eine dokumentengestützte KI-Suche anbieten.
+Für eine Einarbeitung bietet sich eine feste Kapitelreihenfolge an. Zum
+Nachschlagen sind kurze, direkt verlinkbare Themenseiten sinnvoll. Wenn das
+Ergebnis von Berechnungen überprüfbar bleiben soll, können Notebooks Text,
+Code und Ausgabe zusammenhalten. In einem Wiki können mehrere Menschen
+Begriffe, Erfahrungen und Entscheidungen über Seitenverweise verbinden.
+
+Diese Formen lassen sich kombinieren. Ein Projekt kann ein Einstiegshandbuch,
+eine API-Referenz und eine Sammlung von Betriebsnotizen pflegen. Entscheidend
+ist, wo Änderungen vorgenommen werden und wer ihre fachliche Prüfung übernimmt.
+Ein zusätzliches Such- oder RAG-System erschließt den Bestand, ersetzt seine
+Pflege aber nicht. Automatisch erzeugte Antworten können fehlerhaft sein.
+
+## Beispiel: Betriebsanleitung für einen Dienst
+
+Eine neue Konfigurationsoption erhält eine Referenzseite mit zulässigen Werten.
+Das Einstiegskapitel zeigt einen typischen Einsatz. Ein Notebook kann eine
+Messung dokumentieren. Alle drei verweisen auf denselben Versionsstand.
+So entsteht ein zusammenhängender Bestand, ohne denselben Erklärungstext in
+mehreren Kapiteln unabhängig pflegen zu müssen.
 
 ## Unterkategorien: gefilterte Softwareauswahl
 
-- [Book-First: Bücher und Handbücher](dokumentation/book-first.md)
-- [Docs-First: Dokumentationsportale](dokumentation/docs-first.md)
-- [Notebooks und ausführbare Dokumente](dokumentation/notebooks.md)
+- [Bücher und Handbücher](dokumentation/book-first.md)
+- [Dokumentationsportale](dokumentation/docs-first.md)
+- [Notebooks](dokumentation/notebooks.md)
 - [Webseiten-Generatoren](dokumentation/webseiten-generatoren.md)
-- [Wikis und Wissensdatenbanken](dokumentation/wikis.md)
-- [RAG- und KI-Wissenssysteme](dokumentation/rag.md)
+- [Wikis](dokumentation/wikis.md)
+- [RAG und Wissenssuche](dokumentation/rag.md)
 - [Programmatische Dokumentenerstellung](dokumentation/dokumentenerstellung.md)
-
-## Geplante Vertiefung
-
-- Zielgruppen und Lesewege
-- Dokumentstruktur und Querverweise
-- Pflege, Verantwortlichkeiten und Veröffentlichung
-
-Quelle: [Dokumentenerstellung, Wikis & Notebooks](https://dokument.wissen-ahrensburg.de/wissen/dokumentation/).
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: 26. September 2026. Redaktionelle Auswahl nach der
+Redaktioneller Stand: 27. September 2026. Auswahl nach der
 [gemeinsamen Bewertungsmethode](software.md). Die Reihenfolge priorisiert
 Reife und anschließend die Eignung für diese Kategorie.
 

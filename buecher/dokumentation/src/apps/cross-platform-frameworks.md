@@ -6,27 +6,30 @@ Laufzeitumgebungen und Entwicklungsframeworks für plattformübergreifende Clien
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**4 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 | Rang | Software und offizielle Quelle | Lizenz des betrachteten Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [Tauri](https://github.com/tauri-apps/tauri) | Apache-2.0 | Sehr hoch | Extrem ressourcenschonende Multi-Plattform-Laufzeit (Rust + Web-Frontend) für Desktop und Mobile. | Dateien: [Lokaler Dateisystem- und SQLite-Zugriff](https://tauri.app/) |
-| 2 | [React Native](https://github.com/facebook/react-native) | MIT | Sehr hoch | Etablierter Standard für native iOS- und Android-Apps mit Web-Technologien. | Dateien: [Lokaler SQLite- und Dateispeicher über offizielle Module](https://reactnative.dev/) |
-| 3 | [Flutter](https://github.com/flutter/flutter) | BSD-3-Clause | Sehr hoch | Plattformübergreifend kompilierte UI-Engine für Mobile, Desktop und Web. | Dateien: [Lokale Dateipersistenz und sqflite](https://flutter.dev/) |
-| 4 | [Capacitor](https://github.com/ionic-team/capacitor) | MIT | Sehr hoch | Moderne native Bridge zur Auslieferung von Web-Apps auf mobilen Betriebssystemen. | Dateien: [Lokaler Dateispeicher und SQLite-Plugins](https://capacitorjs.com/) |
-| 5 | [Electron](https://github.com/electron/electron) | MIT | Sehr hoch | Führendes Desktop-Framework (Chromium + Node.js) für Apps wie Joplin, Obsidian und VS Code. | Dateien: [Vollständiger Node.js-Dateisystemzugriff](https://www.electronjs.org/) |
+| 1 | [Flutter](https://github.com/flutter/flutter) | BSD-3-Clause | Sehr hoch | Framework für plattformübergreifende Oberflächen. | Dateien: [Lesen und Schreiben mit dart:io und path_provider](https://docs.flutter.dev/cookbook/persistence/reading-writing-files) |
+| 2 | [Capacitor](https://github.com/ionic-team/capacitor) | MIT | Sehr hoch | Native Laufzeit und Plugins für Weboberflächen. | Dateien: [Filesystem-Plugin](https://capacitorjs.com/docs/apis/filesystem) |
+| 3 | [Electron](https://github.com/electron/electron) | MIT | Sehr hoch | Desktop-Laufzeit mit Browser- und Node.js-Prozessen. | Dateien: [Dateizugriff im Hauptprozess, begrenzte IPC-Anbindung](https://www.electronjs.org/docs/latest/tutorial/tutorial-preload) |
+| 4 | [Tauri](https://github.com/tauri-apps/tauri) | MIT; teilweise MIT OR Apache-2.0 | Hoch | Rust-Kern und Weboberfläche; eigene Anwendungslogik erforderlich. | Dateien: [File-System-Plugin mit eingeschränkten Berechtigungen](https://v2.tauri.app/plugin/file-system/) |
 
 ## Einsatz und Abgrenzung
 
-Entwicklungsframeworks stellen die technische Brücke zwischen Webcode und Betriebssystem her.
+Die Auswahl bewertet Frameworks für selbst entwickelte Anwendungen. Ein
+Dateispeicher muss tatsächlich implementiert werden; SQLite-Plugins werden
+hier nicht als zulässiger Ersatz für Inhaltsdateien aufgeführt.
 
-- **Tauri:** Minimale Binary-Größe und hohe Sicherheit; erfordert für native Systemfunktionen Rust-Kenntnisse.
-- **React Native:** Zugriff auf native Plattformkomponenten; Build-Pipelines (Xcode/Android Studio) sind zu pflegen.
-- **Flutter:** Identische Pixel-Darstellung auf allen Geräten; erfordert die Programmiersprache Dart.
-- **Capacitor:** Einfachste Migration bestehender Webanwendungen; Performance hängt von der WebView ab.
-- **Electron:** Bewährteste Desktop-Laufzeit; höherer Speicher- und Ressourcenverbrauch als Tauri.
+Die Dateizugriffe unterscheiden sich nach Plattform und Berechtigungen.
+Der verlinkte Flutter-Ablauf gilt nicht für den Browser. Electron führt
+privilegierte Dateizugriffe auf der Anwendungsseite aus; eine beliebige
+Webseite erhält dadurch keinen unbeschränkten Zugriff auf das Dateisystem.
+
+Für ein Beispielprojekt werden zunächst Textdateien gespeichert, nach einem
+Neustart geladen und bei fehlenden Schreibrechten verständliche Fehlermeldungen
+angezeigt. Synchronisation und Konfliktbehandlung sind zusätzliche Aufgaben.

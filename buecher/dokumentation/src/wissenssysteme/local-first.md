@@ -1,15 +1,14 @@
 # Visuelle, Local-First und agentische Systeme
 
-[Übergeordnete Kategorie: Evolution digitaler Wissenssysteme](../wissenssysteme.md)
+[Übergeordnete Kategorie: Digitale Wissenssysteme](../wissenssysteme.md)
 
 Werkzeuge für lokale Wissensarbeit, visuelle Darstellung oder Agentenunterstützung.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,12 +24,11 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die gefilterte Auswahl deckt lokale Wissensarbeit und visuelle Darstellung ab: TiddlyWiki speichert eine HTML-Datei, Excalidraw lokale Zeichnungsdateien. AnythingLLM ergänzt Agentenfunktionen, hier ausschließlich in der angepassten PostgreSQL-Variante.
 
-- **TiddlyWiki:** Gemeinsame Bearbeitung und Synchronisierung brauchen ein passendes Betriebskonzept.
+- **TiddlyWiki:** Arbeitet vollständig autark im Browser ohne Backend-Server; das Zurückschreiben modifizierter HTML-Dateien verlangt passende Browser-Helfer oder lokale Speicheradapter.
 - **Excalidraw:** Ersetzt keine vollständige textuelle Wissensdatenbank.
 
+- **AnythingLLM:** Stellt eine eigenständige Desktop-Laufzeit für lokale Dokumentenabfragen bereit. Die standardmäßige SQLite-Nutzung erfüllt den Buchfilter nicht; zwingend erforderlich ist die [Umstellung auf PostgreSQL und pgvector](../software.md#sonderfall-anythingllm).
 
-- **AnythingLLM:** Nur der PostgreSQL-Betrieb bleibt ausgewählt: Prisma-Datenbank gemäß Quellhinweis umstellen und pgvector als Vektorspeicher einrichten. Die Standardinstallation mit SQLite erfüllt den Filter nicht. Dieser zusätzliche Anpassungsbedarf begrenzt die Reife dieser Betriebsvariante.
-
-- **Zim:** Lokale, verlinkte Wiki-Seiten liegen in Textdateien. Der Schwerpunkt liegt auf persönlicher Wissensarbeit, nicht auf gemeinsamem Echtzeit-Editing.
+- **Zim:** Arbeitet unmittelbar auf dem lokalen Dateisystem; jede Notizseite liegt als gewöhnliche Textdatei im Verzeichnisbaum und bleibt ohne Serversoftware editierbar.
 
 - **SiYuan:** Die .sy-Dateien enthalten das maßgebliche Wissen; die SQLite-Indizes sind rekonstruierbare Hilfsdaten.

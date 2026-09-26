@@ -1,19 +1,34 @@
-# Evolution digitaler Content-Management-Systeme
+# Content-Management-Systeme: Redaktion und Auslieferung
 
-Content-Management-Systeme organisieren die Erstellung, Pflege und Auslieferung
-von Inhalten. Die Ausgangsseite gliedert ihre Entwicklung nach Architektur:
+Ein CMS verwaltet Inhalte, die mehrere Menschen erstellen, prüfen und
+veröffentlichen. Für die Auswahl ist etwa entscheidend, ob eine Redaktion
+fertige Seiten bearbeitet oder strukturierte Angaben wie Titel, Termin,
+Veranstaltungsort und Anmeldelink pflegt.
 
-| Richtung | Prinzip |
-| --- | --- |
-| Klassische CMS | Redaktion, Speicherung und Seitenausgabe sind eng verbunden |
-| Headless und Decoupled CMS | Inhaltspflege und Darstellung werden getrennt; Schnittstellen verbinden sie |
-| Composable CMS | Mehrere spezialisierte Dienste bilden gemeinsam die Publikationsumgebung |
-| KI-gestützte Systeme | Assistenz unterstützt Texterstellung und Personalisierung |
-| Agentische Systeme | Agenten übernehmen mehrstufige Aufgaben in der Inhaltspflege |
+## Beispiel: Eine Veranstaltung auf mehreren Kanälen
 
-Git-basierte und Flat-File-Ansätze bilden einen ergänzenden Entwicklungsstrang.
-Speicherarchitektur und Auslieferungsmodell sind dabei getrennte Fragen:
-Dateispeicherung allein beschreibt noch keinen vollständigen Redaktionsprozess.
+Eine Redaktion erfasst die Veranstaltung einmal. Die Website zeigt einen
+langen Beschreibungstext, eine App zunächst nur Termin und Ort. Wird die
+Veranstaltung abgesagt, muss die Änderung auf beiden Kanälen ankommen.
+Dafür werden ein gemeinsames Inhaltsmodell, Zuständigkeiten und Regeln für
+Zwischenspeicher benötigt. Eine API allein erledigt diese Abstimmung nicht.
+
+## Wie die Bausteine zusammenarbeiten
+
+Bei einem integrierten CMS gehören Inhaltspflege und Seitenausgabe zur selben
+Anwendung. Bei einer entkoppelten Lösung übernimmt ein eigenes Frontend die
+Darstellung. Das schafft Gestaltungsspielraum, bringt aber zusätzliche Arbeit
+für Vorschau, Anmeldung und Veröffentlichung mit sich.
+
+Dateibasierte Systeme passen zu Beständen, die sich gut als Text und Medien
+verwalten lassen. Relationale Inhaltsmodelle können dagegen eine Datenbank
+nahelegen. In dieser Auswahl werden PostgreSQL und direkte Inhaltsdateien
+betrachtet. Das ist eine redaktionelle Eingrenzung, keine allgemeine Aussage
+über die Qualität anderer Datenbanken.
+
+KI-Erweiterungen können Entwürfe oder Metadaten vorschlagen. Die Reife eines
+CMS-Kerns belegt dabei weder die Qualität einer Erweiterung noch die Richtigkeit
+ihrer Ausgaben. Automatische Veröffentlichung benötigt eigene Prüfregeln.
 
 ## Unterkategorien: gefilterte Softwareauswahl
 
@@ -21,23 +36,14 @@ Dateispeicherung allein beschreibt noch keinen vollständigen Redaktionsprozess.
 - [Headless und Decoupled CMS](cms/headless.md)
 - [Composable CMS](cms/composable.md)
 - [KI-gestützte Content-Erstellung](cms/ki-content.md)
-- [Agentische Content-Systeme](cms/agentisch.md)
+- [Agentische Abläufe](cms/agentisch.md)
 - [Git-basierte und Flat-File-CMS](cms/dateibasiert.md)
-
-## Geplante Vertiefung
-
-- Inhalt, Darstellung und Auslieferung
-- Redaktionelle Rollen und Freigaben
-- Schnittstellen und Wiederverwendung über mehrere Kanäle
-
-Quelle: [Evolution und Architekturen digitaler Content-Management-Systeme](https://dokument.wissen-ahrensburg.de/wissen/dokumentation/evolution-digitaler-cms/).
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: 26. September 2026. Redaktionelle Auswahl nach der
+Redaktioneller Stand: 27. September 2026. Auswahl nach der
 [gemeinsamen Bewertungsmethode](software.md). Die Reihenfolge priorisiert
 Reife und anschließend die Eignung für diese Kategorie.
 
@@ -88,4 +94,3 @@ Offizielle Grundlage: [Wagtail](https://github.com/wagtail/wagtail).
 **Einordnung:** Ergänzt die klassischen redaktionellen CMS um eine dateibasierte Variante mit Admin-Oberfläche. Inhalte liegen in Markdown und YAML; relationale Inhaltsmodelle sind nicht sein Schwerpunkt.
 
 Offizielle Grundlage: [Grav](https://github.com/getgrav/grav).
-

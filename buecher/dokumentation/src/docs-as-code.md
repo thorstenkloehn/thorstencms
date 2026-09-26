@@ -1,49 +1,49 @@
-# Evolution digitaler Docs-as-Code
+# Docs-as-Code: Änderungen gemeinsam prüfen
 
-Docs-as-Code behandelt Dokumentation mit Verfahren aus der Softwareentwicklung:
-Textdateien werden versioniert, Änderungen geprüft und Veröffentlichungen
-aus den Quellen gebaut.
+Bei Docs-as-Code liegen Dokumente in bearbeitbaren Textdateien. Änderungen
+werden versioniert, geprüft und anschließend in ein lesbares Ausgabeformat
+überführt. Der Nutzen zeigt sich besonders dann, wenn Dokumentation und
+Software häufig gemeinsam geändert werden.
 
-Die Ausgangsseite unterscheidet sechs Entwicklungsrichtungen:
+## Beispiel: Eine geänderte Konfigurationsoption
 
-1. Strukturierte Textauszeichnung und Dokumentation im Quellcode.
-2. Zusammenhängende Abläufe aus Versionierung, Review und automatisiertem Build.
-3. Markdown als leicht zugängliches Format für Dokumentationsprojekte.
-4. Komponenten und interaktive Elemente innerhalb der Dokumentation.
-5. KI-Unterstützung für Qualitätsprüfung und dokumentengestützte Suche.
-6. Agentische Pflege von Dokumentationsdateien und Änderungen.
+Ein Änderungsvorschlag enthält den neuen Programmcode, die überarbeitete
+Erklärung und ein passendes Beispiel. Die prüfende Person sieht zusammen,
+ob Beschreibung und Verhalten übereinstimmen. Ein Build kontrolliert, ob sich
+das Buch erzeugen lässt. Zusätzliche Prüfungen können fehlende Links oder
+abweichende Begriffe melden; fachliche Richtigkeit folgt daraus nicht automatisch.
 
-Die Übergänge sind fließend. Ein dateibasiertes Buch benötigt weder interaktive
-Komponenten noch KI, um einen nachvollziehbaren Pflegeprozess zu ermöglichen.
+## Wiederholbare Veröffentlichung
+
+Für verlässliche Ergebnisse müssen Werkzeugversionen, Erweiterungen und
+benötigte Dateien festgelegt werden. Allein die Verwendung von Git oder
+Markdown macht einen Build weder deterministisch noch offlinefähig.
+Auch Barrierefreiheit hängt von Inhalt, Struktur, Theme und Ausgabe ab.
+
+KI-Werkzeuge können Änderungen vorbereiten. Ihre Ergebnisse werden als
+Textänderungen geprüft, bevor der eigentliche Publikationslauf beginnt.
+Dadurch bleibt nachvollziehbar, welcher Text veröffentlicht wurde.
 
 ## Aufbau dieses Buches
 
-Die Inhalte liegen als Markdown vor. `SUMMARY.md` definiert die Lesereihenfolge,
-`book.toml` die Buchkonfiguration. mdBook erzeugt daraus die HTML-Ausgabe.
+Die Inhalte liegen als Markdown vor. `SUMMARY.md` ordnet die Kapitel,
+`book.toml` konfiguriert mdBook. Für eine Änderung werden Inhalt und
+Querverweise geprüft, danach wird die HTML-Ausgabe gebaut und kontrolliert.
 
 ## Unterkategorien: gefilterte Softwareauswahl
 
-- [Strukturierte Textauszeichnung und API-Dokumentation](docs-as-code/strukturierte-texte.md)
-- [Versionierung, Review und automatisierter Build](docs-as-code/automatisierte-ablaeufe.md)
-- [Markdown-basierte Dokumentation](docs-as-code/markdown.md)
-- [Komponenten und interaktive Dokumentation](docs-as-code/komponenten.md)
-- [KI-Unterstützung und dokumentengestützte Suche](docs-as-code/ki-unterstuetzung.md)
+- [Textauszeichnung und API-Dokumentation](docs-as-code/strukturierte-texte.md)
+- [Versionierung, Review und Build](docs-as-code/automatisierte-ablaeufe.md)
+- [Markdown-Dokumentation](docs-as-code/markdown.md)
+- [Komponenten und Interaktion](docs-as-code/komponenten.md)
+- [KI und dokumentengestützte Suche](docs-as-code/ki-unterstuetzung.md)
 - [Agentische Dokumentationspflege](docs-as-code/agentische-pflege.md)
-
-## Geplante Vertiefung
-
-- Kapitelstruktur und Querverweise
-- Versionierung und redaktionelle Prüfung
-- Reproduzierbare Veröffentlichung
-
-Quelle: [Evolution und Architekturen digitaler Docs-as-Code](https://dokument.wissen-ahrensburg.de/wissen/dokumentation/evolution-digitaler-docs-as-code/).
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: 26. September 2026. Redaktionelle Auswahl nach der
+Redaktioneller Stand: 27. September 2026. Auswahl nach der
 [gemeinsamen Bewertungsmethode](software.md). Die Reihenfolge priorisiert
 Reife und anschließend die Eignung für diese Kategorie.
 

@@ -14,18 +14,18 @@ Docs-as-Code beschreibt einen dateibasierten Arbeitsprozess.
 
 ## Aufbau und Stand
 
-Dies ist die erste Buchstruktur mit kurzen thematischen Einführungen.
-Die sechs verlinkten Ausgangsseiten sind im [Quellenverzeichnis](quellen.md)
-dokumentiert. Die Texte sind eigenständige Zusammenfassungen, keine vollständige
-Übernahme der Seiten.
+Das Buch verbindet Einführungen, Arbeitsbeispiele und Softwareauswahlen.
+Acht Hauptkategorien und 52 Unterkategorien enthalten jeweils bis zu fünf
+Einträge. Die Zahl richtet sich nach der belegbaren Eignung für den
+beschriebenen PostgreSQL- oder Dateibetrieb.
 
-Jede der acht Hauptkategorien und alle 52 Unterkategorien enthalten eine
-gefilterte Auswahl von genau fünf Open-Source-Lösungen mit Lizenz,
-Reifegrad, Begründung und offiziellen Quellen. Enthalten bleiben nur
-PostgreSQL- oder dateibasierte Betriebsvarianten; den Speicherweg nennt jede Tabelle. Die Unterkategorien sind als eigene Kapitel
-in der Navigation und auf den jeweiligen Übersichtsseiten verlinkt.
-Die [Bewertungsmethode](software.md) erläutert die Reifegrade.
-Installationsanleitungen folgen später. mdBook dient als Format für dieses Buch.
+Die [Bewertungsmethode](software.md) erklärt Reifegrade und Speicherumfang.
+Frameworks, Anwendungen und mobile Clients werden ausdrücklich unterschieden.
+Installationsanleitungen sind noch nicht Bestandteil des Buches.
+
+Das [Quellenverzeichnis](quellen.md) dokumentiert die Herkunft aus eigenen
+Artikeln des Autors und den redaktionellen Stand. Die Texte wurden überarbeitet;
+Sachangaben zu Software werden durch externe Projektquellen belegt.
 
 ## Lesepfad
 

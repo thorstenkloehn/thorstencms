@@ -1,15 +1,14 @@
 # Versionierung, Review und automatisierter Build
 
-[Übergeordnete Kategorie: Evolution digitaler Docs-as-Code](../docs-as-code.md)
+[Übergeordnete Kategorie: Docs-as-Code](../docs-as-code.md)
 
 Generatoren als Bausteine eines nachvollziehbaren Dokumentationsprozesses.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Git, Review und CI müssen die Generatoren ergänzen. Bewertet werden hier die Dokumentationswerkzeuge, nicht vollständige Hosting- oder CI-Plattformen.
 
-- **Sphinx:** Erweiterungen müssen im Build aufeinander abgestimmt sein.
-- **Doxygen:** Ein vollständiger Review- und Veröffentlichungsprozess kommt aus der Umgebung.
-- **Asciidoctor:** Für ein vollständiges Portal werden zusätzliche Struktur- und Build-Bausteine benötigt.
-- **MkDocs:** Theme- und Plugin-Reife separat bewerten.
-- **mdBook:** Mehrere Produktversionen und komplexe Portale benötigen zusätzliche Organisation.
+- **Sphinx:** Lässt sich über `sphinx-build -W` deterministisch in CI-Pipelines einbinden, um unvollständige Verweise sofort als Build-Fehler zu stoppen.
+- **Doxygen:** Ermöglicht automatisierte API-Dokumentationsläufe direkt nach Code-Commits; erfordert Abstimmung mit dem Compiler-Build-System.
+- **Asciidoctor:** Schnelle, containerfreundliche Pipeline-Ausführung zur gleichzeitigen Erzeugung von HTML5- und PDF-Releases bei neuen Softwareversionen.
+- **MkDocs:** Ermöglicht über den Schalter `--strict` automatisierte Prüfungen auf fehlerhafte Links und fehlende Navigationsziele im CI-Lauf.
+- **mdBook:** Minimaler Ressourcenbedarf und extrem schneller nativer Build; hervorragend für leichtgewichtige GitHub-Pages- und CI-Workflows ohne Laufzeit-Overhead geeignet.

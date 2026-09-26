@@ -2,13 +2,13 @@
 
 [Übergeordnete Kategorie: Webframeworks](../webframeworks.md)
 
-Die Quelle behandelt sowohl KI-Funktionen in Webanwendungen als auch externe Entwicklungsassistenten. Die folgende Auswahl unterscheidet deshalb Laufzeit-Orchestrierung und Werkzeuge zur Bearbeitung eines Webprojekts.
+Die Auswahl unterscheidet Laufzeit-Bausteine für KI-Funktionen und externe Assistenten, die Dateien eines Webprojekts bearbeiten.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -21,5 +21,3 @@ Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md)
 ## Einsatz und Abgrenzung
 
 LangGraph ist ein Framework für KI-Abläufe und benötigt eine Web-API und Oberfläche. Die übrigen vier Projekte sind Entwicklungsassistenten, keine Webframeworks: Sie bearbeiten lokale Projektdateien. Ihre Dateispeicherung sagt nichts über die Datenbank der erzeugten Webanwendung aus; diese muss zusätzlich den Filter erfüllen. Die Reifegrade bewerten die Werkzeuge, nicht automatisch erzeugte Anwendungen.
-
-Thematische Grundlage: [Evolution digitaler Webframeworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).

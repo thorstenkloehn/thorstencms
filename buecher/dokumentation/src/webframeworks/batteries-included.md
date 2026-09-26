@@ -8,10 +8,10 @@ Diese Kategorie beschreibt den Funktionsumfang und ergänzt die sechs Entwicklun
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** Open Source, jeweils für PostgreSQL-Betrieb ausgewählt.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
-Die Reihenfolge priorisiert Reife und anschließend die Passung zur Kategorie.
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Die Rangfolge gewichtet den Umfang integrierter Standardwerkzeuge und deren Reifegrad.
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -35,4 +35,4 @@ Die Reihenfolge priorisiert Reife und anschließend die Passung zur Kategorie.
 
 ## Betriebsvariante
 
-PostgreSQL ist ausdrücklich zu konfigurieren. Auch Sessions, Warteschlangen und weitere persistente Anwendungsdaten müssen PostgreSQL oder den erlaubten Dateispeicher verwenden. Zusätzliche Datenbanken sind nicht Bestandteil dieser Auswahl. Die beschriebenen Kombinationen wurden für dieses Buch nicht installiert oder getestet.
+Für Batteries-Included-Frameworks müssen alle integrierten Subsysteme wie Sitzungsverwaltung, Cache-Adapter und asynchrone Warteschlangen so konfiguriert werden, dass sie den [Speicherfilter](../software.md#verbindlicher-speicherfilter) einhalten (beispielsweise relationale Datenbank-Backends für Queues statt externer Key-Value-Speicher). Die beschriebenen Setups wurden für dieses Buch nicht installiert oder getestet.

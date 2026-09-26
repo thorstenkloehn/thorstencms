@@ -6,9 +6,9 @@ Ajax ergänzt serverseitige Seiten um nachgeladene Inhalte. Die Auswahl umfasst 
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -21,5 +21,3 @@ Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md)
 ## Einsatz und Abgrenzung
 
 Diese Bibliotheken sind keine Datenbanken. Aufgenommen wird jeweils die Kombination mit einem selbst entwickelten Django-Backend und PostgreSQL. HTML-Antworten und Formulare verbinden die Schichten; bei Alpine.js und Stimulus muss der HTTP-Zugriff selbst ergänzt werden.
-
-Thematische Grundlage: [Evolution digitaler Webframeworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).

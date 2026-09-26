@@ -1,15 +1,14 @@
 # KI-gestützte Content-Erstellung
 
-[Übergeordnete Kategorie: Evolution digitaler Content-Management-Systeme](../cms.md)
+[Übergeordnete Kategorie: Content-Management-Systeme](../cms.md)
 
 Offene Erweiterungen und Frameworks für Assistenz in Redaktionsprozessen.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,10 +24,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Drupal AI ist eine CMS-Erweiterung. Die anderen Einträge sind Integrationsbausteine für Textassistenz oder dokumentengestützte Verarbeitung; eine fertige Personalisierungsplattform wird damit nicht zugesichert.
 
-- **Haystack:** Anwendung, Index und Evaluation müssen integriert werden.
-- **LlamaIndex:** Gehostete Angebote sind von der offenen Bibliothek zu trennen.
-- **LangChain:** Framework liefert keine fertige Wissensredaktion.
-- **Drupal AI:** Reife des Drupal-Kerns überträgt sich nicht automatisch auf KI-Module.
-- **Microsoft Agent Framework:** Junger Nachfolger; langfristige Betriebserfahrung noch begrenzt.
+- **Haystack:** Dient als Pipeline-Backend für redaktionelle Inhaltsprüfungen und Textzusammenfassungen; die redaktionelle Freigabe verbleibt im CMS.
+- **LlamaIndex:** Eignet sich zur automatisierten Verschlagwortung und Metadaten-Extraktion aus hochgeladenen Redaktionsdokumenten.
+- **LangChain:** Ermöglicht die Anbindung von Modellen an redaktionelle Eingabemasken (z. B. Entwurfsvorschläge für Teaser oder Übersetzungen).
+- **Drupal AI:** Reife des Drupal-Kerns überträgt sich nicht automatisch auf KI-Module; Zugangsdaten und Modellkontingente sind separat abzusichern.
+- **Microsoft Agent Framework:** Junger Nachfolger des Semantic Kernel; langfristige Praxiserfahrung in Content-Plattformen ist noch begrenzt.
 
 Projektentwicklung: [Semantic Kernel verweist auf Microsoft Agent Framework als Nachfolger](https://github.com/microsoft/semantic-kernel). Die Bewertung bleibt wegen der jungen Projektlinie vorsichtig.

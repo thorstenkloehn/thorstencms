@@ -6,10 +6,9 @@ Automatisierbare Konvertierung und Erzeugung von Dokumenten.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die Auswahl umfasst Konverter und Bibliotheken: DOCX-Verarbeitung, strukturierte Texte und Notebook-Exporte erfüllen unterschiedliche Aufgaben.
 
-- **Pandoc:** Konverter; keine gemeinsame Redaktionsoberfläche.
-- **Asciidoctor:** Für ein vollständiges Portal werden zusätzliche Struktur- und Build-Bausteine benötigt.
-- **nbconvert:** Keine eigenständige Oberfläche zur gemeinsamen Redaktion.
-- **python-docx:** Die erzeugten Dateien müssen im Zielprogramm geprüft werden.
-- **PHPWord:** Ausgabeformate können unterschiedliche Funktionen abdecken.
+- **Pandoc:** Universell skriptbare Konvertierungsmaschine mit Unterstützung für Lua-Filter zur automatisierten Transformation von Dokumentenströmen.
+- **Asciidoctor:** Programmatisch über Bibliotheken (AsciidoctorJ, Ruby) ansteuerbar, um technische Dokumente und Berichte direkt im Software-Build zu erzeugen.
+- **nbconvert:** Ermöglicht die skriptgesteuerte Konvertierung von Jupyter-Notebooks in statische HTML- oder PDF-Berichte im Batch-Betrieb.
+- **python-docx:** Programmierbibliothek zur automatisierten Generierung und Manipulation nativer Microsoft-Word-Dateien (.docx) aus Datensätzen.
+- **PHPWord:** Serverseitige PHP-Komponente zur dynamischen Erstellung von Textdokumenten (DOCX, ODT) in Webanwendungen.

@@ -2,13 +2,13 @@
 
 [Übergeordnete Kategorie: Webframeworks](../webframeworks.md)
 
-Serverseitige Frameworks verbinden Anfragen, Geschäftslogik, Datenzugriff und HTML-Ausgabe. Die Quelle unterscheidet CGI-Anfänge, Full-Stack-MVC und Enterprise-Architekturen. Die Auswahl konzentriert sich auf heute nutzbare Vertreter dieser Entwicklung, nicht auf historische CGI-Pioniere.
+Serverseitige Frameworks verbinden Anfragen, Geschäftslogik, Datenzugriff und HTML-Ausgabe. Die Auswahl betrachtet heutige Frameworks mit serverseitiger Anwendungslogik. Historische CGI-Werkzeuge sind nicht Gegenstand dieser Produktauswahl.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -22,10 +22,4 @@ Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md)
 
 Alle fünf Projekte benötigen eine selbst entwickelte Anwendung. PostgreSQL muss als Datenbank gewählt werden; zusätzliche Queue-, Cache- und Session-Dienste dürfen den Speicherfilter nicht umgehen.
 
-Thematische Grundlage: [Evolution digitaler Webframeworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).
-
-**Einordnung von ASP.NET Core:** Serverseitiges Framework der Enterprise-Linie.
-Die Auswahl verwendet PostgreSQL über Npgsql; SQL Server ist dafür nicht erforderlich.
-ASP.NET Core ersetzt hier Laravel, damit die Liste bei fünf Projekten bleibt und
-neben Python, Ruby, Java und PHP auch .NET abdeckt. Das ist eine Entscheidung
-für die Breite der Auswahl, keine pauschale Abwertung von Laravel.
+**Architektur von ASP.NET Core:** Basiert auf der modularen Kestrel-Webserver-Pipeline und Entity Framework Core. Die relationale Anbindung an PostgreSQL wird über den Treiber `Npgsql.EntityFrameworkCore.PostgreSQL` (`UseNpgsql`) realisiert, wodurch die Lösung vollständig ohne Microsoft SQL Server betrieben werden kann. Razor Pages und Controller ermöglichen klassische serverseitige Render-Workflows.

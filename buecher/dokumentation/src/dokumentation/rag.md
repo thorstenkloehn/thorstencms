@@ -6,10 +6,9 @@ Dokumentengestützte Suche und Antworten aus einem eigenen Wissensbestand.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,12 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-Die ersten drei Einträge sind Frameworks; AnythingLLM ergänzt eine Anwendung mit gesondert einzurichtendem PostgreSQL-Betrieb. Haystack und LangChain sind mit PostgreSQL-Integrationen nutzbar; LlamaIndex kann seine einfachen Speicherstrukturen lokal persistieren. Die jeweils genannte Speicheroption muss ausdrücklich gewählt werden.
+RAG-Systeme ergänzen Dokumentensammlungen um semantische Suche und kontextbezogene Antworten, garantieren jedoch keine fehlerfreie Wiedergabe. Die Frameworks Haystack, LlamaIndex, LangChain und LangGraph erfordern eine eigene Anwendungs- und Indexierungslogik.
 
-- **Haystack:** Anwendung, Index und Evaluation müssen integriert werden.
-- **LlamaIndex:** Gehostete Angebote sind von der offenen Bibliothek zu trennen.
-- **LangChain:** Framework liefert keine fertige Wissensredaktion.
-
-- **AnythingLLM:** Nur der PostgreSQL-Betrieb bleibt ausgewählt: Prisma-Datenbank gemäß Quellhinweis umstellen und pgvector als Vektorspeicher einrichten. Die Standardinstallation mit SQLite erfüllt den Filter nicht. Dieser zusätzliche Anpassungsbedarf begrenzt die Reife dieser Betriebsvariante.
-
-- **LangGraph:** Framework für selbst entwickelte Abläufe, keine fertige Redaktionsanwendung. [RAG-Abläufe](https://docs.langchain.com/oss/python/langgraph/agentic-rag) lassen sich damit orchestrieren. PostgreSQL-Checkpointer und Store ausdrücklich konfigurieren; für Dokumente und Vektoren bei Bedarf [langchain-postgres](https://github.com/langchain-ai/langchain-postgres) einsetzen. Für Dokumentationspflege müssen Dateibearbeitung, Review und Build als Werkzeuge eingebunden werden.
+- **Haystack:** Spezialisiert auf modulare Frage-Antwort-Pipelines, Dokument-Routing und systematische Evaluierung von Antworttreffern.
+- **LlamaIndex:** Schwerpunkt liegt auf Chunking-Strategien, Knoten-Hierarchien und optimiertem Dokumenten-Retrieval aus Dateien.
+- **LangChain:** Breit gefächerte Schnittstellenbibliothek für Prompt-Verkettungen und PostgreSQL-Vektorspeicher; erfordert eigene Oberfläche.
+- **AnythingLLM:** Sofort nutzbare Chat-Oberfläche für Dokumentensammlungen; setzt für den filterkonformen Betrieb die [Umstellung auf PostgreSQL und pgvector](../software.md#sonderfall-anythingllm) voraus.
+- **LangGraph:** Ermöglicht zyklische [Agentic-RAG-Abläufe](https://docs.langchain.com/oss/python/langgraph/agentic-rag) mit adaptiver Re-Querying- und Selbstkorrekturlogik bei unvollständigen Suchergebnissen.

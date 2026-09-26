@@ -1,15 +1,14 @@
 # Git-basierte und Flat-File-CMS
 
-[Übergeordnete Kategorie: Evolution digitaler Content-Management-Systeme](../cms.md)
+[Übergeordnete Kategorie: Content-Management-Systeme](../cms.md)
 
 Inhaltspflege über Dateien oder Git-Repositories.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 

@@ -1,32 +1,36 @@
 # Sprachmodelle in Wissenssystemen
 
-[Übergeordnete Kategorie: Integration von Sprachmodellen in Software-Architekturen](../sprachmodell-integration.md)
+[Übergeordnete Kategorie](../sprachmodell-integration.md)
 
-Semantische Wissensgraphen, Local-First PKM mit Sprachmodellen und RAG-gestützte Recherche mit Quellennachweisen.
+Dokumentengestützte Antworten benötigen einen gepflegten Bestand, geeigneten Abruf und eine Prüfung der erzeugten Aussagen.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
-[Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
-Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des betrachteten Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SiYuan](https://github.com/siyuan-note/siyuan) | AGPL-3.0 | Sehr hoch | Block-basierter Wissensgraph mit lokaler semantischer Suche und integriertem KI-Assistenten. | Dateien: [Lokales JSON-Dateisystem im Workspace](https://github.com/siyuan-note/siyuan/blob/master/docs/WORKSPACE.md) |
-| 2 | [Dify](https://github.com/langgenius/dify) | Apache-2.0 | Hoch | Etablierte Plattform für visuelle RAG-Workflows, Agenten und strukturierte Wissensbasen. | PostgreSQL: [PostgreSQL als zentrale Anwendungs- und Vektordatenbank](https://docs.dify.ai/) |
-| 3 | [RAGFlow](https://github.com/infiniflow/ragflow) | Apache-2.0 | Hoch | Tiefgehende Dokumentenextraktion (PDF, Tabellen, OCR) mit belegbarem RAG-Abruf. | PostgreSQL: [PostgreSQL für relationale Metadaten](https://ragflow.io/) |
-| 4 | [Wiki.js](https://js.wiki/about) | AGPL-3.0 | Hoch | Modernes Wissensportal mit konfigurierbarer Volltext- und Vektor-Suchintegration. | PostgreSQL: [Unterstütztes Datenbank-Backend](https://js.wiki/get-started) |
-| 5 | [AnythingLLM](https://github.com/Mintplex-Labs/anything-llm) | MIT | Mittel | Dokumentenbasiertes Arbeitsplatzsystem mit flexibler Vektorspeicheranbindung. | PostgreSQL: [PostgreSQL-Schema und pgvector-Setup](https://github.com/Mintplex-Labs/anything-llm) |
+| 1 | [Haystack](https://github.com/deepset-ai/haystack) | Apache-2.0 (Kern) | Hoch | Dokumentierte Pipelines, Tests und Migrationshinweise. | PostgreSQL: [PostgreSQL + pgvector für Dokumente und Vektoren](https://docs.haystack.deepset.ai/reference/integrations-pgvector) |
+| 2 | [LlamaIndex](https://github.com/run-llama/llama_index) | MIT (Kern) | Hoch | Dokumentation, Beispiele und nachvollziehbarer Änderungsverlauf. | Dateien: [Lokale Dateien via StorageContext.persist](https://developers.llamaindex.ai/python/framework/module_guides/storing/save_load/) |
+| 3 | [LangChain](https://github.com/langchain-ai/langchain) | MIT (Bibliothek) | Hoch | Dokumentierte Integrationen und Sicherheitsrichtlinie. | PostgreSQL: [PostgreSQL über langchain-postgres](https://github.com/langchain-ai/langchain-postgres) |
+| 4 | [LangGraph](https://github.com/langchain-ai/langgraph) | MIT (Bibliothek) | Hoch | Dokumentierte Abläufe mit Zustandsverwaltung. | PostgreSQL: [PostgreSQL-Checkpointer und Store konfigurieren](https://docs.langchain.com/oss/python/langgraph/persistence) |
+| 5 | [AnythingLLM](https://github.com/Mintplex-Labs/anything-llm) | MIT (Kern) | Mittel für PostgreSQL-Betrieb | PostgreSQL-Pfad im Quellprojekt beschrieben; zusätzliche Einrichtung erforderlich. | PostgreSQL: [Prisma-Datenbank umstellen](https://github.com/Mintplex-Labs/anything-llm/blob/master/server/prisma/schema.prisma) und [pgvector konfigurieren](https://github.com/Mintplex-Labs/anything-llm/blob/master/server/utils/vectorDbProviders/pgvector/SETUP.md) |
 
 ## Einsatz und Abgrenzung
 
-Wissenssysteme nutzen Sprachmodelle zur Verknüpfung unstrukturierter Inhalte und zur Verhinderung von Halluzinationen.
+Haystack, LlamaIndex, LangChain und LangGraph sind Bausteine für eigene
+Anwendungen. Für eine Wissensredaktion müssen Suche, Berechtigungen,
+Quellenverweise und Aktualisierung der Daten zusammengeführt werden.
 
-- **SiYuan:** Perfekt für individuelle Wissensgraphen; RAG-Abfragen erfolgen primär auf dem lokalen, dateibasierten Datenbestand.
-- **Dify:** Hoher Bedienkomfort durch visuelle Orchestrierung; Docker-/Kubernetes-Betrieb für Teams empfohlen.
-- **RAGFlow:** Exzellente Stärken bei komplexen Layouts und Tabellen; höherer Rechenaufwand bei der Dokumentenextraktion.
-- **Wiki.js:** Strukturiertes Unternehmens-Wiki; RAG-Funktionalität setzt externe KI-Endpunkte voraus.
-- **AnythingLLM:** Schneller Einstieg für Desktop- und Serverumgebungen; erfordert explizite pgvector-Konfiguration.
+AnythingLLM bleibt ausschließlich als angepasste PostgreSQL-Variante enthalten:
+Anwendungsdatenbank gemäß [Prisma-Schema](https://github.com/Mintplex-Labs/anything-llm/blob/master/server/prisma/schema.prisma)
+umstellen und [pgvector](https://github.com/Mintplex-Labs/anything-llm/blob/master/server/utils/vectorDbProviders/pgvector/SETUP.md)
+einrichten. pgvector allein ersetzt die standardmäßige SQLite-Anwendungsdatenbank
+nicht. Diese Umstellung wurde für das Buch nicht praktisch getestet.
+
+Eine erzeugte Antwort wird gegen die verwendeten Passagen geprüft. RAG kann
+die Quellenarbeit unterstützen, garantiert aber keine fehlerfreien Aussagen.
+Für Wiki.js werden hier keine unbewiesenen nativen Vektor- oder RAG-Funktionen
+behauptet; die Wiki-Nutzung bleibt in der entsprechenden Kategorie beschrieben.

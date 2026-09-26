@@ -6,9 +6,9 @@ Diese Ansätze begrenzen die im Browser ausgeführte Arbeit oder verteilen die A
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -21,5 +21,3 @@ Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md)
 ## Einsatz und Abgrenzung
 
 Fresh wird mit Deno und PostgreSQL, SolidStart mit Node.js und PostgreSQL betrachtet. Die Datenbanktreiber müssen in serverseitigen Routen eingebunden werden. Diese Auswahl garantiert keine Ausführbarkeit auf jeder Edge-Plattform. Qwik bezeichnet hier die stabile Version, nicht die angekündigte Beta der nächsten Hauptversion.
-
-Thematische Grundlage: [Evolution digitaler Webframeworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).

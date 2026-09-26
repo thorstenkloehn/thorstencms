@@ -1,15 +1,14 @@
 # Agentische Content-Systeme
 
-[Übergeordnete Kategorie: Evolution digitaler Content-Management-Systeme](../cms.md)
+[Übergeordnete Kategorie: Content-Management-Systeme](../cms.md)
 
 Bausteine für mehrstufige Recherche-, Schreib- und Prüfabläufe.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,13 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-CMS-Anbindung und Publikationsfreigabe sind selbst zu gestalten. Hohe Framework-Reife belegt keine fehlerfreie autonome Veröffentlichung.
+Agentische Systeme im CMS automatisieren mehrstufige redaktionelle Aufgaben wie Recherche, Erstentwurf und Faktenabgleich. Die redaktionelle Freigabe und Qualitätskontrolle müssen als feste Kontrollpunkte (Human-in-the-Loop) verankert bleiben.
 
-- **LangGraph:** Werkzeuge, Modelle und Freigaben selbst konfigurieren.
-- **Haystack:** Anwendung, Index und Evaluation müssen integriert werden.
-- **LlamaIndex:** Gehostete Angebote sind von der offenen Bibliothek zu trennen.
-- **Microsoft Agent Framework:** Junger Nachfolger; langfristige Betriebserfahrung noch begrenzt.
-
-Projektentwicklung: [Semantic Kernel verweist auf Microsoft Agent Framework als Nachfolger](https://github.com/microsoft/semantic-kernel). Die Bewertung bleibt wegen der jungen Projektlinie vorsichtig.
-
-- **LangChain:** Framework mit dokumentierten [Multi-Agenten-Mustern](https://docs.langchain.com/oss/python/langchain/multi-agent). Es ergänzt die Orchestrierung um Modell- und Werkzeuganbindungen. PostgreSQL für Dokumente und Vektoren sowie PostgreSQL-basierte Zustandsverwaltung konfigurieren; keine fertige CMS-Oberfläche.
+- **LangGraph:** Bildet redaktionelle Genehmigungsketten (z. B. Recherche -> Entwurf -> Faktenprüfung -> finale Freigabe) als zustandsbehafteten Graphen ab.
+- **Haystack:** Dient als spezialisierter Prüfbaustein, um Aussagen in Textentwürfen automatisiert gegen freigegebene Unternehmensquellen abzugleichen.
+- **LlamaIndex:** Versorgt Schreib-Agenten mit thematisch passenden Referenzdokumenten und Metadaten aus dem Inhaltsarchiv des CMS.
+- **Microsoft Agent Framework:** Ermöglicht die Orchestrierung asynchroner Redaktionsaufgaben; als Nachfolger des Semantic Kernel verlangt die junge Codebasis noch vorsichtige Erprobung.
+- **LangChain:** Stellt [Multi-Agenten-Muster](https://docs.langchain.com/oss/python/langchain/multi-agent) und Werkzeug-Adapter für CMS-APIs bereit; alle Zwischenzustände und Token-Budgets sind in PostgreSQL zu sichern.

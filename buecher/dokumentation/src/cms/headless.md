@@ -1,15 +1,14 @@
 # Headless und Decoupled CMS
 
-[Übergeordnete Kategorie: Evolution digitaler Content-Management-Systeme](../cms.md)
+[Übergeordnete Kategorie: Content-Management-Systeme](../cms.md)
 
 Inhaltspflege getrennt von Darstellung und Auslieferung.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,12 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-Drupal und Wagtail können entkoppelt betrieben werden. Strapi Community, Payload und Keystone sind stärker auf API-orientierte Projekte ausgerichtet.
+Headless-Architekturen trennen die Inhaltspflege strikt von der Präsentationsschicht. Redaktionelle Vorschau, Session-Handling und Cache-Invalidierung für externe Frontends müssen separat im Projekt gelöst werden.
 
-- **Drupal:** Modulabhängigkeiten und größere Upgrades benötigen Planung.
-- **Wagtail:** Benötigt für individuelle Inhaltsmodelle ein Django-Entwicklungsteam.
-- **Strapi Community Edition:** Enterprise-Code ist ausdrücklich nicht Teil dieser Auswahl.
-- **Payload:** Anwendungsentwicklung und Datenmodellierung erforderlich.
-- **Keystone:** Entwicklerorientiert; nicht sofort eine fertige Website.
-
-API-Nachweise: [Drupal JSON:API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module) und [Wagtail API](https://docs.wagtail.org/en/stable/advanced_topics/api/). Strapi wird ausschließlich als [Community Edition](https://github.com/strapi/strapi/blob/develop/LICENSE) bewertet.
+- **Drupal:** Dient über das Kernmodul [JSON:API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module) als entkoppeltes Backend; Vorschaumechanismen für separate Frontends verlangen zusätzlichen Integrationsaufwand.
+- **Wagtail:** Stellt Inhaltsbäume über die offizielle [Wagtail API](https://docs.wagtail.org/en/stable/advanced_topics/api/) bereit; Redaktionsansichten und Benutzer-Frontends bleiben technologisch getrennt.
+- **Strapi Community Edition:** Natives API-first-CMS mit anpassbaren REST- und GraphQL-Endpunkten; Enterprise-Features sind ausdrücklich nicht Teil der [freien Lizenz](https://github.com/strapi/strapi/blob/develop/LICENSE).
+- **Payload:** TypeScript-basiertes Headless-CMS mit enger Anbindung an moderne Frontend-Frameworks und flexiblen Zugriffskontrollen.
+- **Keystone:** Generiert aus deklarativen TypeScript-Schemas eine performante GraphQL-API für individuell entwickelte Frontends.

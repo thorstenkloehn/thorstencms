@@ -6,9 +6,9 @@ Meta-Frameworks verbinden Komponenten, Routing und serverseitige oder statische 
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -21,5 +21,3 @@ Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md)
 ## Einsatz und Abgrenzung
 
 Next.js und Astro sind hier für lokale Inhaltsdateien ausgewählt. Nuxt, SvelteKit und React Router werden als selbst gehostete Node.js-Anwendungen mit eigenem node-postgres-Datenzugriff betrachtet. Die Datenbankintegration ist Entwicklungsarbeit; ein statischer Export allein ersetzt keine Speicherung veränderlicher Nutzerdaten.
-
-Thematische Grundlage: [Evolution digitaler Webframeworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).

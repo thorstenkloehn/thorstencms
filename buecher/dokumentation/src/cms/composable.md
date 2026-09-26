@@ -1,15 +1,14 @@
 # Composable CMS
 
-[Übergeordnete Kategorie: Evolution digitaler Content-Management-Systeme](../cms.md)
+[Übergeordnete Kategorie: Content-Management-Systeme](../cms.md)
 
 CMS-Bausteine für eine aus mehreren Diensten zusammengesetzte Publikationsarchitektur.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,12 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-Bewertet wird die CMS-Komponente. Die Liste ist keine MACH-Zertifizierung und kein Beleg für eine vollständig integrierte DXP. Suche, Frontend und weitere Dienste müssen abgestimmt werden.
+In Composable-Architekturen fungiert das CMS als modularer Inhaltsbaustein neben eigenständigen E-Commerce-, Such- und Lokalisierungsdiensten. Die Integration verlangt saubere Schnittstellen und Orchestrierung.
 
-- **Drupal:** Modulabhängigkeiten und größere Upgrades benötigen Planung.
-- **Wagtail:** Benötigt für individuelle Inhaltsmodelle ein Django-Entwicklungsteam.
-- **Strapi Community Edition:** Enterprise-Code ist ausdrücklich nicht Teil dieser Auswahl.
-- **Payload:** Anwendungsentwicklung und Datenmodellierung erforderlich.
-- **Keystone:** Entwicklerorientiert; nicht sofort eine fertige Website.
-
-API-Nachweise: [Drupal JSON:API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module) und [Wagtail API](https://docs.wagtail.org/en/stable/advanced_topics/api/). Strapi wird ausschließlich als [Community Edition](https://github.com/strapi/strapi/blob/develop/LICENSE) bewertet.
+- **Drupal:** Dient als robuster Content-Hub für Multichannel-Ausspielungen; verlangt eine klare Definition der Service-Grenzen gegenüber Drittsystemen.
+- **Wagtail:** Lässt sich über APIs hervorragend mit externen Diensten und Microservices verbinden, erfordert jedoch Entwicklungsressourcen für benutzerdefinierte Konnektoren.
+- **Strapi Community Edition:** Leichtgewichtiger Baustein für modulare Webhook- und API-Architekturen; die quelloffene Version verzichtet auf proprietäre Enterprise-Erweiterungen.
+- **Payload:** Lässt sich dank TypeScript-Codebasis nahtlos in modulare Full-Stack-Landschaften einbetten und mit maßgeschneiderter Geschäftslogik erweitern.
+- **Keystone:** Schema-first-Ansatz zur Modellierung domänenspezifischer Datenbausteine innerhalb vernetzter Microservice-Umgebungen.

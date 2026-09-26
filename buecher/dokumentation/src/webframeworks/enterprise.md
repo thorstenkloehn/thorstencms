@@ -8,10 +8,10 @@ Diese Kategorie betrachtet den Einsatz in Organisationen. Sie überschneidet sic
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** Open Source, jeweils für PostgreSQL-Betrieb ausgewählt.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
-Die Reihenfolge priorisiert Reife und anschließend die Passung zur Kategorie.
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Die Rangfolge ordnet bewährte Enterprise-Stacks nach Betriebssicherheit und Ökosystem-Reife.
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -35,4 +35,4 @@ Die Reihenfolge priorisiert Reife und anschließend die Passung zur Kategorie.
 
 ## Betriebsvariante
 
-PostgreSQL ist ausdrücklich zu konfigurieren. Auch Sessions, Warteschlangen und weitere persistente Anwendungsdaten müssen PostgreSQL oder den erlaubten Dateispeicher verwenden. Zusätzliche Datenbanken sind nicht Bestandteil dieser Auswahl. Die beschriebenen Kombinationen wurden für dieses Buch nicht installiert oder getestet.
+Im Enterprise-Umfeld erfordert der PostgreSQL-Betrieb eine sorgfältige Dimensionierung von Verbindungspools (z. B. via PgBouncer), Replikation und Mandantentrennung. Zusätzliche Datenbanken für Metadaten sind ausgeschlossen; alle persistenten Geschäftsdaten verbleiben gemäß [Speicherfilter](../software.md#verbindlicher-speicherfilter) in PostgreSQL. Diese Architekturen wurden für dieses Buch nicht praktisch aufgebaut.

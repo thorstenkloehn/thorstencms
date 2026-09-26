@@ -10,14 +10,25 @@ Abrufdatum: **26. September 2026**.
 5. [Evolution und Architekturen digitaler Web-Frameworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/)
 6. [Evolution und Architekturen digitaler klassischer LMS](https://dokument.wissen-ahrensburg.de/wissen/e-learning/evolution-digitaler-klassische-lms/)
 
-Die Generationenmodelle werden als Gliederungshilfe der Ausgangsseiten
-verwendet, nicht als allgemein verbindlicher Standard. Das Buch übernimmt
-keine Produktranglisten oder Aussagen über aktuelle Marktführerschaft.
+## Verwendung und Prüfstand
 
-Aktueller Umfang: Buchnavigation, kurze Einführungen und gefilterte Softwareauswahlen
-für fünf Hauptkategorien und 33 Unterkategorien. Diese Rangfolgen sind eigenständige redaktionelle
-Bewertungen. Offizielle Softwarequellen stehen direkt bei den Einträgen;
-die [Bewertungsmethode](software.md) beschreibt Kriterien und Grenzen.
+Die sechs verlinkten Ausgangsartikel stammen vom Autor dieses Buches.
+Der Autor hat dies am 27. September 2026 bestätigt. Die Links dokumentieren
+die Herkunft der Inhalte aus seinen eigenen Veröffentlichungen.
+Das oben genannte Abrufdatum stammt aus der früheren Buchfassung; es wird
+hier nicht als erneut bestätigter Abruf ausgegeben.
 
-Die Quellen zum Speicherbetrieb sind direkt in der zusätzlichen Tabellenspalte
-verlinkt. Es gilt der [PostgreSQL-/Dateifilter](software.md#verbindlicher-speicherfilter).
+Die Überblickskapitel wurden neu anhand konkreter Arbeitsaufgaben aufgebaut.
+Die Unterkategorien beschreiben sich überschneidende Formen und Bausteine;
+sie stellen keine allgemein verbindlichen Generationen dar. Die früheren
+Herkunftsverweise bleiben hier zur Nachvollziehbarkeit erhalten.
+
+Der Bestand umfasst acht Hauptkategorien und 52 Unterkategorien. Die Auswahl
+enthält je nach Beleglage bis zu fünf Einträge pro Kategorie. Funktionen,
+Lizenzen und Betriebsvarianten werden über Projektquellen an den jeweiligen
+Einträgen erläutert. Die [Bewertungsmethode](software.md) beschreibt Umfang,
+Zurückstellungen und Grenzen dieser dokumentenbasierten Prüfung.
+
+Die externen Projektquellen an den Softwareeinträgen dienen der Nachprüfung
+von Sachangaben. Die Urheberschaft der eigenen Ausgangsartikel und die
+Lizenzbedingungen der vorgestellten Software werden getrennt betrachtet.

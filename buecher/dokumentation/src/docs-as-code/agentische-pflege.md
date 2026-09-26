@@ -1,15 +1,14 @@
 # Agentische Dokumentationspflege
 
-[Übergeordnete Kategorie: Evolution digitaler Docs-as-Code](../docs-as-code.md)
+[Übergeordnete Kategorie: Docs-as-Code](../docs-as-code.md)
 
 Offene Assistenten und Agenten für Änderungen an Dokumentations-Repositories.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -32,4 +31,4 @@ Aider bearbeitet Repository-Dateien und führt eine textuelle Historie. mini-SWE
 
 - **Gemini CLI:** Der offene CLI-Kern bearbeitet lokale Dateien und speichert Sitzungen lokal. Die Lizenz eines angebundenen Modells oder Dienstes ist davon unabhängig.
 
-- **LangGraph:** Framework für selbst entwickelte Abläufe, keine fertige Redaktionsanwendung. [RAG-Abläufe](https://docs.langchain.com/oss/python/langgraph/agentic-rag) lassen sich damit orchestrieren. PostgreSQL-Checkpointer und Store ausdrücklich konfigurieren; für Dokumente und Vektoren bei Bedarf [langchain-postgres](https://github.com/langchain-ai/langchain-postgres) einsetzen. Für Dokumentationspflege müssen Dateibearbeitung, Review und Build als Werkzeuge eingebunden werden.
+- **LangGraph:** Ermöglicht die Entwicklung maßgeschneiderter Dokumentationsagenten mit zustandsbehafteten Korrekturschleifen (z. B. automatisierte Syntax- oder Linkprüfung mit iterativem Nachbessern vor dem Commit). PostgreSQL-Checkpointer sichern den Agentenzustand zwischen einzelnen Arbeitsschritten.

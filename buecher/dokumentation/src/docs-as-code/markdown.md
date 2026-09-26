@@ -1,15 +1,14 @@
 # Markdown-basierte Dokumentation
 
-[Übergeordnete Kategorie: Evolution digitaler Docs-as-Code](../docs-as-code.md)
+[Übergeordnete Kategorie: Docs-as-Code](../docs-as-code.md)
 
 Textbasierte Bücher und Portale mit überschaubarer Autorenoberfläche.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die Konfiguration unterscheidet sich: YAML ist verbreitet, aber keine Voraussetzung. mdBook verwendet TOML und SUMMARY.md.
 
-- **MkDocs:** Theme- und Plugin-Reife separat bewerten.
-- **Jekyll:** Ruby-Abhängigkeiten und Plugins müssen zusammenpassen.
-- **Hugo:** Redaktionsoberfläche muss separat ergänzt werden.
-- **mdBook:** Mehrere Produktversionen und komplexe Portale benötigen zusätzliche Organisation.
-- **Docusaurus:** Node.js- und React-Abhängigkeiten gehören zur laufenden Pflege.
+- **MkDocs:** Setzt auf Python-Markdown mit solider CommonMark-Konformität; Navigationsbäume werden deklarativ über eine zentrale Konfigurationsdatei gesteuert.
+- **Jekyll:** Etablierter Markdown-Standard im Git-Umfeld via Kramdown-Parser und Liquid-Templating; native Ausführung auf GitHub Pages.
+- **Hugo:** Bietet durch den integrierten Goldmark-Compiler herausragende Generierungsgeschwindigkeit für sehr große Markdown-Bestände.
+- **mdBook:** Konzentriert sich auf reines Markdown ohne komplexe Frontend-Toolchains; die Leseführung wird strikt über die Inhaltsdatei `SUMMARY.md` definiert.
+- **Docusaurus:** Erweitert Markdown-Dateien zu MDX, wodurch React-Komponenten direkt im Textfluss eingebunden werden können.

@@ -1,28 +1,41 @@
-# Evolution digitaler Webframeworks
+# Webframeworks: Darstellung, Verarbeitung und Datenzugriff
 
-Webframeworks bilden die technische Grundlage für Webanwendungen, Inhaltsportale und interaktive Wissenssysteme. Das Kapitel ergänzt die bisherigen Perspektiven um Darstellung, Anwendungslogik und Datenzugriff.
+Eine Webanwendung nimmt Anfragen entgegen, verarbeitet Eingaben und liefert
+eine Antwort. Ein Framework unterstützt diese Aufgaben, legt aber nicht für
+jedes Projekt fest, wo Inhalte gespeichert werden oder wie viel Arbeit im
+Browser stattfindet.
 
-Die Ausgangsseite unterscheidet sechs Entwicklungsrichtungen. Diese überlappen: Eine aktuelle Anwendung kann serverseitige Logik, interaktive Komponenten und KI-Funktionen kombinieren. Das Generationenmodell ist eine Orientierung, keine Reifegradskala.
+## Beispiel: Vom Lesekatalog zur Kursanmeldung
+
+Ein selten geänderter Lesekatalog kann als statische Website ausgegeben werden.
+Für eine Kursanmeldung kommen Benutzerrechte, Eingabeprüfung und dauerhafte
+Speicherung hinzu. Interaktive Bedienung lässt sich schrittweise ergänzen,
+ohne die gesamte Anwendung als Single-Page-Application aufzubauen.
+
+Serverseitiges Rendering, Browserkomponenten und statische Ausgabe lassen sich
+kombinieren. Islands begrenzen beispielsweise die interaktiven Bereiche einer
+Seite; Edge-Betrieb beschreibt den Ausführungsort. Diese Entscheidungen sind
+von der Wahl der Datenbank zu unterscheiden.
 
 ## Unterkategorien
 
-- [Serverseitige Frameworks: CGI, MVC und Enterprise](webframeworks/serverseitig.md)
+- [Serverseitige Frameworks](webframeworks/serverseitig.md)
 - [Ajax und progressive Erweiterung](webframeworks/ajax.md)
 - [Single-Page-Applications](webframeworks/spa.md)
 - [Full-Stack- und Meta-Frameworks](webframeworks/meta-frameworks.md)
 - [Server Components, Islands und Edge](webframeworks/islands-edge.md)
-- [KI-native Bausteine und agentengestützte Entwicklung](webframeworks/ki-agenten.md)
-
-### Ergänzende Kategorien nach Funktionsumfang und Einsatz
-
+- [KI-Bausteine und Entwicklungsassistenten](webframeworks/ki-agenten.md)
 - [Batteries-Included-Webframeworks](webframeworks/batteries-included.md)
 - [Enterprise-Webframeworks](webframeworks/enterprise.md)
 
+Die Kategorien beschreiben Architektur- und Einsatzschwerpunkte. Sie sind
+kein verbindliches historisches Generationenmodell.
+
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -55,10 +68,7 @@ interaktiven Anteil einer Seite; Edge-Betrieb beschreibt den Ausführungsort.
 KI-Werkzeuge können die Entwicklung unterstützen, ersetzen aber weder diese
 Entscheidungen noch die fachliche Prüfung.
 
-Quelle: [Evolution und Architekturen digitaler Web-Frameworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).
-
 **Einordnung von ASP.NET Core:** Serverseitiges Framework der Enterprise-Linie.
 Die Auswahl verwendet PostgreSQL über Npgsql; SQL Server ist dafür nicht erforderlich.
-ASP.NET Core ersetzt hier Laravel, damit die Liste bei fünf Projekten bleibt und
-neben Python, Ruby, Java und PHP auch .NET abdeckt. Das ist eine Entscheidung
-für die Breite der Auswahl, keine pauschale Abwertung von Laravel.
+Die Auswahl deckt Python, Ruby, Java, PHP und .NET ab. Weitere passende
+Frameworks werden in den Unterkategorien beschrieben.

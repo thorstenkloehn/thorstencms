@@ -1,15 +1,14 @@
 # Multimodale Multi-Agenten-Systeme
 
-[Übergeordnete Kategorie: Evolution digitaler Wissenssysteme](../wissenssysteme.md)
+[Übergeordnete Kategorie: Digitale Wissenssysteme](../wissenssysteme.md)
 
 Offene Bausteine zur Orchestrierung spezialisierter Wissensagenten.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,13 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-Dies sind Integrationsframeworks, keine vollständig selbstorganisierenden Wissensplattformen. Multimodale Fähigkeiten hängen von Modellen, Werkzeugen und der konkreten Pipeline ab.
+Multi-Agenten-Systeme verteilen komplexe Recherche- und Analyseaufgaben auf spezialisierte Agenten, die Zwischenergebnisse austauschen und gegenseitig validieren.
 
-- **LangGraph:** Werkzeuge, Modelle und Freigaben selbst konfigurieren.
-- **Haystack:** Anwendung, Index und Evaluation müssen integriert werden.
-- **LlamaIndex:** Gehostete Angebote sind von der offenen Bibliothek zu trennen.
-- **Microsoft Agent Framework:** Junger Nachfolger; langfristige Betriebserfahrung noch begrenzt.
-
-Projektentwicklung: [Semantic Kernel verweist auf Microsoft Agent Framework als Nachfolger](https://github.com/microsoft/semantic-kernel). Die Bewertung bleibt wegen der jungen Projektlinie vorsichtig.
-
-- **LangChain:** Framework mit dokumentierten [Multi-Agenten-Mustern](https://docs.langchain.com/oss/python/langchain/multi-agent). Es ergänzt die Orchestrierung um Modell- und Werkzeuganbindungen. PostgreSQL für Dokumente und Vektoren sowie PostgreSQL-basierte Zustandsverwaltung konfigurieren; keine fertige CMS-Oberfläche.
+- **LangGraph:** Ermöglicht zyklische Agenten-Netzwerke mit expliziter Rollenverteilung (z. B. Recherche, Synthese und kritischer Gegenabgleich) über persistente PostgreSQL-Checkpoints.
+- **Haystack:** Integriert multimodale Datenquellen (Text, Tabellen, strukturierte Daten) in vernetzte Agenten-Pipelines mit formalen Bewertungsmetriken.
+- **LlamaIndex:** Fungiert als strukturierte Wissensebene für autonome Agenten, die semantische Indizes und Dokumentenhierarchien navigieren.
+- **Microsoft Agent Framework:** Bietet ein verteiltes Laufzeitmodell für Unternehmens-Agenten mit starker Typisierung; die noch junge Plattform erfordert gezielte Schnittstellenpflege.
+- **LangChain:** Dokumentierte [Multi-Agenten-Muster](https://docs.langchain.com/oss/python/langchain/multi-agent) zur Orchestrierung von Experten-Agenten; Agentenzustände und Konversationsverläufe werden in PostgreSQL gespeichert.

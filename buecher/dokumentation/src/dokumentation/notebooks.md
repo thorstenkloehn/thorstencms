@@ -6,10 +6,9 @@ Interaktive Arbeitsumgebungen und eng zugehörige Publishing-Systeme.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 JupyterLab und Notebook sind Anwendungen. R Markdown und Quarto verbinden Text mit Berechnungen; nbconvert übernimmt die Ausgabe und ist kein Editor.
 
-- **JupyterLab:** Reproduzierbare Ausführung hängt zusätzlich von Kerneln und Abhängigkeiten ab.
-- **Jupyter Notebook:** Erweiterungen sind nicht über alle Hauptversionen kompatibel.
-- **R Markdown:** Schwerpunkt auf R; Abhängigkeiten gehören zum Dokument.
-- **nbconvert:** Keine eigenständige Oberfläche zur gemeinsamen Redaktion.
-- **Quarto:** Codeausführung benötigt passende Laufzeitumgebungen.
+- **JupyterLab:** Moderne modulare Arbeitsumgebung zur parallelen Ausführung interaktiver Berechnungen, Terminal-Sitzungen und Datenvisualisierungen.
+- **Jupyter Notebook:** Bewährte klassische Oberfläche zur interaktiven Dokumentation linearer Analyseabläufe und Code-Zellen.
+- **R Markdown:** Verknüpft Fließtext mit R- und Python-Codeblöcken für reproduzierbare statistische Datenanalysen und wissenschaftliche Auswertungen.
+- **nbconvert:** Übernimmt das Rendering ausgeführter Notebook-Zellen mitsamt grafischen Ausgaben in saubere HTML- oder PDF-Präsentationen.
+- **Quarto:** Moderne Publishing-Plattform für rechnergestützte Dokumente mit nativer Unterstützung für Jupyter-, R- und Observable-Codezellen.

@@ -1,43 +1,49 @@
-# Evolution digitaler Wissenssysteme
+# Digitale Wissenssysteme: Finden, Verknüpfen und Pflegen
 
-Die Ausgangsseite beschreibt sechs sich überlappende Entwicklungsrichtungen.
-Sie dienen als Orientierung und sind keine verbindliche Reifegradskala.
+Eine Sammlung wird dann im Alltag nützlich, wenn Menschen die passende
+Information wiederfinden und erkennen können, ob sie noch gilt. Dafür braucht
+es neben der Suche auch Zuständigkeiten, Änderungsverläufe und eine verständliche
+Ordnung. Ein Wissenssystem verbindet diese Aufgaben; seine Oberfläche allein
+sagt noch wenig über die Qualität des Bestands aus.
 
-| Richtung | Zentrale Idee |
-| --- | --- |
-| Wikis | Seiten gemeinsam bearbeiten, versionieren und verlinken |
-| Kollaborative Arbeitsräume und Docs-as-Code | Inhalte in gemeinsame Arbeitsabläufe einbetten |
-| Persönliche Wissensgraphen und Block-Editoren | Kleine Wissenseinheiten und Rückverweise verbinden |
-| Semantische und RAG-Systeme | Inhalte nach Bedeutung erschließen und für Antworten abrufen |
-| Visuelle, Local-First und agentische Systeme | Wissen räumlich organisieren, lokal bearbeiten oder automatisiert pflegen |
-| Multimodale Multi-Agenten-Systeme | Verschiedene Medien und spezialisierte Agenten zusammenführen |
+## Entscheidungen am Beispiel eines Projektwissens
 
-Die späteren Richtungen ersetzen frühere nicht zwangsläufig. Für die Einordnung
-sind auch Speicherform, Zusammenarbeit und Datenmodell entscheidend.
+Ein Team hält zunächst Entscheidungen und Betriebserfahrungen auf Wiki-Seiten
+fest. Jede Entscheidung erhält einen Anlass, eine verantwortliche Person und
+Verweise auf betroffene Komponenten. Persönliche Notizen können daneben lokal
+bleiben. Erst ausgewählte, überprüfte Erkenntnisse werden in den Teambestand
+übernommen.
+
+Mit wachsendem Umfang wird die Suche wichtiger. Schlagwörter, Volltextsuche
+und semantische Verfahren erfüllen unterschiedliche Aufgaben. Ein RAG-Ablauf
+kann passende Passagen für einen Antwortentwurf bereitstellen. Ob die Antwort
+diese Passagen korrekt wiedergibt, muss gesondert geprüft werden.
+
+## Architekturfragen
+
+- Liegen Inhalte zentral oder auf den Endgeräten?
+- Werden Seiten, einzelne Blöcke oder strukturierte Datensätze bearbeitet?
+- Wie werden widersprüchliche Änderungen erkannt und entschieden?
+- Werden Zugriffsrechte bereits beim Abruf von Suchergebnissen durchgesetzt?
+- Wie werden veraltete Informationen gekennzeichnet oder entfernt?
+
+Die folgenden Kategorien sind sich überschneidende Arbeitsweisen. Sie bilden
+keine feste Abfolge, in der eine neue Technik ältere Systeme ersetzt.
 
 ## Unterkategorien: gefilterte Softwareauswahl
 
 - [Wiki-Systeme](wissenssysteme/wiki-systeme.md)
-- [Kollaborative Arbeitsräume und Docs-as-Code](wissenssysteme/arbeitsraeume.md)
-- [Persönliche Wissensgraphen und Block-Editoren](wissenssysteme/pkm.md)
+- [Kollaborative Arbeitsräume](wissenssysteme/arbeitsraeume.md)
+- [Persönliche Wissensorganisation](wissenssysteme/pkm.md)
 - [Semantische und RAG-Systeme](wissenssysteme/semantische-systeme.md)
-- [Visuelle, Local-First und agentische Systeme](wissenssysteme/local-first.md)
-- [Multimodale Multi-Agenten-Systeme](wissenssysteme/multi-agenten.md)
-
-## Geplante Vertiefung
-
-- Von Seiten und Links zu Blöcken und Graphen
-- Lokale Datenhaltung und gemeinsame Bearbeitung
-- Quellenbezug und menschliche Prüfung bei KI-Unterstützung
-
-Quelle: [Evolution und Architekturen digitaler Wissenssysteme](https://dokument.wissen-ahrensburg.de/wissen/dokumentation/evolution-digitaler-wissenssysteme/).
+- [Lokale und visuelle Werkzeuge](wissenssysteme/local-first.md)
+- [Multi-Agenten-Bausteine](wissenssysteme/multi-agenten.md)
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: 26. September 2026. Redaktionelle Auswahl nach der
+Redaktioneller Stand: 27. September 2026. Auswahl nach der
 [gemeinsamen Bewertungsmethode](software.md). Die Reihenfolge priorisiert
 Reife und anschließend die Eignung für diese Kategorie.
 
@@ -88,4 +94,3 @@ Offizielle Grundlage: [TiddlyWiki](https://github.com/TiddlyWiki/TiddlyWiki5).
 **Einordnung:** Für diese Auswahl PostgreSQL als Anwendungsdatenbank konfigurieren. Zusätzliche Speicherziele sind optional und nicht Bestandteil der gewählten Variante.
 
 Offizielle Grundlage: [Wiki.js](https://js.wiki/about).
-

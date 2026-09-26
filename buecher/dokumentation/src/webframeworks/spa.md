@@ -6,9 +6,9 @@ SPAs übernehmen große Teile der Darstellung und Navigation im Browser. Persist
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien in der beschriebenen Betriebsvariante.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
+Redaktioneller Stand: **27. September 2026**. [Bewertungskriterien und Grenzen](../software.md).
 
 | Rang | Software und offizielle Quelle | Lizenz des Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
 | --- | --- | --- | --- | --- | --- |
@@ -21,5 +21,3 @@ Stand: **26. September 2026**. [Bewertungskriterien und Grenzen](../software.md)
 ## Einsatz und Abgrenzung
 
 Die ausgewählte Betriebsvariante verwendet für jedes Frontend eine eigene HTTP-API mit Django REST framework und PostgreSQL. Das ist ein Architekturvorschlag, kein eingebauter PostgreSQL-Treiber des Frontends. Ember benötigt einen passenden API-Adapter beziehungsweise ein abgestimmtes Antwortformat.
-
-Thematische Grundlage: [Evolution digitaler Webframeworks](https://dokument.wissen-ahrensburg.de/entwicklung/webentwicklung/evolution-digitaler-webframeworks/).

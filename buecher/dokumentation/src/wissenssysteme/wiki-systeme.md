@@ -1,15 +1,14 @@
 # Wiki-Systeme
 
-[Übergeordnete Kategorie: Evolution digitaler Wissenssysteme](../wissenssysteme.md)
+[Übergeordnete Kategorie: Digitale Wissenssysteme](../wissenssysteme.md)
 
 Gemeinsam gepflegte Seiten mit Verweisen und Versionierung.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -23,11 +22,10 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 ## Einsatz und Abgrenzung
 
-Für viele Bearbeitende stehen PostgreSQL-fähige Wikis und ein dateibasiertes Server-Wiki zur Auswahl. TiddlyWiki eignet sich besonders für persönliche Sammlungen.
+Wiki-Systeme bilden das Rückgrat offener Wissensvernetzung. Die Systeme unterscheiden sich grundlegend in ihrer Architektur: MediaWiki, XWiki und Wiki.js setzen auf relationale Datenbanken (hier PostgreSQL), während DokuWiki und TiddlyWiki dateibasiert ohne Datenbank auskommen.
 
-- **MediaWiki:** Erweiterungen und Upgrades müssen gemeinsam geplant werden.
-- **XWiki:** Individuelle Wiki-Anwendungen erhöhen den Betriebsaufwand.
-- **DokuWiki:** Kompatibilität zusätzlicher Plugins gesondert prüfen.
-- **TiddlyWiki:** Gemeinsame Bearbeitung und Synchronisierung brauchen ein passendes Betriebskonzept.
-
-- **Wiki.js:** Für diese Auswahl PostgreSQL als Anwendungsdatenbank konfigurieren. Zusätzliche Speicherziele sind optional und nicht Bestandteil der gewählten Variante.
+- **MediaWiki:** Etablierter Maßstab für großflächige, hierarchiefreie Wissensnetze; LTS-Releases und Schema-Migrationen erfordern eine vorausschauende Betriebsplanung.
+- **XWiki:** Leistungsfähige Plattform für semantisch strukturiertes Wissensmanagement mit eigenem Makro- und Applikationsbaukasten.
+- **DokuWiki:** Ausgezeichnet geeignet für wartungsarme Wissenssammlungen im Dateisystem; Textdateien ermöglichen einfache Backups und direkte Versionierung.
+- **TiddlyWiki:** Nicht-lineares, modulares persönliches Wissenssystem; für verteilte Teams sind geeignete Synchronisations-Gateways erforderlich.
+- **Wiki.js:** Universelle Wissensplattform mit moderner Weboberfläche; der filterkonforme Betrieb setzt die explizite Konfiguration von PostgreSQL als Primärdatenbank voraus.

@@ -1,15 +1,14 @@
 # Komponenten und interaktive Dokumentation
 
-[Übergeordnete Kategorie: Evolution digitaler Docs-as-Code](../docs-as-code.md)
+[Übergeordnete Kategorie: Docs-as-Code](../docs-as-code.md)
 
 Frameworks und Publishing-Werkzeuge für interaktive Inhalte.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,8 +24,8 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die ersten vier verbinden Dokumentation mit Webkomponenten. Quarto ergänzt wissenschaftliche und ausführbare Veröffentlichungen.
 
-- **Docusaurus:** Node.js- und React-Abhängigkeiten gehören zur laufenden Pflege.
-- **VitePress:** Komponenten benötigen Vue-Kenntnisse.
-- **Starlight:** Astro-Komponenten und Erweiterungen müssen kompatibel sein.
-- **Nextra:** Next.js-Abhängigkeiten gehören zur langfristigen Pflege.
-- **Quarto:** Codeausführung benötigt passende Laufzeitumgebungen.
+- **Docusaurus:** Ermöglicht das direkte Einbetten interaktiver React-Widgets und konfigurierbarer Code-Sandboxes in den Dokumentationstext via MDX.
+- **VitePress:** Erlaubt die nahtlose Verwendung von Vue-3-Komponenten innerhalb von Markdown zur Demonstration interaktiver Oberflächenelemente.
+- **Starlight:** Nutzt das Komponentenmodell von Astro, wodurch interaktive Bedienelemente als leichtgewichtige Inseln (Islands) im Browser nachgeladen werden.
+- **Nextra:** Integriert React-Komponenten und dynamische Such- oder Filterleisten auf Basis des Next.js-Frameworks.
+- **Quarto:** Verbindet Dokumentation mit ausführbaren interaktiven Datenvisualisierungen (z. B. über Observable JavaScript oder Python-Bibliotheken).

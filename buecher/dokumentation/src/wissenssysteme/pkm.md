@@ -1,15 +1,14 @@
 # Persönliche Wissensgraphen und Block-Editoren
 
-[Übergeordnete Kategorie: Evolution digitaler Wissenssysteme](../wissenssysteme.md)
+[Übergeordnete Kategorie: Digitale Wissenssysteme](../wissenssysteme.md)
 
 Vernetzte Notizen, Wissenseinheiten und persönliche Wissensorganisation.
 
 ## Open-Source-Auswahl nach Reifegrad
 
-**5 passende Einträge:** ausschließlich PostgreSQL oder Inhaltsdateien.
-Die Auswahl enthält genau fünf passende Projekte, nach Reifegrad priorisiert.
+**5 Einträge:** für den jeweils beschriebenen Speicherumfang ausgewählt.
 
-Stand: **26. September 2026**. Redaktionelle Auswahl aus geprüften Projekten;
+Redaktioneller Stand: **27. September 2026**;
 [Bewertungskriterien und Grenzen](../software.md) gelten auch hier.
 Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
@@ -25,11 +24,11 @@ Die Rangfolge priorisiert Reife und danach die Passung zum Thema.
 
 Die Auswahl verbindet vernetzte Notizen mit unterschiedlichen Arbeitsoberflächen. SiYuan setzt auf Blöcke, Org-roam auf Emacs; Zettlr verbindet Markdown-Texte mit einer dokumentierten Graphansicht.
 
-- **TiddlyWiki:** Gemeinsame Bearbeitung und Synchronisierung brauchen ein passendes Betriebskonzept.
+- **TiddlyWiki:** Ermöglicht hochgradig anpassbare nicht-lineare Notizstrukturen über Tiddlers und Tags; eignet sich primär für individuelle Denk- und Zettelkasten-Workflows.
 - **Org-roam:** Erfordert Emacs- und Org-mode-Kenntnisse.
 - **SiYuan:** Synchronisierung und Zusatzdienste separat beurteilen.
 - **Zettlr:** Schwerpunkt auf persönlicher Text- und Wissensarbeit; keine zentrale Teamredaktion.
 
 Funktionsnachweis: [Zettlr-Graphansicht](https://docs.zettlr.com/en/pkms/graph.html).
 
-- **Zim:** Lokale, verlinkte Wiki-Seiten liegen in Textdateien. Der Schwerpunkt liegt auf persönlicher Wissensarbeit, nicht auf gemeinsamem Echtzeit-Editing.
+- **Zim:** Eignet sich für hierarchische und querverlinkte Notizsammlungen im persönlichen Desktop-Alltag; Seitenumbenennungen und Verweisstrukturen werden im lokalen Dateibaum nachgeführt.
