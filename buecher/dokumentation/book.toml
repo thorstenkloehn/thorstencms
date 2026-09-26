@@ -1,0 +1,12 @@
+[book]
+title = "Digitale Dokumentation und Wissenssysteme"
+description = "Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code"
+language = "de"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
