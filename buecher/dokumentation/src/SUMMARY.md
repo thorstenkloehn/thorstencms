@@ -95,6 +95,10 @@
   - [LSP, Tree-sitter und symbolbewusste Kontextanalyse](ide-ki-integration/lsp-treesitter-kontext.md)
   - [In-Editor-Diffs, AST-Patching und Puffer-Synchronisation](ide-ki-integration/inline-diff-patching.md)
   - [Terminal-Schleifen, Test-Runner und Workspace-Sandboxing](ide-ki-integration/terminal-agenten-sandboxing.md)
+- [Mobile und Desktop-Apps und KI-Framework-SDKs](apps-ki-integration.md)
+  - [On-Device-Inferenz und Hardwarebeschleunigung](apps-ki-integration/on-device-hardwarebeschleunigung.md)
+  - [Local-First-Architekturen, Offline-RAG und CRDT-Sync](apps-ki-integration/local-first-offline-rag.md)
+  - [Hybrid-Routing, Modellkaskadierung und Energiemanagement](apps-ki-integration/hybrid-routing-energiemanagement.md)
 
 ---
 
