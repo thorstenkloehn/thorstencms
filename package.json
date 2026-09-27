@@ -1,0 +1,26 @@
+{
+  "name": "thorsten",
+  "version": "1.0.0",
+  "description": "[Digitale Dokumentation und Wissenssysteme](buecher/dokumentation/src/README.md) ist ein deutschsprachiges mdBook über Dokumentationsformen und die Entwicklung von Wissenssystemen, Content-Management-Systemen, Docs-as-Code, Webframeworks, Lernmanagement-Systemen (LMS), Mobile- und Desktop-Apps sowie Sprachmodell-Integrationen.",
+  "homepage": "https://github.com/thorstenkloehn/thorstencms#readme",
+  "bugs": {
+    "url": "https://github.com/thorstenkloehn/thorstencms/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thorstenkloehn/thorstencms.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "mdbook build buecher/dokumentation",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d buecher/dokumentation/book --dotfiles",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
