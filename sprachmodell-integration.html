@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Integration von Sprachmodellen in Software-Architekturen - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="integration-von-sprachmodellen-in-software-architekturen"><a class="header" href="#integration-von-sprachmodellen-in-software-architekturen">Integration von Sprachmodellen in Software-Architekturen</a></h1>
+<p>Ein Sprachmodell kann einen Textentwurf erzeugen, Informationen aus bereitgestellten
+Passagen zusammenfassen oder einen Werkzeugaufruf vorschlagen. Die umgebende
+Anwendung entscheidet, welche Daten es erhält und welche Aktionen tatsächlich
+ausgeführt werden. Diese Trennung ist für überprüfbare Ergebnisse wichtig.</p>
+<h2 id="beispiel-eine-antwort-aus-einem-handbuch"><a class="header" href="#beispiel-eine-antwort-aus-einem-handbuch">Beispiel: Eine Antwort aus einem Handbuch</a></h2>
+<p>Eine Nutzerin fragt nach einer Konfigurationsoption. Die Anwendung sucht
+relevante Handbuchpassagen, prüft deren Zugriffsrechte und gibt sie zusammen
+mit der Frage an das Modell. Der Antwortentwurf enthält Verweise auf die
+verwendeten Stellen. Fehlende oder widersprüchliche Informationen müssen
+sichtbar bleiben, statt durch eine plausible Vermutung ersetzt zu werden.</p>
+<p>Auch ein RAG-System kann falsche Antworten erzeugen. Ein Quellenlink belegt
+erst dann eine Aussage, wenn die verlinkte Passage sie tatsächlich stützt.
+Die Qualität hängt unter anderem von Dokumentbestand, Abruf, Modell und
+Prüfung ab. Vektorsuche allein verhindert keine Halluzinationen.</p>
+<h2 id="integrationsorte"><a class="header" href="#integrationsorte">Integrationsorte</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Bereich</th><th>Möglicher Ablauf</th><th>Zusätzliche Aufgabe der Anwendung</th></tr></thead><tbody>
+<tr><td>CMS</td><td>Entwurf oder Metadaten vorschlagen</td><td>Redaktionelle Freigabe und Änderungshistorie</td></tr>
+<tr><td>Webanwendung</td><td>Antwort schrittweise anzeigen</td><td>Anmeldung, Zeitlimits und Fehlerbehandlung</td></tr>
+<tr><td>LMS</td><td>Rückmeldung zu einer Übung vorbereiten</td><td>Didaktische Prüfung und Schutz der Lerndaten</td></tr>
+<tr><td>Wissenssystem</td><td>Passagen suchen und zusammenfassen</td><td>Zugriffsrechte und nachvollziehbare Belege</td></tr>
+<tr><td>Docs-as-Code</td><td>Änderungsvorschlag an Textdateien erzeugen</td><td>Diff-Prüfung und anschließender Build</td></tr>
+<tr><td>Office-Editor</td><td>Markierten Text umarbeiten</td><td>Bewusste Auswahl des Modellanbieters und der übertragenen Inhalte</td></tr>
+</tbody></table>
+</div>
+<h2 id="daten-und-werkzeugaufrufe"><a class="header" href="#daten-und-werkzeugaufrufe">Daten und Werkzeugaufrufe</a></h2>
+<p>PostgreSQL kann Dokumente, Metadaten und Konversationszustand speichern.
+Für Vektoren kommt eine passende Erweiterung oder Integration hinzu.
+Ein PostgreSQL-Vektorspeicher ist dabei nicht automatisch ein Speicher für
+den gesamten Agentenzustand. Jede Datenart braucht eine klare Zuordnung.</p>
+<p>Ein Modellvorschlag für einen Werkzeugaufruf wird von Anwendungscode geprüft.
+Ein passendes JSON-Schema kontrolliert die Form, nicht die fachliche Richtigkeit
+oder Berechtigung. Die Anwendung muss Zugriff und zulässige Parameter zusätzlich
+prüfen, bevor sie eine Aktion ausführt.</p>
+<h2 id="lokale-und-externe-modelle"><a class="header" href="#lokale-und-externe-modelle">Lokale und externe Modelle</a></h2>
+<p>Ollama kann Modelle lokal ausführen und bietet auch Cloud-Funktionen.
+Für eine lokale Verarbeitung müssen Modellwahl und Konfiguration dazu passen;
+zusätzliche Werkzeuge dürfen Inhalte nicht unbeabsichtigt weiterleiten.
+<a href="https://docs.ollama.com/faq">Ollama: Lokaler Betrieb und Cloud-Funktionen</a>.</p>
+<p>Die Lizenz einer Laufzeit oder Bibliothek gilt nicht automatisch für die
+Modellgewichte. Hardwarebedarf, Nutzungsrechte und Datenflüsse werden deshalb
+getrennt beurteilt. Ein lokaler Server garantiert noch keine Datenschutzkonformität.</p>
+<h2 id="unterkategorien-gefilterte-softwareauswahl"><a class="header" href="#unterkategorien-gefilterte-softwareauswahl">Unterkategorien: gefilterte Softwareauswahl</a></h2>
+<ul>
+<li><a href="sprachmodelle/cms.html">CMS-Anbindung</a></li>
+<li><a href="sprachmodelle/frameworks.html">Webframeworks und Backend</a></li>
+<li><a href="sprachmodelle/bibliotheken.html">Bibliotheken und Laufzeiten</a></li>
+<li><a href="sprachmodelle/lms.html">Lernmanagement-Systeme</a></li>
+<li><a href="sprachmodelle/docs-as-code.html">Docs-as-Code</a></li>
+<li><a href="sprachmodelle/wissenssysteme.html">Wissenssysteme</a></li>
+<li><a href="sprachmodelle/ide-code-editoren.html">IDEs und Code-Editoren</a></li>
+<li><a href="sprachmodelle/office-autorentools.html">Office- und Autorentools</a></li>
+</ul>
+<h2 id="open-source-auswahl-nach-reifegrad"><a class="header" href="#open-source-auswahl-nach-reifegrad">Open-Source-Auswahl nach Reifegrad</a></h2>
+<p><strong>4 Einträge:</strong> für den jeweils beschriebenen Speicherumfang ausgewählt.</p>
+<p>Redaktioneller Stand: 27. September 2026. Auswahl nach der
+<a href="software.html">gemeinsamen Bewertungsmethode</a>. Die Reihenfolge priorisiert
+Reife und anschließend die Eignung für diese Kategorie.</p>
+<div class="table-wrapper"><table><thead><tr><th>Rang</th><th>Software</th><th>Lizenz des Kerns</th><th>Reifegrad</th><th>Schwerpunkt</th><th>Passender Speicherweg und Nachweis</th></tr></thead><tbody>
+<tr><td>1</td><td><a href="https://github.com/langchain-ai/langchain">LangChain</a></td><td>MIT</td><td>Hoch</td><td>Umfassende Modell-Orchestrierung und Tool-Chains</td><td>PostgreSQL: <a href="https://github.com/langchain-ai/langchain-postgres">Dokument- und Vektorspeicher über langchain-postgres</a></td></tr>
+<tr><td>2</td><td><a href="https://github.com/run-llama/llama_index">LlamaIndex</a></td><td>MIT</td><td>Hoch</td><td>Daten-Framework für Dokumenten-Indizierung und RAG</td><td>PostgreSQL: <a href="https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/postgres/">PGVectorStore-Integration</a></td></tr>
+<tr><td>3</td><td><a href="https://github.com/ollama/ollama">Ollama</a></td><td>MIT</td><td>Hoch</td><td>Lokale Laufzeitumgebung für Open-Weights-Sprachmodelle</td><td>Dateien: <a href="https://ollama.com/">Lokale Modell- und GGUF-Dateien</a></td></tr>
+<tr><td>4</td><td><a href="https://github.com/BerriAI/litellm">LiteLLM</a></td><td>MIT</td><td>Hoch</td><td>Zentrales Gateway und Proxy für 100+ Modellanbieter</td><td>PostgreSQL: <a href="https://docs.litellm.ai/docs/proxy/virtual_keys">PostgreSQL für Proxy-Schlüssel und Budgets</a></td></tr>
+</tbody></table>
+</div>
+<h2 id="betrieb-und-prüfung"><a class="header" href="#betrieb-und-prüfung">Betrieb und Prüfung</a></h2>
+<p>LangChain und LlamaIndex sind Integrationsbibliotheken. Eine Oberfläche,
+Berechtigungen und Evaluationsfälle gehören zur eigenen Anwendung. LiteLLM
+kann Modellzugriffe bündeln; die ausgewählte Variante verwendet PostgreSQL
+für den Proxy-Zustand. Ollama wird hier als Laufzeit mit lokalen Modelldateien
+betrachtet, nicht als fertiger Dokumentenspeicher.</p>
+<p>Für eine neue Anwendung helfen einige bewusst schwierige Prüffragen:
+Was passiert ohne passenden Beleg? Werden veraltete Passagen erkannt?
+Kann ein Benutzer Inhalte aus einem gesperrten Kurs abrufen? Bleiben Fehler
+bei Modell- oder Werkzeugaufrufen sichtbar? Solche Tests müssen zur konkreten
+Anwendung gehören und wurden hier nicht für die genannten Produkte durchgeführt.</p>
+<p><a href="cli-agenten.html">CLI-Agenten</a> und <a href="mobile-desktop-apps.html">App-Architekturen</a>
+vertiefen die Nutzung dieser Bausteine im Arbeitsalltag.</p>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="cli-agenten.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="sprachmodelle/cms.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="cli-agenten.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="sprachmodelle/cms.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

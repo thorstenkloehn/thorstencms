@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Webframeworks: Darstellung, Verarbeitung und Datenzugriff - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="webframeworks-darstellung-verarbeitung-und-datenzugriff"><a class="header" href="#webframeworks-darstellung-verarbeitung-und-datenzugriff">Webframeworks: Darstellung, Verarbeitung und Datenzugriff</a></h1>
+<p>Eine Webanwendung nimmt Anfragen entgegen, verarbeitet Eingaben und liefert
+eine Antwort. Ein Framework unterstützt diese Aufgaben, legt aber nicht für
+jedes Projekt fest, wo Inhalte gespeichert werden oder wie viel Arbeit im
+Browser stattfindet.</p>
+<h2 id="beispiel-vom-lesekatalog-zur-kursanmeldung"><a class="header" href="#beispiel-vom-lesekatalog-zur-kursanmeldung">Beispiel: Vom Lesekatalog zur Kursanmeldung</a></h2>
+<p>Ein selten geänderter Lesekatalog kann als statische Website ausgegeben werden.
+Für eine Kursanmeldung kommen Benutzerrechte, Eingabeprüfung und dauerhafte
+Speicherung hinzu. Interaktive Bedienung lässt sich schrittweise ergänzen,
+ohne die gesamte Anwendung als Single-Page-Application aufzubauen.</p>
+<p>Serverseitiges Rendering, Browserkomponenten und statische Ausgabe lassen sich
+kombinieren. Islands begrenzen beispielsweise die interaktiven Bereiche einer
+Seite; Edge-Betrieb beschreibt den Ausführungsort. Diese Entscheidungen sind
+von der Wahl der Datenbank zu unterscheiden.</p>
+<h2 id="unterkategorien"><a class="header" href="#unterkategorien">Unterkategorien</a></h2>
+<ul>
+<li><a href="webframeworks/serverseitig.html">Serverseitige Frameworks</a></li>
+<li><a href="webframeworks/ajax.html">Ajax und progressive Erweiterung</a></li>
+<li><a href="webframeworks/spa.html">Single-Page-Applications</a></li>
+<li><a href="webframeworks/meta-frameworks.html">Full-Stack- und Meta-Frameworks</a></li>
+<li><a href="webframeworks/islands-edge.html">Server Components, Islands und Edge</a></li>
+<li><a href="webframeworks/ki-agenten.html">KI-Bausteine und Entwicklungsassistenten</a></li>
+<li><a href="webframeworks/batteries-included.html">Batteries-Included-Webframeworks</a></li>
+<li><a href="webframeworks/enterprise.html">Enterprise-Webframeworks</a></li>
+</ul>
+<p>Die Kategorien beschreiben Architektur- und Einsatzschwerpunkte. Sie sind
+kein verbindliches historisches Generationenmodell.</p>
+<h2 id="open-source-auswahl-nach-reifegrad"><a class="header" href="#open-source-auswahl-nach-reifegrad">Open-Source-Auswahl nach Reifegrad</a></h2>
+<p><strong>5 Einträge:</strong> für den jeweils beschriebenen Speicherumfang ausgewählt.</p>
+<p>Redaktioneller Stand: <strong>27. September 2026</strong>. <a href="software.html">Bewertungskriterien und Grenzen</a>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Rang</th><th>Software und offizielle Quelle</th><th>Lizenz des Kerns</th><th>Reifegrad</th><th>Begründung</th><th>Passender Speicherweg und Nachweis</th></tr></thead><tbody>
+<tr><td>1</td><td><a href="https://github.com/django/django">Django</a></td><td>BSD-3-Clause</td><td>Sehr hoch</td><td>Langjähriges Python-Framework mit ORM, Admin und umfassendem Handbuch.</td><td>PostgreSQL: <a href="https://docs.djangoproject.com/en/stable/ref/databases/#postgresql-notes">Offizielles Datenbank-Backend</a></td></tr>
+<tr><td>2</td><td><a href="https://github.com/rails/rails">Ruby on Rails</a></td><td>MIT</td><td>Sehr hoch</td><td>Etabliertes MVC-System mit Migrationen und integriertem Anwendungsmodell.</td><td>PostgreSQL: <a href="https://guides.rubyonrails.org/configuring.html#configuring-a-postgresql-database">Active-Record-Konfiguration</a></td></tr>
+<tr><td>3</td><td><a href="https://github.com/spring-projects/spring-boot">Spring Boot</a></td><td>Apache-2.0</td><td>Sehr hoch</td><td>Umfangreiche Betriebs- und Datenzugriffsdokumentation für Java-Anwendungen.</td><td>PostgreSQL: <a href="https://docs.spring.io/spring-boot/how-to/data-access.html">DataSource mit PostgreSQL-JDBC-Treiber konfigurieren</a></td></tr>
+<tr><td>4</td><td><a href="https://github.com/symfony/symfony">Symfony</a></td><td>MIT</td><td>Sehr hoch</td><td>Langjähriger PHP-Unterbau mit wiederverwendbaren Komponenten.</td><td>PostgreSQL: <a href="https://symfony.com/doc/current/doctrine.html">Doctrine und PostgreSQL-Verbindungsadresse</a></td></tr>
+<tr><td>5</td><td><a href="https://github.com/dotnet/aspnetcore">ASP.NET Core</a></td><td>MIT</td><td>Sehr hoch</td><td>Etabliertes plattformübergreifendes .NET-Framework für MVC, Razor Pages und HTTP-APIs.</td><td>PostgreSQL: <a href="https://www.npgsql.org/efcore/">EF Core mit Npgsql und UseNpgsql konfigurieren</a></td></tr>
+</tbody></table>
+</div>
+<h2 id="speicherwege-fuer-webframeworks"><a class="header" href="#speicherwege-fuer-webframeworks">Speicherwege fuer Webframeworks</a></h2>
+<p>Ein Framework liefert Bausteine für eine Anwendung. Die hier ausgewählte
+Betriebsvariante muss beim Entwickeln ausdrücklich umgesetzt werden.</p>
+<ul>
+<li><strong>Server-Frameworks:</strong> PostgreSQL über das dokumentierte ORM oder den Datenbanktreiber konfigurieren.</li>
+<li><strong>Browser-Bibliotheken und SPAs:</strong> Die Auswahl gilt ausschließlich zusammen mit einem eigenen Django-Backend, dessen Datenbank PostgreSQL ist. Für JSON-Schnittstellen ergänzt <a href="https://www.django-rest-framework.org/">Django REST framework</a> das Backend. Browser greifen per HTTP darauf zu, niemals mit Datenbankzugangsdaten direkt auf PostgreSQL. Diese Kombination ist eine redaktionell abgeleitete Architektur, keine Herstellerzertifizierung.</li>
+<li><strong>Node.js- und Deno-Frameworks:</strong> PostgreSQL-Treiber gehören in serverseitige Routen. Hosting, Verbindungsverwaltung und Migrationen müssen passend eingerichtet werden.</li>
+<li><strong>Inhaltsdateien:</strong> Markdown und MDX sind maßgebliche Inhalte; Quellcode-Dateien allein machen ein beliebiges Framework noch nicht zu einem dateibasierten Wissenssystem.</li>
+</ul>
+<p>Die <a href="https://docs.djangoproject.com/en/stable/ref/databases/#postgresql-notes">Django-Dokumentation</a>
+belegt den PostgreSQL-Speicherweg des gemeinsamen Beispiel-Backends.
+Keine dieser Kombinationen wurde für dieses Buch installiert oder im Zusammenspiel getestet.</p>
+<h2 id="architekturfragen"><a class="header" href="#architekturfragen">Architekturfragen</a></h2>
+<p>Rendering und Speicherung sind unabhängige Entscheidungen. Statische Ausgabe
+passt zu selten veränderten Inhalten. Individuelle Benutzeraktionen benötigen
+serverseitige Verarbeitung und dauerhafte Speicherung. Islands reduzieren den
+interaktiven Anteil einer Seite; Edge-Betrieb beschreibt den Ausführungsort.
+KI-Werkzeuge können die Entwicklung unterstützen, ersetzen aber weder diese
+Entscheidungen noch die fachliche Prüfung.</p>
+<p><strong>Einordnung von ASP.NET Core:</strong> Serverseitiges Framework der Enterprise-Linie.
+Die Auswahl verwendet PostgreSQL über Npgsql; SQL Server ist dafür nicht erforderlich.
+Die Auswahl deckt Python, Ruby, Java, PHP und .NET ab. Weitere passende
+Frameworks werden in den Unterkategorien beschrieben.</p>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="docs-as-code/agentische-pflege.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="webframeworks/serverseitig.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="docs-as-code/agentische-pflege.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="webframeworks/serverseitig.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

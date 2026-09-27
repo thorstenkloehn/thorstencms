@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>In-line-Assistenz, Cursor-Kontexte und Ghost-Text - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="in-line-assistenz-cursor-kontexte-und-ghost-text"><a class="header" href="#in-line-assistenz-cursor-kontexte-und-ghost-text">In-line-Assistenz, Cursor-Kontexte und Ghost-Text</a></h1>
+<p><a href="../autorentools-ki-integration.html">Übergeordnete Kategorie: Autorentools und KI-Framework-SDKs</a></p>
+<p>Die direkte Unterstützung während des Tippens erfordert eine hochgradig reaktive Schnittstelle zwischen der Text-Engine des Editors und dem KI-Framework-SDK. Anders als bei getrennten Chat-Seitenleisten findet die Interaktion unmittelbar an der Cursor-Position statt.</p>
+<hr />
+<h2 id="das-fill-in-the-middle-prinzip-prefix--und-suffix-kontext"><a class="header" href="#das-fill-in-the-middle-prinzip-prefix--und-suffix-kontext">Das Fill-In-the-Middle-Prinzip (Prefix- und Suffix-Kontext)</a></h2>
+<p>Wird ein Textabsatz mitten im Dokument überarbeitet oder fortgeführt, reicht es nicht aus, dem Modell lediglich den vorangegangenen Text zu übergeben. Das Modell muss wissen, wie der Satz oder Absatz nach der Einfügemarke weitergeht, um logische und grammatikalische Brüche zu vermeiden:</p>
+<pre><code>[Bestehender Text vor Cursor (Prefix)]
+"Die Untersuchung ergab signifikante Unterschiede in der Gruppe A, "
+                                  ▲
+                         [Aktuelle Cursor-Position]
+                                  │
+                   [KI generiert passenden Einschub]
+                   "wobei insbesondere die Latenzwerte ..."
+                                  ▼
+[Bestehender Text nach Cursor (Suffix)]
+"was die ursprüngliche Hypothese der Autoren stützt."
+</code></pre>
+<h3 id="prompt-architektur-für-text-vervollständigungen"><a class="header" href="#prompt-architektur-für-text-vervollständigungen">Prompt-Architektur für Text-Vervollständigungen:</a></h3>
+<ul>
+<li><strong>Prefix (Linker Kontext):</strong> Typischerweise 1.000 bis 3.000 Tokens vor der Cursor-Position zur Erfassung des Gedankengangs und des Schreibstils.</li>
+<li><strong>Suffix (Rechter Kontext):</strong> 500 bis 1.000 Tokens nach der Cursor-Position, um den grammatikalischen Anschluss an den Folgetext zu sichern.</li>
+<li><strong>Dokumentenmetadaten:</strong> Titel des Manuskripts, Zielgruppe und Genre werden im System-Prompt verankert.</li>
+</ul>
+<hr />
+<h2 id="ghost-text-und-tastaturgesteuerte-interaktion"><a class="header" href="#ghost-text-und-tastaturgesteuerte-interaktion">Ghost-Text und tastaturgesteuerte Interaktion</a></h2>
+<p>Die Einblendung maschineller Fortsetzungen erfolgt über sogenannten <strong>Ghost-Text</strong> (halbtransparente, graue Schrift unmittelbar hinter der Einfügemarke):</p>
+<ol>
+<li><strong>Nicht-invasives Erscheinen:</strong> Nach einer kurzen Tipp-Pause (Debounce-Intervall von ca. 300 bis 500 Millisekunden) fordert das Editor-Plugin einen kurzen Textchunk über das KI-SDK an.</li>
+<li><strong>Schlanke Tastatur-Steuerung:</strong>
+<ul>
+<li><code>Tab</code>: Übernimmt den gesamten Vorschlag in das Dokument.</li>
+<li><code>Strg + Pfeil rechts</code>: Übernimmt den Vorschlag schrittweise wortweise.</li>
+<li><code>Escape</code> oder Weitertippen: Verwirft den Ghost-Text sofort, ohne den Schreibfluss zu unterbrechen.</li>
+</ul>
+</li>
+<li><strong>Geringe Latenz:</strong> Inferenz-Latenzen über 800 Millisekunden zerstören das Schreibgefühl. Für Ghost-Text kommen daher bevorzugt spezialisierte, kompakte Modelle mit hoher Ausgabegeschwindigkeit zum Einsatz.</li>
+</ol>
+<hr />
+<h2 id="erhalt-semantischer-formatierungen-und-dom-schutz"><a class="header" href="#erhalt-semantischer-formatierungen-und-dom-schutz">Erhalt semantischer Formatierungen und DOM-Schutz</a></h2>
+<p>Wird eine markierte Textpassage überarbeitet (z. B. <em>„Absatz kürzen und präziser formulieren“</em>), besteht die Gefahr, dass Rich-Text-Auszeichnungen zerstört werden.</p>
+<ul>
+<li><strong>Format-Integrität:</strong> Befinden sich im markierten Bereich Fettungen, Kursivierungen, Fußnotenmarker (<code>[^1]</code>) oder Querverweise, muss das KI-SDK angewiesen werden, diese Tags syntaktisch exakt beizubehalten.</li>
+<li><strong>DOM- und AST-Sanitizing:</strong> Vor dem Zurückschreiben in das Dokument prüft das Plugin die Antwort auf Wohlgeformtheit (z. B. Schließen aller geöffneten XML-/HTML-Knoten oder Markdown-Formatierungszeichen).</li>
+<li><strong>Asynchrone Entkopplung:</strong> Um ein Einfrieren der Programmoberfläche (UI-Freeze) zu verhindern, laufen Inferenz und Netzwerkabfragen in separaten Hintergrund-Threads (oder Web Workern). Der Haupt-Thread verarbeitet Benutzereingaben jederzeit ohne Verzögerung.</li>
+</ul>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Wie vorgeschlagene Änderungen im Dokument sichtbar gemacht und vom Autor verwaltet werden, zeigt die Unterkategorie <a href="aenderungsverfolgung-revision.html">Änderungsverfolgung, Revisionsmodi und Stilprüfung</a>.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../autorentools-ki-integration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../autorentools-ki-integration/aenderungsverfolgung-revision.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../autorentools-ki-integration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../autorentools-ki-integration/aenderungsverfolgung-revision.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

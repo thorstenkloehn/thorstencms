@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>KI-Integrations- und Modellbibliotheken - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="ki-integrations--und-modellbibliotheken"><a class="header" href="#ki-integrations--und-modellbibliotheken">KI-Integrations- und Modellbibliotheken</a></h1>
+<p><a href="../sprachmodell-integration.html">Übergeordnete Kategorie: Integration von Sprachmodellen in Software-Architekturen</a></p>
+<p>Abstraktionsbibliotheken, Frameworks, Provider-SDKs, Gateways und lokale Open-Weights-Laufzeiten.</p>
+<h2 id="architekturschichten-sdks-frameworks-und-gateways"><a class="header" href="#architekturschichten-sdks-frameworks-und-gateways">Architekturschichten: SDKs, Frameworks und Gateways</a></h2>
+<p>Bei der technischen Einbindung von Sprachmodellen in bestehende Software-Architekturen lassen sich vier funktionale Abstraktionsschichten unterscheiden:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│  Orchestrierungs- &amp; Agenten-Frameworks (LangChain, DSPy)    │  ▲ Hohe Abstraktion
+├─────────────────────────────────────────────────────────────┤  │ (Workflows, RAG,
+│  Daten- &amp; Index-Frameworks (LlamaIndex)                     │  │  Graph-Zustände)
+├─────────────────────────────────────────────────────────────┤  │
+│  Fullstack- &amp; Gateway-Schichten (LiteLLM, Vercel AI SDK)    │  │
+├─────────────────────────────────────────────────────────────┤  │
+│  Provider- &amp; Laufzeit-SDKs (Google GenAI, OpenAI, Ollama)   │  ▼ Hardware- &amp;
+└─────────────────────────────────────────────────────────────┘    API-Nähe
+</code></pre>
+<h3 id="1-provider-sdks-basisschicht"><a class="header" href="#1-provider-sdks-basisschicht">1. Provider-SDKs (Basisschicht)</a></h3>
+<p>Provider-SDKs (Software Development Kits) binden die herstellerspezifischen HTTP- oder gRPC-Schnittstellen der Modellanbieter direkt ein.</p>
+<ul>
+<li><strong>Funktionsumfang:</strong> Authentifizierung, Serialisierung von Parametern (wie Temperatur, Token-Limits und strukturierte JSON-Schemata), Behandlung von HTTP-Verbindungsabbrüchen und Auslesen von Server-Sent Events (SSE) beim Token-Streaming.</li>
+<li><strong>Vorteile:</strong> Minimale Latenz, keine überflüssigen Abstraktionsschichten („Zero Overhead“) und unmittelbare Verfügbarkeit neuer Provider-Funktionen (etwa spezifische Caching-Parameter, multimodale Eingaben oder erweiterte Kontrollflags für Denkprozesse).</li>
+<li><strong>Grenzen:</strong> Kein integriertes Zustandsmanagement über Konversationsgrenzen hinweg; Werkzeugaufrufe (Function Calling) und Vektoranbindungen müssen in der eigenen Anwendungslogik implementiert werden.</li>
+</ul>
+<h3 id="2-fullstack--und-entwicklungs-sdks"><a class="header" href="#2-fullstack--und-entwicklungs-sdks">2. Fullstack- und Entwicklungs-SDKs</a></h3>
+<p>Fullstack-SDKs schlagen eine Brücke zwischen Frontend, serverseitiger Laufzeit und Modell.</p>
+<ul>
+<li>Sie vereinheitlichen Kommunikationsprotokolle für Web-UIs, bieten Streaming-Hilfen für Serverkomponenten und standardisieren die Typisierung von Werkzeugaufrufen.</li>
+<li>Ziel ist ein reduzierter Boilerplate-Code bei interaktiven Benutzeroberflächen, ohne zwingend ein komplexes Agenten-Framework betreiben zu müssen.</li>
+</ul>
+<h3 id="3-orchestrierungs--und-agenten-frameworks"><a class="header" href="#3-orchestrierungs--und-agenten-frameworks">3. Orchestrierungs- und Agenten-Frameworks</a></h3>
+<p>Frameworks stellen übergeordnete Kontrollstrukturen, Pipeline-Definitionen und Zustandsmaschinen bereit.</p>
+<ul>
+<li><strong>Workflow-Steuerung:</strong> Strukturieren mehrstufige Ausführungsketten (Chains) und zyklische Zustandsgraphen mit Verzweigungen, Rollbacks und Human-in-the-Loop-Prüfungen.</li>
+<li><strong>RAG-Integration:</strong> Automatisieren das Laden, Zerlegen (Chunking), Einbetten und Indizieren von Dokumentenbeständen sowie den semantischen Abruf über Vektordatenbanken.</li>
+<li><strong>Architektonische Risiken:</strong> Gefahr undurchsichtiger Abstraktionen („Leaky Abstractions“), erschwerte Fehlerdiagnose im Produktivbetrieb und Abhängigkeit von Release-Zyklen der Framework-Betreiber bei API-Änderungen der Modellhersteller.</li>
+</ul>
+<h3 id="4-gateway--und-proxy-laufzeiten"><a class="header" href="#4-gateway--und-proxy-laufzeiten">4. Gateway- und Proxy-Laufzeiten</a></h3>
+<p>Gateways schalten sich als Vermittler zwischen die Anwendung und die Modellanbieter.</p>
+<ul>
+<li><strong>Funktionsumfang:</strong> Entkopplung über standardisierte Schnittstellen, automatisches Failover bei Dienstausfällen, Ratenbegrenzung (Rate Limiting), Caching identischer Anfragen und zentrale Kostenkontrolle über virtuelle Schlüssel.</li>
+</ul>
+<hr />
+<h2 id="kriterien-für-die-architekturentscheidung"><a class="header" href="#kriterien-für-die-architekturentscheidung">Kriterien für die Architekturentscheidung</a></h2>
+<p>Die Wahl zwischen einem schlanken SDK und einem umfassenden Framework hängt von den funktionalen Anforderungen ab:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Anforderungskriterium</th><th style="text-align: left">Empfohlene Architekturschicht</th><th style="text-align: left">Begründung</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Geringe Latenz &amp; maximale Kontrolle</strong></td><td style="text-align: left">Provider-SDK</td><td style="text-align: left">Direkte Streaming-Verbindung ohne Zwischenschichten; minimale Abhängigkeiten.</td></tr>
+<tr><td style="text-align: left"><strong>Interaktive Web- und Chat-UIs</strong></td><td style="text-align: left">Fullstack-SDK / Web-Framework</td><td style="text-align: left">Serverseitiges Token-Streaming und UI-Zustandssynchronisation ohne Framework-Ballast.</td></tr>
+<tr><td style="text-align: left"><strong>Dokumentenzentrierte Suche (RAG)</strong></td><td style="text-align: left">Daten-Framework (z. B. LlamaIndex)</td><td style="text-align: left">Spezialisierte Indizierungs-, Parsing- und Re-Ranking-Pipelines beschleunigen den Aufbau.</td></tr>
+<tr><td style="text-align: left"><strong>Zyklische Multi-Step-Workflows</strong></td><td style="text-align: left">Graphbasiertes Framework (z. B. LangChain/LangGraph)</td><td style="text-align: left">Zustandsbehaftete Graphen, Checkpointing und Verzweigungslogik für Agenten-Pipelines.</td></tr>
+<tr><td style="text-align: left"><strong>Multi-Provider-Strategie &amp; Ausfallsicherheit</strong></td><td style="text-align: left">Gateway-Proxy (z. B. LiteLLM)</td><td style="text-align: left">Zentrales Modell-Routing, Lastverteilung und Budgetüberwachung unabhängig vom Anwendungscode.</td></tr>
+<tr><td style="text-align: left"><strong>Systematische Prompt-Optimierung</strong></td><td style="text-align: left">Compiler-Framework (z. B. DSPy)</td><td style="text-align: left">Ersetzt handgeschriebene Prompts durch messbare, programmierte Optimierungsschleifen.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="open-source-auswahl-nach-reifegrad"><a class="header" href="#open-source-auswahl-nach-reifegrad">Open-Source-Auswahl nach Reifegrad</a></h2>
+<p><strong>5 Einträge:</strong> für den jeweils beschriebenen Speicherumfang ausgewählt.</p>
+<p>Redaktioneller Stand: <strong>27. September 2026</strong>;
+<a href="../software.html">Bewertungskriterien und Grenzen</a> gelten auch hier.
+Die Rangfolge priorisiert Reife und danach die Passung zum Thema.</p>
+<p>| Rang | Software und offizielle Quelle | Lizenz des betrachteten Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | <a href="https://github.com/langchain-ai/langchain">LangChain</a> | MIT | Hoch | Dokumentiertes Ökosystem für Modellketten, Agenten, Prompts und Tool-Calling. | PostgreSQL: <a href="https://github.com/langchain-ai/langchain-postgres">Dokumente und Vektoren über langchain-postgres</a> |
+| 2 | <a href="https://github.com/run-llama/llama_index">LlamaIndex</a> | MIT | Hoch | Bibliothek für Dokumentabruf und Modellanbindung. | PostgreSQL: <a href="https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/postgres/">PGVectorStore-Integration</a> |
+| 3 | <a href="https://github.com/ollama/ollama">Ollama</a> | MIT | Hoch | Laufzeit für lokale Modelle; Modelllizenz und Konfiguration separat prüfen. | Dateien: <a href="https://ollama.com/">Lokale Modell- und GGUF-Dateien</a> |
+| 4 | <a href="https://github.com/BerriAI/litellm">LiteLLM</a> | MIT | Hoch | Universelles OpenAI-kompatibles Gateway für über 100 Modellanbieter mit Load-Balancing. | PostgreSQL: <a href="https://docs.litellm.ai/docs/proxy/virtual_keys">PostgreSQL für Proxy-Schlüssel und Budgets</a> |
+| 5 | <a href="https://github.com/stanfordnlp/dspy">DSPy</a> | MIT | Hoch | Framework von Stanford zur programmatischen Optimierung von Prompts und LLM-Pipelines. | Dateien: <a href="https://dspy.ai/">JSON-Konfigurations- und Optimierungsdateien</a> |</p>
+<hr />
+<h2 id="einsatz-und-abgrenzung"><a class="header" href="#einsatz-und-abgrenzung">Einsatz und Abgrenzung</a></h2>
+<p>Integrationsbibliotheken lösen Anwendungsentwickler von herstellerspezifischen API-Besonderheiten, unterscheiden sich jedoch grundlegend in ihrem architektonischen Schwerpunkt:</p>
+<ul>
+<li><strong>LangChain:</strong> Eignet sich als modulares Werkzeug- und Ketten-Ökosystem, wenn vielseitige Integrationen zu externen Datenquellen und Tool-Calling benötigt werden. Für einfache Aufrufe erzeugen die tiefen Vererbungshierarchien jedoch unnötige Komplexität.</li>
+<li><strong>LlamaIndex:</strong> Konzentriert sich primär auf die Datenaufnahme, Chunking-Strategien und multimodales Retrieval. Es dient als Kernbaustein für RAG-Systeme, delegiert weiterführende Anwendungslogik jedoch an das übergeordnete Backend.</li>
+<li><strong>Ollama:</strong> Bietet eine isolierte Laufzeitumgebung zur Ausführung quantisierter Open-Weights-Modelle auf eigener Hardware. Es ersetzt weder eine Vektordatenbank noch die semantische Anwendungslogik, sondern dient als lokaler API-Endpunkt.</li>
+<li><strong>LiteLLM:</strong> Wirkt als standardisierende Schicht zwischen Anwendungscode und diversen Cloud- oder On-Premise-Modellanbietern. Der Betrieb eines separaten Proxy-Dienstes erfordert zusätzliche Infrastruktur, schützt jedoch vor Anbieter-Lock-in und unkontrollierten API-Kosten.</li>
+<li><strong>DSPy:</strong> Verfolgt einen algorithmischen Ansatz, der Prompts wie kompilierbare Programme behandelt. Es optimiert Few-Shot-Beispiele und Instruktionen anhand messbarer Evaluationsmetriken, setzt dafür aber einen gepflegten Satz an Testdaten voraus.</li>
+</ul>
+<p>Zur praktischen Anbindung auf Backend-Ebene siehe <a href="frameworks.html">Sprachmodelle in Webframeworks &amp; Backend</a>. Für autonome Entwicklungsassistenten, die Projektdateien bearbeiten, sei auf <a href="../webframeworks/ki-agenten.html">KI-native Bausteine und agentengestützte Entwicklung</a> sowie <a href="../cli-agenten.html">KI- und CLI-Coding-Agenten im Vergleich</a> verwiesen.</p>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../sprachmodelle/frameworks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../sprachmodelle/lms.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../sprachmodelle/frameworks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../sprachmodelle/lms.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>TUI-Schnittstellen, REPL-Loops und Token-Streaming - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="tui-schnittstellen-repl-loops-und-token-streaming"><a class="header" href="#tui-schnittstellen-repl-loops-und-token-streaming">TUI-Schnittstellen, REPL-Loops und Token-Streaming</a></h1>
+<p>Während Automatisierungsskripte und Unix-Pipes minimale, unformatierte Textströme fordern, verlangt die direkte Mensch-Maschine-Interaktion auf der Kommandozeile nach einer reaktiven, übersichtlichen und ergonomischen Umgebung. Moderne Terminal User Interfaces (TUIs) verwandeln einfache CLI-Skripte in vollwertige Arbeitsumgebungen mit Syntax-Hervorhebung, mehrzeiligen Eingabefeldern, interaktiven Bestätigungsdialogen und flüssigem Token-Streaming.</p>
+<p>Die Integration eines KI-Framework-SDKs in eine TUI erfordert jedoch eine präzise Koordination zwischen asynchronem Netzwerk-I/O, Ereignis-Schleifen der Benutzeroberfläche und der physischen Steuerung des Terminal-Zustands.</p>
+<hr />
+<h2 id="architektur-eines-agentischen-repl-loops"><a class="header" href="#architektur-eines-agentischen-repl-loops">Architektur eines agentischen REPL-Loops</a></h2>
+<p>Ein interaktiver Coding-Agent arbeitet nach dem Prinzip einer erweiterten Read-Eval-Print-Loop (REPL). Im Unterschied zu klassischen Programmiersprachen-REPLs (wie Python oder Node.js) schiebt der Agent zwischen Eingabe und Ausführung komplexe Kontext-Analysen, asynchrone Modell-Anfragen und Werkzeug-Genehmigungen ein.</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│ Agentischer REPL-Zustandsgraph                                         │
+│                                                                        │
+│   ┌───────────────┐        Eingabe        ┌────────────────────────┐   │
+│   │               ├──────────────────────►│  Kontext-Aggregation   │   │
+│   │  Read (REPL)  │                       │  (Git, Files, Memory)  │   │
+│   │               │◄─────────────────┐    └───────────┬────────────┘   │
+│   └───────▲───────┘                  │                │                │
+│           │                          │                ▼                │
+│           │ Reset / Next             │    ┌────────────────────────┐   │
+│           │                          │    │  Modell-Inferenz &amp;     │   │
+│   ┌───────┴───────┐                  │    │  Token-Streaming       │   │
+│   │               │                  │    └───────────┬────────────┘   │
+│   │ Print / State │                  │                │                │
+│   │               │                  │                ▼ Tool Call?     │
+│   └───────▲───────┘                  │    ┌────────────────────────┐   │
+│           │                          └────┤  Human-in-the-Loop     │   │
+│           │ Durchgeführt                  │  Diff-Bestätigung      │   │
+│   ┌───────┴───────┐     (Abbruch)         └───────────┬────────────┘   │
+│   │ Subprozess-   │◄──────────────────────────────────┘ (Freigabe)     │
+│   │ Ausführung    │                                                    │
+│   └───────────────┘                                                    │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="terminal-steuerung-raw-mode-vs-cooked-mode"><a class="header" href="#terminal-steuerung-raw-mode-vs-cooked-mode">Terminal-Steuerung: Raw Mode vs. Cooked Mode</a></h2>
+<p>Standardmäßig operieren Terminals im zeilenorientierten Modus (<strong>Canonical / Cooked Mode</strong>). Eingaben werden vom Betriebssystem gepuffert, bis der Nutzer die Eingabetaste drückt. Das Terminal kümmert sich eigenständig um Zeileneditierung und Zeichen-Echo.</p>
+<p>Für eine moderne TUI muss das Programm in den <strong>Raw Mode</strong> wechseln:</p>
+<ol>
+<li><strong>Deaktivierung von Pufferung und Echo:</strong> Jeder Tastenanschlag (einschließlich Pfeiltasten, Tabulatoren, <code>Ctrl + C</code>, <code>Escape</code>) wird sofort ohne Verzögerung an das Programm übermittelt.</li>
+<li><strong>Eigenverantwortliche Darstellung:</strong> Das Framework muss Cursor-Positionierung, Zeilenumbrüche und das Rendern von Zeichen selbst verwalten.</li>
+<li><strong>Bracketed Paste Mode:</strong> Ermöglicht das Einfügen mehrzeiliger Codeblöcke aus der Zwischenablage, ohne dass Zeilenumbrüche versehentlich als sofortige Ausführungsbefehle interpretiert werden.</li>
+</ol>
+<h3 id="alternate-screen-buffer-vs-inline-streaming"><a class="header" href="#alternate-screen-buffer-vs-inline-streaming">Alternate Screen Buffer vs. Inline-Streaming</a></h3>
+<p>Es existieren zwei grundlegende Design-Paradigmen für Terminal-Agenten:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Kriterium</th><th style="text-align: left">Fullscreen-TUI (Alternate Screen)</th><th style="text-align: left">Inline-Streaming (Standard Scrollback)</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Mechanismus</strong></td><td style="text-align: left">ANSI-Code <code>\x1b[?1049h</code> / <code>\x1b[?1049l</code></td><td style="text-align: left">Direkte Ausgabe im normalen Verlauf</td></tr>
+<tr><td style="text-align: left"><strong>Typische Vertreter</strong></td><td style="text-align: left">LazyGit, K9s, Textual-Vollbild-Apps</td><td style="text-align: left">Aider, Claude Code, Gemini CLI</td></tr>
+<tr><td style="text-align: left"><strong>Scrollback-Verhalten</strong></td><td style="text-align: left">Eigener Buffer; nach Beenden ist der alte Terminal-Inhalt wieder sichtbar</td><td style="text-align: left">Generierter Code verbleibt dauerhaft in der Shell-Historie</td></tr>
+<tr><td style="text-align: left"><strong>Kopieren &amp; Einfügen</strong></td><td style="text-align: left">Erfordert native TUI-Mausintegration</td><td style="text-align: left">Standard-Mausmarkierung des Terminals funktioniert</td></tr>
+<tr><td style="text-align: left"><strong>Eignung für Coding-Agenten</strong></td><td style="text-align: left">Gut für visuelle Dashboards und Explorer</td><td style="text-align: left"><strong>Optimal</strong> für Coding-Sessions, da Ausgaben referenzierbar bleiben</td></tr>
+</tbody></table>
+</div>
+<p>Moderne Coding-Agenten bevorzugen das <strong>Inline-Streaming</strong>, damit Code-Auszüge, Diffs und Antworten des Modells nach Abschluss des Dialogs nahtlos in der Shell-Historie des Nutzers erhalten bleiben.</p>
+<hr />
+<h2 id="relevante-tui-frameworks-nach-Ökosystem"><a class="header" href="#relevante-tui-frameworks-nach-Ökosystem">Relevante TUI-Frameworks nach Ökosystem</a></h2>
+<p>Für den Bau performanter und plattformübergreifender Terminal-Oberflächen haben sich spezialisierte Bibliotheken etabliert:</p>
+<ul>
+<li><strong>Rust:</strong>
+<ul>
+<li><strong>Ratatui (Fork von tui-rs):</strong> Der De-facto-Standard für hardwarenahe, extrem performante Terminal-UIs mit sofortigem Rendering (Immediate Mode).</li>
+<li><strong>Crossterm:</strong> Plattformunabhängige Low-Level-Bibliothek zur Manipulation von Cursor, Farben und Terminal-Events auf Linux, macOS und Windows.</li>
+</ul>
+</li>
+<li><strong>Go:</strong>
+<ul>
+<li><strong>Bubbletea (Charm):</strong> Basiert auf der Elm-Architektur (Model-Update-View) und erlaubt deklarative, hochgradig modulare TUI-Komponenten mit hervorragender Async-Unterstützung.</li>
+<li><strong>Lipgloss:</strong> Deklaratives Styling für Ränder, Farben und Layouts im Terminal.</li>
+</ul>
+</li>
+<li><strong>Python:</strong>
+<ul>
+<li><strong>Textual:</strong> Modernes, ereignisgesteuertes Framework mit CSS-ähnlichem Styling und Widget-System.</li>
+<li><strong>Prompt-Toolkit:</strong> Ausgezeichnet für mehrzeilige Eingabe-Prompts mit Autovervollständigung, Syntax-Highlighting und Emacs-/Vi-Tastenbelegung.</li>
+<li><strong>Rich:</strong> Perfekt für progressives Inline-Rendering von Markdown, Tabellen und Statusanzeigen.</li>
+</ul>
+</li>
+<li><strong>Node.js / TypeScript:</strong>
+<ul>
+<li><strong>Ink:</strong> Ermöglicht den Bau von CLI-UIs unter Verwendung von React-Komponenten und Flexbox-Layouts.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="progressive-markdown-formatierung-und-streaming"><a class="header" href="#progressive-markdown-formatierung-und-streaming">Progressive Markdown-Formatierung und Streaming</a></h2>
+<p>Wenn Sprachmodelle Antworten tokenweise generieren, treffen unvollständige Markdown-Fragmente im Millisekundentakt ein. Eine naive Darstellung führt zu störendem Bildschirmflackern oder fehlerhaften Formatierungen (z. B. wenn öffnende Backticks <code>```typescript</code> empfangen wurden, der schließende Block aber noch fehlt).</p>
+<h3 id="streaming-renderer-architektur"><a class="header" href="#streaming-renderer-architektur">Streaming-Renderer-Architektur</a></h3>
+<ol>
+<li><strong>Differentieller Puffer:</strong> Eingehende Chunks werden in einem internen Puffer akkumuliert.</li>
+<li><strong>Zeilenbasierte Ausgabe:</strong> Solange eine Textzeile noch nicht durch einen Zeilenumbruch abgeschlossen ist, wird sie im Terminal mittels Carriage Return (<code>\r</code>) und Zeilenlöschung (<code>\x1b[2K</code>) an Ort und Stelle aktualisiert.</li>
+<li><strong>Syntax-Highlighting von Codeblöcken:</strong> Erkennt der Parser den Beginn eines Code-Blocks, wird der nachfolgende Inhalt zeilenweise an einen Lexer (z. B. Syntect in Rust, Chroma in Go oder Pygments in Python) übergeben und mit ANSI-Farbcodes formatiert ausgegeben.</li>
+</ol>
+<hr />
+<h2 id="signal-handling-ctrl--c-und-aufräumarbeiten"><a class="header" href="#signal-handling-ctrl--c-und-aufräumarbeiten">Signal-Handling: <code>Ctrl + C</code> und Aufräumarbeiten</a></h2>
+<p>Nichts frustriert Anwender mehr als ein abgestürztes Terminal, in dem der Cursor verschwunden ist oder Eingaben unsichtbar bleiben, weil das Programm im Raw Mode abgebrochen wurde.</p>
+<p>Ein robuster Agent implementiert gestaffelte Signal-Handler für <code>SIGINT</code> (Signal 2):</p>
+<pre><code>[ Laufende Modell-Inferenz oder Subprozess ]
+                   │
+                   ▼  Erstes Ctrl + C (SIGINT)
+[ Inferenz abbrechen / Subprozess terminieren ]
+[ Terminal bleibt aktiv, Eingabe-Prompt kehrt zurück ]
+                   │
+                   ▼  Zweites Ctrl + C (innerhalb 1s) oder Ctrl + D
+[ Graceful Shutdown: Cursor wieder einblenden, Raw Mode beenden, Exit 0 ]
+</code></pre>
+<h3 id="aufräumpflicht-bei-programmende"><a class="header" href="#aufräumpflicht-bei-programmende">Aufräumpflicht bei Programmende</a></h3>
+<p>Vor jedem Programmende – egal ob regulär, durch Abbruchsignal oder durch eine Panic/Exception – müssen folgende Terminal-Befehle zwingend ausgeführt werden (idealerweise über Panic-Hooks oder Destruktoren):</p>
+<ol>
+<li><strong>Cursor wieder sichtbar schalten:</strong> <code>\x1b[?25h</code></li>
+<li><strong>Raw Mode verlassen:</strong> Terminal-Attribute (<code>termios</code>) auf die gesicherten Ursprungswerte zurücksetzen.</li>
+<li><strong>Alternate Screen verlassen:</strong> Sofern verwendet, <code>\x1b[?1049l</code> ausgeben.</li>
+</ol>
+<hr />
+<h2 id="querverweise-und-vertiefung"><a class="header" href="#querverweise-und-vertiefung">Querverweise und Vertiefung</a></h2>
+<ul>
+<li>Wie nicht-interaktive Pipelines ohne TUI implementiert werden, erläutert <a href="unix-pipes-headless.html">Unix-Pipes, Headless-Betrieb und Standard-Streams</a>.</li>
+<li>Die Absicherung von Subprozessen und interaktive Bestätigungsdialoge vertieft das Kapitel <a href="subprozess-pty-sicherheit.html">Subprozess-Steuerung, PTYs und Shell-Sicherheit</a>.</li>
+<li>Konzepte zur Visualisierung von Inline-Diffs und Code-Patches finden sich unter <a href="../ide-ki-integration/inline-diff-patching.html">Inline-Diff-Patching und AST-Refactoring</a>.</li>
+</ul>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../cli-agenten-ki-integration/unix-pipes-headless.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../cli-agenten-ki-integration/subprozess-pty-sicherheit.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../cli-agenten-ki-integration/unix-pipes-headless.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../cli-agenten-ki-integration/subprozess-pty-sicherheit.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

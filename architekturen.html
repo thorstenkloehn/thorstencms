@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Architekturen im Zusammenhang - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="architekturen-im-zusammenhang"><a class="header" href="#architekturen-im-zusammenhang">Architekturen im Zusammenhang</a></h1>
+<p>Digitale Informationssysteme existieren selten als isolierte Monolithen. In modernen Organisationen greifen unterschiedliche Architekturmodelle ineinander: Technische Handbücher entstehen über dateibasierte Docs-as-Code-Pipelines, Marketing- und Produktinhalte werden in Content-Management-Systemen redaktionell gepflegt, internes Unternehmenswissen wird in semantischen Wissensgraphen verknüpft, und Schulungsmaterialien werden über Lernmanagement-Systeme bereitgestellt.</p>
+<p>Die Integration von Sprachmodellen und KI-Framework-SDKs verbindet diese ehemals getrennten Welten zu einem kohärenten Gesamtsystem. Dieses Kapitel führt die Perspektiven des Buches zusammen und liefert einen ganzheitlichen Architekturüberblick.</p>
+<hr />
+<h2 id="die-gesamtarchitektur-im-zusammenspiel"><a class="header" href="#die-gesamtarchitektur-im-zusammenspiel">Die Gesamtarchitektur im Zusammenspiel</a></h2>
+<p>Das folgende Schichtenmodell veranschaulicht, wie die in den Einzelkapiteln behandelten Bausteine über standardisierte Protokolle (wie MCP, SSE, REST und LTI) interagieren:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                             Client- &amp; Autorenebene                          │
+│  ├─ Web-Browser (SSE / Streams)        ├─ Mobile / Desktop-Apps (Local-First)│
+│  ├─ IDEs &amp; Editoren (LSP / Inline-Diff)├─ Autorentools (Track Changes / FIM)│
+│  └─ CLI &amp; Terminal (Pipes / TUIs / PTY)                                     │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │ Protokolle (HTTP, SSE, LTI 1.3, WebSockets)
+┌──────────────────────────────────────▼──────────────────────────────────────┐
+│                    Anwendungs- &amp; Orchestrierungs-Schicht                    │
+│  ├─ Webframework-Backend (FastAPI, Django, Spring Boot, ASP.NET Core)       │
+│  ├─ CMS-Redaktionsengine &amp; Workflow-Staging (Draft -&gt; Review -&gt; Published)  │
+│  ├─ LMS-Lernservice mit didaktischen Schutzplanken (Sokratischer Tutor)     │
+│  └─ Multi-Agenten-Orchestrierung (LangGraph-Zustandsgraphen mit Interrupts) │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │ Model Context Protocol (MCP) / JSON-RPC
+┌──────────────────────────────────────▼──────────────────────────────────────┐
+│                  Standardisierte Werkzeug- &amp; Gateway-Ebene                  │
+│  ├─ LiteLLM Gateway (Multi-Provider-Routing, Fallbacks &amp; Kostenkontrolle)   │
+│  ├─ Lokale Inferenz-Engines (Ollama, CoreML, ExecuTorch, WebGPU)            │
+│  └─ MCP-Server (Dateisysteme, Git-Repositories, externe APIs)               │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │ SQL / Relationen / Vektoren / Git
+┌──────────────────────────────────────▼──────────────────────────────────────┐
+│                   Persistenz- &amp; Single-Source-of-Truth-Ebene                │
+│  ├─ PostgreSQL &amp; pgvector (Relationale Daten, Vektoren, Checkpoints)        │
+│  ├─ Git-Repositories (Markdown, AsciiDoc, Quellcode, Revisions-Deltas)      │
+│  └─ Lokale SQLite-Datenbanken (`sqlite-vec` &amp; CRDTs auf Mobilgeräten)       │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="vergleichende-domänen-matrix"><a class="header" href="#vergleichende-domänen-matrix">Vergleichende Domänen-Matrix</a></h2>
+<p>Jede behandelte Architekturdomäne erfüllt eine spezifische didaktische und technische Funktion innerhalb des Gesamtsystems:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Domäne</th><th style="text-align: left">Primärer Speicherweg</th><th style="text-align: left">Leitfrage der Domäne</th><th style="text-align: left">Spezifische Rolle des KI-SDKs</th><th style="text-align: left">Primärer Schutzmechanismus</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong><a href="wissenssysteme-ki-integration.html">Wissenssysteme</a></strong></td><td style="text-align: left">PostgreSQL / <code>pgvector</code></td><td style="text-align: left">Wie finden und verknüpfen Menschen Wissen?</td><td style="text-align: left">Hybrides Retrieval (BM25 + Vektoren), Re-Ranking, Zitationslogik</td><td style="text-align: left">SQL Pre-Filtering (<code>WHERE acl_groups &amp;&amp; :roles</code>)</td></tr>
+<tr><td style="text-align: left"><strong><a href="cms-ki-integration.html">CMS</a></strong></td><td style="text-align: left">PostgreSQL (Relationen &amp; Entwürfe)</td><td style="text-align: left">Wie werden Inhalte redaktionell gepflegt?</td><td style="text-align: left">Structured Outputs für Content-Modelle, Taxonomien, Alt-Texte</td><td style="text-align: left">Drei-Stufen-Staging (<code>AI Draft</code> ➔ <code>Review</code> ➔ <code>Published</code>)</td></tr>
+<tr><td style="text-align: left"><strong><a href="docs-as-code-ki-integration.html">Docs-as-Code</a></strong></td><td style="text-align: left">Git-Repository (Markdown / Text)</td><td style="text-align: left">Wie werden Änderungen nachvollziehbar gebaut?</td><td style="text-align: left">Pull-Request-Automatisierung, Drift-Erkennung, Code-to-Docs</td><td style="text-align: left">Deterministische CI-Linter-Schleifen (<code>mdbook</code>, <code>vale</code>)</td></tr>
+<tr><td style="text-align: left"><strong><a href="web-ki-integration.html">Webframeworks</a></strong></td><td style="text-align: left">PostgreSQL (Transaktionen)</td><td style="text-align: left">Wie werden Daten zuverlässig ausgeliefert?</td><td style="text-align: left">Asynchrones Token-Streaming (SSE), Background-Worker-Queues</td><td style="text-align: left">Tool-Execution-Sandbox, Connection-Pool-Schutz</td></tr>
+<tr><td style="text-align: left"><strong><a href="lms-ki-integration.html">LMS</a></strong></td><td style="text-align: left">PostgreSQL &amp; LRS (xAPI)</td><td style="text-align: left">Wie wird nachhaltiges Verstehen gefördert?</td><td style="text-align: left">Sokratischer Tutor (Scaffolding), interaktive Übungen</td><td style="text-align: left">Didaktische Guardrails, Verbot autonomer Benotung</td></tr>
+<tr><td style="text-align: left"><strong><a href="autorentools-ki-integration.html">Autorentools</a></strong></td><td style="text-align: left">Lokale Dateien (DOCX, ODT, MD)</td><td style="text-align: left">Wie wird der Schreib- und Denkprozess gestützt?</td><td style="text-align: left">In-line-Vervollständigung (FIM), Ghost-Text, Stilprüfung</td><td style="text-align: left">Native Änderungsverfolgung (Track Changes), Manuskriptschutz</td></tr>
+<tr><td style="text-align: left"><strong><a href="ide-ki-integration.html">IDEs &amp; Editoren</a></strong></td><td style="text-align: left">Projekt-Workspace / Git</td><td style="text-align: left">Wie wird Code präzise entwickelt und getestet?</td><td style="text-align: left">LSP-Kontextanalyse, AST-Patching, TDD-Testschleifen</td><td style="text-align: left">Workspace Trust, Terminal-Whitelisting, Code-Skelette</td></tr>
+<tr><td style="text-align: left"><strong><a href="cli-agenten-ki-integration.html">CLI-Agenten</a></strong></td><td style="text-align: left">Unix-Pipes / <code>stdout</code> / PTY</td><td style="text-align: left">Wie werden Shell-Skripte und Entwickler im Terminal unterstützt?</td><td style="text-align: left">Non-interaktives Streaming (NDJSON), TUI-REPLs, PTY-Spawning</td><td style="text-align: left">Striktes Argument-Vectoring (<code>argv</code>), TTY-Erkennung, Timeouts</td></tr>
+<tr><td style="text-align: left"><strong><a href="apps-ki-integration.html">Apps (Mobile/Desktop)</a></strong></td><td style="text-align: left">Lokale SQLite (<code>sqlite-vec</code>)</td><td style="text-align: left">Wie funktioniert Software offline und mobil?</td><td style="text-align: left">On-Device-Inferenz (CoreML, ExecuTorch), Offline-RAG</td><td style="text-align: left">Asymmetrisches Hybrid-Routing, Battery Guard</td></tr>
+<tr><td style="text-align: left"><strong><a href="multi-agenten-ki-integration.html">Multi-Agenten</a></strong></td><td style="text-align: left">PostgreSQL (<code>checkpoints</code>)</td><td style="text-align: left">Wie lösen vernetzte Spezialisten Großaufgaben?</td><td style="text-align: left">Supervisor-Planung, Werkzeugaufrufe über offene MCP-Server</td><td style="text-align: left">Relationales Checkpointing, Time-Travel, Interrupts</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="vier-fundamentale-architekturentscheidungen"><a class="header" href="#vier-fundamentale-architekturentscheidungen">Vier fundamentale Architekturentscheidungen</a></h2>
+<p>Bei der Konzeption eines Gesamtsystems müssen Architekten vier grundlegende Weichenstellungen treffen:</p>
+<h3 id="1-inferenz-topologie-edge-on-device-vs-cloud-gateway"><a class="header" href="#1-inferenz-topologie-edge-on-device-vs-cloud-gateway">1. Inferenz-Topologie: Edge (On-Device) vs. Cloud-Gateway</a></h3>
+<ul>
+<li><strong>On-Device (Local-First):</strong> Unerlässlich bei sensiblen Manuskripten in <a href="autorentools-ki-integration/datensouveraenitaet-lokale-modelle.html">Autorentools</a> und mobilen Apps ohne Netzempfang (<a href="apps-ki-integration/on-device-hardwarebeschleunigung.html">Mobile Apps</a>). Nutzt quantisierte 4-Bit-Modelle auf lokalen NPUs.</li>
+<li><strong>Zentrales Cloud-Gateway:</strong> Erforderlich für unternehmensweite RAG-Pipelines in <a href="wissenssysteme-ki-integration/hybrid-retrieval-reranking.html">Wissenssystemen</a> oder speicherintensive Agentengraphen. Nutzt <a href="sprachmodelle/bibliotheken.html">LiteLLM</a> für Ausfallsicherheit und Kostenkontrolle.</li>
+</ul>
+<h3 id="2-persistenz-und-konsistenz-git-vs-relationale-datenbanken"><a class="header" href="#2-persistenz-und-konsistenz-git-vs-relationale-datenbanken">2. Persistenz und Konsistenz: Git vs. Relationale Datenbanken</a></h3>
+<ul>
+<li><strong>Git-basiert:</strong> Der ideale Speicherort für textuelle Quellbestände, Dokumentationen (<a href="docs-as-code-ki-integration/git-pr-automation.html">Docs-as-Code</a>) und Programmcode (<a href="ide-ki-integration/inline-diff-patching.html">IDEs</a>). Bietet kryptografische Integrität und zeilenbasierte Diffs.</li>
+<li><strong>PostgreSQL-basiert:</strong> Der unverzichtbare Speicherort für transaktionale Workflows, relationale Redaktionszustände (<a href="cms-ki-integration/redaktionelle-workflows-freigabe.html">CMS</a>), semantische Vektoreinbettungen (<code>pgvector</code>) und Agenten-Checkpoints (<a href="multi-agenten-ki-integration/zustandsgraphen-human-in-the-loop.html">Multi-Agenten</a>).</li>
+</ul>
+<h3 id="3-transport-und-kopplung-synchron-vs-asynchron"><a class="header" href="#3-transport-und-kopplung-synchron-vs-asynchron">3. Transport und Kopplung: Synchron vs. Asynchron</a></h3>
+<ul>
+<li><strong>Synchrones Streaming (SSE):</strong> Standard für unmittelbares menschliches Feedback bei Chat-Interaktionen und In-Editor-Generierungen (<a href="web-ki-integration/streaming-transport.html">Webframeworks</a>).</li>
+<li><strong>Asynchrone Event-Entkopplung (Queues &amp; Webhooks):</strong> Zwingend erforderlich für langlaufende Agenten-Recherchen, mehrsprachige Übersetzungen in Headless-CMS (<a href="cms-ki-integration/headless-webhooks-automation.html">CMS</a>) und CI/CD-Linter-Schleifen (<a href="docs-as-code-ki-integration/ci-cd-linter-schleifen.html">Docs-as-Code</a>), um HTTP-Timeouts zu verhindern.</li>
+</ul>
+<h3 id="4-governance-und-die-rolle-des-menschen-human-in-the-loop"><a class="header" href="#4-governance-und-die-rolle-des-menschen-human-in-the-loop">4. Governance und die Rolle des Menschen (Human-in-the-Loop)</a></h3>
+<p>Unabhängig von der Domäne gilt das eiserne architektonische Prinzip: <strong>Keine autonome Aktion mit Außenwirkung ohne menschliche Validierungsgrenze.</strong></p>
+<ul>
+<li>Im <strong>CMS</strong> verhindert das Staging-Modell automatische Veröffentlichungen.</li>
+<li>Im <strong>Docs-as-Code</strong> erzwingt der Pull Request die Begutachtung durch Maintainer.</li>
+<li>Im <strong>LMS</strong> schützen didaktische Guardrails vor unzulässigen KI-Prüfungsnoten.</li>
+<li>In der <strong>IDE</strong> schützen Workspace-Trust-Richtlinien vor gefährlichen Terminalbefehlen.</li>
+<li>In <strong>Multi-Agenten-Systemen</strong> halten programmatische Interrupts den Zustandsgraphen vor kritischen Operationen an.</li>
+</ul>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Die Kriterien zur Auswahl der zugrundeliegenden Softwarebausteine und deren Reifegrade sind im Kapitel <a href="software.html">Softwareauswahl und Reifegrade</a> dokumentiert.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="lms/cloud-lxp.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="mobile-desktop-apps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="lms/cloud-lxp.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="mobile-desktop-apps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

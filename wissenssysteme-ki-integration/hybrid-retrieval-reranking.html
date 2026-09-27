@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hybride Suche, Re-Ranking und Quellenbelege - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="hybride-suche-re-ranking-und-quellenbelege"><a class="header" href="#hybride-suche-re-ranking-und-quellenbelege">Hybride Suche, Re-Ranking und Quellenbelege</a></h1>
+<p><a href="../wissenssysteme-ki-integration.html">Übergeordnete Kategorie: Wissenssysteme und KI-Framework-SDKs</a></p>
+<p>In einem professionellen Wissenssystem entscheidet die Qualität des Informationsabrufs (Retrieval) darüber, ob ein Sprachmodell verlässliche Fakten liefert oder plausible Halluzinationen erzeugt. Eine naive semantische Vektorsuche reicht für technische und fachliche Dokumentationsbestände in der Praxis selten aus.</p>
+<hr />
+<h2 id="die-notwendigkeit-hybrider-suche"><a class="header" href="#die-notwendigkeit-hybrider-suche">Die Notwendigkeit hybrider Suche</a></h2>
+<p>Moderne Wissensabfragen erfordern die gleichzeitige Bewältigung zweier unterschiedlicher Suchmuster:</p>
+<ol>
+<li><strong>Semantische Ähnlichkeit (Dense Retrieval):</strong>
+<ul>
+<li>Erkennt thematische Zusammenhänge, selbst wenn unterschiedliche Begriffe verwendet werden (z. B. Suchbegriff: <em>„Benutzerzugänge sperren“</em>, Dokumentinhalt: <em>„Deaktivierung von Benutzerkonten im Identitätsmanagement“</em>).</li>
+<li>Verwendet Vektoreinbettungen und Distanzmetriken (wie Kosinus-Ähnlichkeit) in <code>pgvector</code>.</li>
+</ul>
+</li>
+<li><strong>Lexikalische Exaktheit (Sparse Retrieval / BM25):</strong>
+<ul>
+<li>Unerlässlich für spezifische Fachbegriffe, Funktionsnamen (<code>verify_jwt_token()</code>), Fehlercodes (<code>ERR_CONNECTION_REFUSED</code>), Lizenzbezeichnungen oder Akronym-Kombinationen.</li>
+<li>Verwendet PostgreSQL-Volltextindizes (<code>tsvector</code> und <code>tsquery</code>).</li>
+</ul>
+</li>
+</ol>
+<pre><code>                   ┌─────────────────────────────┐
+                   │    Benutzer-Suchanfrage     │
+                   └──────────────┬──────────────┘
+                                  │
+         ┌────────────────────────┴────────────────────────┐
+         │                                                 │
+         ▼                                                 ▼
+┌─────────────────────────────┐                   ┌─────────────────────────────┐
+│ Lexikalische Suche (BM25)   │                   │ Vektorsuche (pgvector)      │
+│ Findet exakte Bezeichner,   │                   │ Findet semantisch verwandte │
+│ Fehlercodes &amp; Funktionsnamen│                   │ Konzepte &amp; Paraphrasen      │
+└──────────────┬──────────────┘                   └──────────────┬──────────────┘
+               │ Top-50 Ergebnisse                               │ Top-50 Ergebnisse
+               └────────────────────────┬────────────────────────┘
+                                        ▼
+                   ┌─────────────────────────────────────────────┐
+                   │ Reciprocal Rank Fusion (RRF)                │
+                   │ Zusammenführung &amp; Score-Normalisierung      │
+                   └────────────────────┬────────────────────────┘
+                                        ▼ Top-20 Kandidaten
+                   ┌─────────────────────────────────────────────┐
+                   │ Re-Ranking (Cross-Encoder)                  │
+                   │ Tiefe Relevanzbewertung von Query + Passage │
+                   └────────────────────┬────────────────────────┘
+                                        ▼ Beste 3 bis 5 Chunks
+                   ┌─────────────────────────────────────────────┐
+                   │ Sprachmodell-Prompt mit Quellennachweisen   │
+                   └─────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="reciprocal-rank-fusion-rrf-und-re-ranking"><a class="header" href="#reciprocal-rank-fusion-rrf-und-re-ranking">Reciprocal Rank Fusion (RRF) und Re-Ranking</a></h2>
+<h3 id="1-zusammenführung-über-rrf"><a class="header" href="#1-zusammenführung-über-rrf">1. Zusammenführung über RRF</a></h3>
+<p>Da die Scores von Vektordistanzen (z. B. 0.82 Kosinus) und Volltext-Rankings (z. B. 0.45 BM25-Score) nicht direkt mathematisch vergleichbar sind, nutzt man Reciprocal Rank Fusion (RRF). RRF bewertet Treffer anhand ihrer relativen Position in beiden Ergebnislisten:</p>
+<p>$$RRF(d) = \sum_{m \in M} \frac{1}{k + r_m(d)}$$</p>
+<p>Hierbei ist $r_m(d)$ der Rang des Dokuments $d$ im Suchverfahren $m$ und $k$ eine Glättungskonstante (häufig $k = 60$). Dokumente, die in beiden Verfahren vordere Plätze belegen, steigen verlässlich an die Spitze auf.</p>
+<h3 id="2-re-ranking-cross-encoder"><a class="header" href="#2-re-ranking-cross-encoder">2. Re-Ranking (Cross-Encoder)</a></h3>
+<p>Die Top-Kandidaten (z. B. 20 Chunks) werden an ein Re-Ranking-Modell übergeben.</p>
+<ul>
+<li><strong>Unterschied zum Embedding:</strong> Während Embedding-Modelle Query und Dokument getrennt voneinander in Vektoren übersetzen (Bi-Encoder), analysiert ein Cross-Encoder Suchanfrage und Passage <strong>gemeinsam in einem Durchlauf</strong>. Er erkennt komplexe Verneinungen, temporale Einschränkungen und feine semantische Nuancen.</li>
+<li><strong>Vermeidung des „Lost in the Middle“-Effekts:</strong> Sprachmodelle neigen dazu, Fakten am Anfang und am Ende eines Prompts besser zu beachten als Passagen in der Mitte. Durch das Re-Ranking wird der Kontext auf die drei bis fünf relevantesten Chunks verdichtet, was sowohl die Antwortpräzision erhöht als auch die Inferenzkosten senkt.</li>
+</ul>
+<hr />
+<h2 id="strikte-zitationslogik-und-belegprüfung-grounding"><a class="header" href="#strikte-zitationslogik-und-belegprüfung-grounding">Strikte Zitationslogik und Belegprüfung (Grounding)</a></h2>
+<p>Ein Wissenssystem muss transparent machen, worauf eine Aussage beruht.</p>
+<h3 id="regeln-für-den-system-prompt"><a class="header" href="#regeln-für-den-system-prompt">Regeln für den System-Prompt:</a></h3>
+<ol>
+<li><strong>Keine Spekulation:</strong> Das Modell wird angewiesen, ausschließlich Informationen aus den bereitgestellten Textstücken zu verwenden. Enthält der Kontext keine Antwort, muss das Modell dies explizit formulieren (<em>„Auf Basis der vorliegenden Dokumentation kann diese Frage nicht beantwortet werden.“</em>).</li>
+<li><strong>Eindeutige Zitationsmarker:</strong> Jeder bereitgestellte Chunk erhält eine eindeutige Kennung (z. B. <code>[Quelle 1: path/to/doc.md#L45]</code>). Das Modell muss jede Einzelaussage mit dem entsprechenden Marker belegen.</li>
+<li><strong>Interaktive Darstellung im Frontend:</strong> Das Webframework übersetzt die Marker in klickbare Links, die den Benutzer direkt zur zitierten Stelle im Quellartikel führen und die entsprechende Textpassage im Lesemodus hervorheben.</li>
+</ol>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Welche Sicherheits- und Datenschutzvorgaben bei der Abfrage von Wissensquellen gelten, erläutert die Unterkategorie <a href="rechte-acl-governance.html">Zugriffsrechte, Metadatenfilter und Governance</a>.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../wissenssysteme-ki-integration/ingestion-chunking.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../wissenssysteme-ki-integration/rechte-acl-governance.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../wissenssysteme-ki-integration/ingestion-chunking.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../wissenssysteme-ki-integration/rechte-acl-governance.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

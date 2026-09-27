@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Streaming und Transportprotokolle - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="streaming-und-transportprotokolle"><a class="header" href="#streaming-und-transportprotokolle">Streaming und Transportprotokolle</a></h1>
+<p><a href="../web-ki-integration.html">Übergeordnete Kategorie: Webframeworks und KI-Framework-SDKs</a></p>
+<p>Die schrittweise Übertragung generierter Text-Tokens vom Sprachmodell über das Webframework bis in den Browser ist entscheidend für eine reaktive Benutzeroberfläche. Während eine vollständige Antwort mehrere Sekunden oder Minuten beanspruchen kann, reduziert das Streaming die wahrgenommene Antwortzeit (Time to First Token) auf wenige hundert Millisekunden.</p>
+<hr />
+<h2 id="protokollvergleich-für-modell-datenströme"><a class="header" href="#protokollvergleich-für-modell-datenströme">Protokollvergleich für Modell-Datenströme</a></h2>
+<p>Für den Transport gestreamter Antworten stehen in modernen Webframeworks drei primäre Protokolle zur Verfügung:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Kriterium</th><th style="text-align: left">Server-Sent Events (SSE)</th><th style="text-align: left">WebSockets</th><th style="text-align: left">Web Streams API (Fetch Chunked)</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Richtung</strong></td><td style="text-align: left">Unidirektional (Server zu Client)</td><td style="text-align: left">Bidirektional (Full-Duplex)</td><td style="text-align: left">Unidirektional (Server zu Client)</td></tr>
+<tr><td style="text-align: left"><strong>Basisprotokoll</strong></td><td style="text-align: left">Standard HTTP/1.1 oder HTTP/2</td><td style="text-align: left">TCP nach HTTP-Upgrade-Handshake</td><td style="text-align: left">Standard HTTP/1.1 oder HTTP/2</td></tr>
+<tr><td style="text-align: left"><strong>Browser-Unterstützung</strong></td><td style="text-align: left">Nativ über <code>EventSource</code> / Fetch</td><td style="text-align: left">Nativ über <code>WebSocket</code>-API</td><td style="text-align: left">Nativ über <code>ReadableStream</code></td></tr>
+<tr><td style="text-align: left"><strong>Proxy- &amp; Firewall-Kompatibilität</strong></td><td style="text-align: left">Sehr hoch; passiert Standard-Proxies</td><td style="text-align: left">Mittel; erfordert Upgrade-Unterstützung</td><td style="text-align: left">Sehr hoch</td></tr>
+<tr><td style="text-align: left"><strong>Wiederverbindung</strong></td><td style="text-align: left">Automatisch durch Browser spezifiziert</td><td style="text-align: left">Muss manuell im Client implementiert werden</td><td style="text-align: left">Manuell über Verbindungsabbruch-Handler</td></tr>
+<tr><td style="text-align: left"><strong>Typischer Einsatzzweck</strong></td><td style="text-align: left">Text-Chat, Code-Generierung, Markdown</td><td style="text-align: left">Audio-/Sprachstreaming, Multi-User-Kollaboration</td><td style="text-align: left">Moderne Fullstack- &amp; Edge-Webframeworks</td></tr>
+</tbody></table>
+</div>
+<h3 id="1-server-sent-events-sse"><a class="header" href="#1-server-sent-events-sse">1. Server-Sent Events (SSE)</a></h3>
+<p>SSE hat sich als Standard für die Ausgabe von Sprachmodell-Tokens durchgesetzt. Das Webframework sendet den Header <code>Content-Type: text/event-stream</code> und schaltet die HTTP-Pufferung ab (<code>X-Accel-Buffering: no</code> bei Nginx). Jeder Token-Chunk wird als standardisiertes Datenfeld formatiert:</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Content-Type: text/event-stream
+Cache-Control: no-cache
+Connection: keep-alive
+
+data: {"token": "Die"}
+
+data: {"token": " Architektur"}
+
+data: [DONE]
+</code></pre>
+<h3 id="2-web-streams-api-und-http2-multiplexing"><a class="header" href="#2-web-streams-api-und-http2-multiplexing">2. Web Streams API und HTTP/2 Multiplexing</a></h3>
+<p>In modernen Laufzeiten (Node.js, Deno, Edge-Runtimes) nutzen Webframeworks die native <code>ReadableStream</code>-Schnittstelle. Hierbei werden Datenblöcke im binären oder UTF-8-Format über Standard-HTTP-Responses übertragen. Unter HTTP/2 oder HTTP/3 entfällt der frühere Verbindungsengpass (Head-of-Line Blocking), da viele parallele Datenströme über eine einzige TCP/QUIC-Verbindung gemultiplext werden.</p>
+<hr />
+<h2 id="backpressure-und-pufferverwaltung"><a class="header" href="#backpressure-und-pufferverwaltung">Backpressure und Pufferverwaltung</a></h2>
+<p>Wenn ein Sprachmodell schneller Tokens liefert, als der Client diese über eine mobile oder instabile Internetverbindung abrufen kann, entsteht ein Rückstau (Backpressure).</p>
+<ul>
+<li><strong>Gefahr:</strong> Puffert das Webframework alle auflaufenden Tokens unbegrenzt im Arbeitsspeicher, führt eine hohe Zahl gleichzeitiger Stream-Verbindungen schnell zur Erschöpfung des RAMs (Memory Exhaustion).</li>
+<li><strong>Lösung:</strong> Moderne asynchrone Controller (z. B. in FastAPI, Spring WebFlux oder Node.js Streams) nutzen nicht-blockierende Warteschlangen mit begrenzter Puffergröße (Bounded Queues). Meldet die zugrunde liegende TCP-Schicht einen vollen Sendepuffer, pausiert das Webframework das Auslesen der nächsten Chunks aus dem KI-SDK, bis der Client wieder Daten empfangen hat.</li>
+</ul>
+<hr />
+<h2 id="verbindungsabbruch-und-kostenkontrolle"><a class="header" href="#verbindungsabbruch-und-kostenkontrolle">Verbindungsabbruch und Kostenkontrolle</a></h2>
+<p>Ein kritischer Aspekt bei der Integration von KI-SDKs in Webframeworks ist die Weiterleitung von Abbruchsignalen. Wenn ein Nutzer den Browser schließt, auf „Abbrechen“ klickt oder die Seite verlässt, muss der serverseitige Modellaufruf sofort beendet werden.</p>
+<pre><code>[Browser schließt Tab]
+         │ TCP FIN / RST
+         ▼
+[Webframework erkennt Client-Disconnect]
+         │ AbortController / Cancellation Token
+         ▼
+[KI-Framework-SDK bricht HTTP-Stream ab]
+         │ HTTP CANCEL / Connection Close
+         ▼
+[Modellanbieter stoppt Token-Erzeugung &amp; Abrechnung]
+</code></pre>
+<h3 id="implementierungsregeln-für-webframeworks"><a class="header" href="#implementierungsregeln-für-webframeworks">Implementierungsregeln für Webframeworks:</a></h3>
+<ol>
+<li><strong>Prüfung auf Verbindungsabbruch:</strong> Der Stream-Generator muss in jeder Iteration prüfen, ob die Client-Verbindung noch besteht (z. B. <code>await request.is_disconnected()</code> in FastAPI oder Prüfung von <code>req.signal.aborted</code> in Node.js).</li>
+<li><strong>Signal-Kopplung:</strong> Das Abbruchsignal des Web-Requests muss direkt an den Aufruf des KI-SDKs übergeben werden (z. B. via <code>AbortSignal</code>).</li>
+<li><strong>Kostenvermeidung:</strong> Ohne diese Kopplung läuft die Inferenz beim Cloud-Provider bis zum konfigurierten Token-Limit weiter. Dies verursacht unnötige API-Kosten und bindet serverseitige Ressourcen.</li>
+</ol>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Die Einbindung asynchroner Hintergrund-Aufgaben bei nicht-streamenden Prozessen wird im folgenden Abschnitt <a href="workflows-persistenz.html">Asynchrone Workflows, Queues und Persistenz</a> erläutert.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../web-ki-integration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../web-ki-integration/workflows-persistenz.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../web-ki-integration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../web-ki-integration/workflows-persistenz.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

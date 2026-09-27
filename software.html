@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Softwareauswahl und Reifegrade - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="softwareauswahl-und-reifegrade"><a class="header" href="#softwareauswahl-und-reifegrade">Softwareauswahl und Reifegrade</a></h1>
+<p>Die acht Hauptkategorien und 52 Unterkategorien enthalten eine redaktionelle
+Auswahl von bis zu fünf Einträgen. Der Umfang richtet sich nach den belegbaren
+Betriebsvarianten. Fehlende Kandidaten werden nicht durch ungesicherte Empfehlungen
+ersetzt. Mehrfachnennungen sind beabsichtigt.</p>
+<p>Die 60 Auswahltabellen enthalten zusammen <strong>257 Einträge</strong>.
+Gezählt werden Tabellenzeilen einschließlich Mehrfachnennungen; eine Zahl
+eindeutiger Projekte wird wegen kombinierter Einträge und Aliasnamen nicht behauptet.</p>
+<p>Redaktioneller Stand: <strong>27. September 2026</strong>. Die Funktions- und Speicherquellen
+stehen bei den Einträgen. Eine dokumentierte Möglichkeit ist kein Nachweis für
+eine hier durchgeführte Installation oder einen aktuellen Vollvergleich aller Produkte.</p>
+<ul>
+<li><a href="dokumentation.html#open-source-auswahl-nach-reifegrad">Dokumentenerstellung, Wikis und Notebooks</a></li>
+<li><a href="wissenssysteme.html#open-source-auswahl-nach-reifegrad">Wissenssysteme</a></li>
+<li><a href="cms.html#open-source-auswahl-nach-reifegrad">Content-Management-Systeme</a></li>
+<li><a href="docs-as-code.html#open-source-auswahl-nach-reifegrad">Docs-as-Code</a></li>
+<li><a href="webframeworks.html#open-source-auswahl-nach-reifegrad">Webframeworks</a></li>
+<li><a href="klassische-lms.html#open-source-auswahl-nach-reifegrad">Lernmanagement-Systeme</a></li>
+<li><a href="mobile-desktop-apps.html#open-source-auswahl-nach-reifegrad">Mobile und Desktop-Apps</a></li>
+<li><a href="sprachmodell-integration.html#open-source-auswahl-nach-reifegrad">Integration von Sprachmodellen</a></li>
+</ul>
+<h2 id="verbindlicher-speicherfilter"><a class="header" href="#verbindlicher-speicherfilter">Verbindlicher Speicherfilter</a></h2>
+<p>Ein Eintrag bleibt nur für einen dokumentierten Betrieb mit <strong>PostgreSQL</strong>
+oder <strong>direkten Inhaltsdateien</strong> erhalten. Die Tabellen nennen die gewählte
+Variante und verlinken ihren Nachweis. Andere unterstützte Backends desselben
+Produkts sind nicht Teil dieser Auswahl.</p>
+<ul>
+<li><strong>PostgreSQL:</strong> Inhalte oder der betrachtete Framework-Zustand können in
+PostgreSQL gespeichert werden. Bei Vektorsuche ist gegebenenfalls pgvector
+einzurichten. Ein bloßer Import aus PostgreSQL reicht nicht.</li>
+<li><strong>Dateien:</strong> Die maßgeblichen Inhalte liegen beispielsweise in Markdown,
+JSON, HTML, Org, AsciiDoc, Notebooks oder Dokumentdateien. Git-basierte
+Inhaltsverwaltung und dateibasierte Generatoren sind eingeschlossen.</li>
+<li><strong>SQLite als Hauptspeicher</strong> ist in dieser Auslegung nicht eingeschlossen.
+Rekonstruierbare Hilfsindizes sind zulässig, wenn die vollständigen Inhalte
+unabhängig davon in Dateien liegen. Das trifft auf die dokumentierten
+Speicherwege von <a href="https://www.orgroam.com/manual">Org-roam</a> und
+<a href="https://github.com/siyuan-note/siyuan/blob/master/docs/WORKSPACE.md">SiYuan</a> zu.</li>
+<li><strong>Frameworks:</strong> Die genannte Speicherintegration muss ausdrücklich gewählt
+werden. Bei zusätzlichen Daten, Chat-Historien und Indizes ist derselbe
+Filter anzuwenden. Eine In-Memory-Demo ist kein Persistenznachweis.</li>
+</ul>
+<p>Erforderliche andere Datenbanken und nicht belegte Speicherwege führen zum
+Entfernen des Eintrags. Datei-Import, Export, Backup oder Zugriff auf eine
+fremde Datenbank allein machen eine Anwendung nicht dateibasiert.</p>
+<h3 id="betrachteter-umfang"><a class="header" href="#betrachteter-umfang">Betrachteter Umfang</a></h3>
+<p>Bei einer Anwendung umfasst der Filter die maßgeblichen Inhalte und den
+Anwendungszustand der beschriebenen Variante. Ein nur rekonstruierbarer
+Hilfsindex ist davon zu unterscheiden. Noch nicht synchronisierte Bearbeitungen
+sind keine beliebig löschbaren Cache-Daten.</p>
+<p>Bei mobilen LMS-Clients wird ausdrücklich nur der PostgreSQL-Serverbestand
+bewertet. Diese Einträge sind keine Empfehlung für eine durchgehend SQLite-freie
+Offline-Gesamtinstallation. Wer den Filter auch auf sämtliche Endgeräte anwenden
+muss, kann aus diesen Client-Einträgen keine Eignung ableiten.</p>
+<p>Bei Bibliotheken benennt die Tabelle den verwendeten Baustein und seinen
+Speicherweg. Dateizugriff muss in der eigenen Anwendung implementiert werden.
+Lokale Modelldateien einer Laufzeit sind keine Ablage für Dokumente oder Chats.
+Externe Modellanbieter und zusätzliche Dienste benötigen eine eigene Prüfung.</p>
+<p><strong>Sonderfall AnythingLLM:</strong> Das Projekt beschreibt die Umstellung der
+Anwendungsdatenbank auf PostgreSQL im
+<a href="https://github.com/Mintplex-Labs/anything-llm/blob/master/server/prisma/schema.prisma">Prisma-Schema</a>.
+Zusätzlich ist <a href="https://github.com/Mintplex-Labs/anything-llm/blob/master/server/utils/vectorDbProviders/pgvector/SETUP.md">pgvector</a>
+für Vektordaten einzurichten. Nur diese angepasste Variante bleibt enthalten;
+ihre Reife wird wegen des Anpassungsbedarfs als mittel eingestuft.
+Die Umstellung wurde hier nicht praktisch erprobt.</p>
+<h2 id="bewertungsmethode"><a class="header" href="#bewertungsmethode">Bewertungsmethode</a></h2>
+<p>Die Auswahl ist eine redaktionelle Empfehlung aus den geprüften Projekten,
+kein vollständiger Marktvergleich. Die Reifegrade sind qualitative Urteile,
+keine Zertifizierung und keine gemessenen TRL-Werte. Grundlage sind die
+verlinkten offiziellen Projektseiten, Repositories und Handbücher.</p>
+<p>Für die Auswahl zählen:</p>
+<ol>
+<li><strong>Offene Lizenz:</strong> Der aufgeführte Softwarekern steht unter einer Open-Source-Lizenz.</li>
+<li><strong>Wartung:</strong> Öffentliche Entwicklung, Änderungsverläufe und ein erkennbarer Pflegeprozess.</li>
+<li><strong>Dokumentation:</strong> Beschriebene Nutzung, Konfiguration und gegebenenfalls Betrieb.</li>
+<li><strong>Bewährung:</strong> Langjährige Entwicklung oder dokumentierte produktive Verwendung.</li>
+<li><strong>Pflegbarkeit:</strong> Nachvollziehbare Aktualisierung, Community und projektgerechte Erweiterbarkeit.</li>
+</ol>
+<p><strong>Sehr hoch</strong> bedeutet hier: langjährig etablierte Grundlage mit umfangreicher
+Dokumentation und belastbaren Hinweisen auf kontinuierliche Pflege oder
+produktiven Einsatz. <strong>Hoch</strong> bedeutet: ausgereifte, dokumentierte Lösung,
+deren Eignung stärker auf einen bestimmten Einsatzbereich zugeschnitten ist
+oder deren Betriebsnachweise in dieser Recherche weniger breit sind.</p>
+<p><strong>Mittel</strong> bedeutet: dokumentierte und nutzbare Software mit noch begrenzter
+Langzeiterfahrung, einer jungen Projektlinie oder größeren offenen Fragen zur
+Integration. Eine komplexe oder noch wenig erprobte Betriebsvariante wird entsprechend
+vorsichtig eingeordnet. Kategorien dürfen weniger als fünf Einträge enthalten.</p>
+<p>Die Reife bewertet den benannten Kern beziehungsweise die ausdrücklich genannte
+Betriebsvariante. Bei LMS-Anbindungen wird die Reife des LMS-Kerns angegeben,
+nicht die eines beliebigen KI-Tutors. Drupal AI wird separat mit „Mittel“
+eingeordnet. LangChain, LlamaIndex und SiYuan werden in ihren wiederholten
+Nennungen einheitlich mit „Hoch“ bewertet. Abweichungen benötigen eine Erklärung.</p>
+<p>Innerhalb gleicher Reifegrade ist die Reihenfolge eine redaktionelle
+Priorisierung für das Kapitel. Die Begründungen nennen die ausschlaggebenden
+Merkmale; die Einordnungen zeigen Grenzen. Projektalter und GitHub-Sterne
+allein bestimmen keinen Rang. Eine neuere Architekturgeneration bedeutet
+nicht automatisch einen höheren Reifegrad.</p>
+<h2 id="umfang-der-prüfung"><a class="header" href="#umfang-der-prüfung">Umfang der Prüfung</a></h2>
+<p>Die Prüfung ist dokumentenbasiert. Es wurden keine Lasttests, Sicherheitsaudits
+oder vergleichenden Installationen der aufgeführten Projekte durchgeführt. Die Auswahl
+betrifft die Softwarekerne, nicht pauschal alle Plugins oder kommerziellen
+Zusatzangebote. Mehrfachnennungen sind beabsichtigt: Ein Generator kann sowohl
+Dokumente erstellen als auch Bestandteil eines Docs-as-Code-Prozesses sein.</p>
+<p>Die 52 Unterkategorien gliedern sich in sieben Dokumentationsformen, sechs
+Wissenssystem-Bereiche, sechs CMS-Bereiche, sechs Docs-as-Code-Bereiche, acht
+Webframework-Bereiche, sechs LMS-Bereiche, fünf App-Bereiche und acht Bereiche
+der Sprachmodellanbindung. Diese Arbeits- und Architekturformen überschneiden
+sich; sie sind kein verbindliches historisches Generationenmodell.</p>
+<p>Bei KI und Agenten werden Anwendungen und Frameworks ausdrücklich
+unterschieden. Ein reifer Baustein garantiert keine ausgereifte Gesamtplattform.
+Die offene Lizenz eines Frameworks sagt außerdem nichts über die Lizenz
+angeschlossener Sprachmodelle oder externer Dienste aus.</p>
+<h2 id="zurueckgestellte-projekte"><a class="header" href="#zurueckgestellte-projekte">Zurueckgestellte Projekte</a></h2>
+<p>Die folgenden Entscheidungen beziehen sich auf den engen Filter dieses Buches.
+Sie sind keine pauschale Bewertung der Qualität der jeweiligen Software.</p>
+<div class="table-wrapper"><table><thead><tr><th>Projekt</th><th>Grund für die Nichtaufnahme beziehungsweise weitere Prüfung</th></tr></thead><tbody>
+<tr><td>Open edX und sein mobiler Client</td><td><a href="https://docs.openedx.org/projects/openedx-proposals/en/latest/best-practices/oep-0067-bp-tools-and-technology.html">OEP-67</a> nennt MySQL als einzig offiziell unterstütztes Django-ORM-Backend. Die frühere PostgreSQL-Zusage wurde entfernt.</td></tr>
+<tr><td>Joplin</td><td>Laut <a href="https://joplinapp.org/help/dev/spec/architecture/">Architekturdokumentation</a> liegen auch Notizen in SQLite. Ein Markdown-Export ändert den Hauptspeicher nicht.</td></tr>
+<tr><td>Directus</td><td>Der am Prüftag abgerufene <a href="https://github.com/directus/directus/blob/main/license">main-Stand der Lizenz</a> verwendet MSCL-1.0-GPL mit Nutzungsbeschränkungen und späterem GPL-Übergang. Eine versionslose GPL-3.0-Angabe ist damit nicht ausreichend.</td></tr>
+<tr><td>Dify</td><td>Die <a href="https://github.com/langgenius/dify/blob/main/LICENSE">Lizenz</a> ergänzt Apache 2.0 um zusätzliche Bedingungen. Die frühere uneingeschränkte Apache-2.0-Angabe wurde entfernt.</td></tr>
+<tr><td>Kolibri</td><td>Die <a href="https://github.com/learningequality/kolibri/blob/develop/kolibri/deployment/default/settings/base.py">Datenbankkonfiguration</a> enthält SQLite- und PostgreSQL-Wege. Ein durchgehend passender Betrieb aller Inhalts- und Benutzerdaten wurde hier nicht belegt; Inhaltskanäle allein genügen nicht.</td></tr>
+<tr><td>Sakai</td><td>Die <a href="https://sakaiproject.atlassian.net/wiki/spaces/DOC/pages/17225318567/Sakai+Admin+Guide+-+Full">Administrationsdokumentation</a> beschreibt MySQL und Oracle. Für die behauptete PostgreSQL-Variante fehlt hier ein tragfähiger Nachweis.</td></tr>
+<tr><td>Frappe LMS</td><td>Die geprüfte <a href="https://github.com/frappe/lms/blob/develop/docker/docker-compose.yml">Compose-Konfiguration</a> verwendet MariaDB. PostgreSQL-Unterstützung des Frappe-Frameworks belegt nicht die Eignung der LMS-Anwendung.</td></tr>
+<tr><td>WordPress Mobile und Ghost Desktop</td><td>Die bisher genannten Cache- und API-Funktionen belegten keinen erlaubten Hauptspeicher des vollständigen Systems.</td></tr>
+<tr><td>WatermelonDB, PouchDB und RxDB</td><td>Die bisher genannten lokalen Datenbanken und Replikationswege belegten keine vollständige Variante nach dem hier verwendeten Datei-/PostgreSQL-Filter.</td></tr>
+<tr><td>Opigno LMS, Ralph LRS und TRAX LRS</td><td>Die bisherigen Verweise belegten die konkret behaupteten PostgreSQL-Gesamtvarianten nicht ausreichend. Ein Framework- oder Projektlink allein reicht nicht.</td></tr>
+<tr><td>RAGFlow</td><td>Die <a href="https://github.com/infiniflow/ragflow/blob/main/docker/docker-compose-base.yml">Betriebskonfiguration</a> enthält verschiedene Dienste und Speicherprofile. Ein PostgreSQL-Metadatenspeicher allein belegt nicht die Einhaltung des Filters für alle benötigten Daten.</td></tr>
+<tr><td>BigBlueButton und mobile Browsernutzung</td><td>Aufzeichnungsdateien allein belegen nicht den gesamten Speicherbedarf der Konferenzplattform. Eine entsprechende Gesamtkonfiguration ist hier nicht nachgewiesen.</td></tr>
+<tr><td>Logseq</td><td>Datei- und Datenbanklinien müssen versionsgenau unterschieden werden. Der bisherige Link auf das Gesamtprojekt genügte nicht als Nachweis einer ausgewählten gepflegten Dateivariante.</td></tr>
+<tr><td>React Native</td><td>Die bisher pauschal genannten offiziellen SQLite-/Dateimodule waren kein konkreter Nachweis für die gewählte Dateianbindung.</td></tr>
+</tbody></table>
+</div>
+<p>Auch nicht aufgeführte Produkte können geeignet sein. Eine spätere Aufnahme
+benötigt eine eindeutig benannte Version oder Betriebsvariante mit Funktions-,
+Lizenz- und Speichernachweis. Verweise auf bewegliche Zweige wie <code>main</code> oder
+<code>develop</code> sind Recherchebelege zum Prüftag und keine Zusage für spätere Releases.</p>
+<h2 id="ergänzende-primärquellen"><a class="header" href="#ergänzende-primärquellen">Ergänzende Primärquellen</a></h2>
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Version_lifecycle">MediaWiki: Versionslebenszyklus</a></li>
+<li><a href="https://www.drupal.org/about/licensing">Drupal: Lizenz</a></li>
+<li><a href="https://github.com/sphinx-doc/sphinx/blob/master/LICENSE.rst">Sphinx: Lizenz</a></li>
+<li><a href="https://github.com/xwiki/xwiki-platform">XWiki: Quellcode und Lizenz</a></li>
+<li><a href="https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/license">TiddlyWiki: Lizenz</a></li>
+</ul>
+<p>Weitere Quellen stehen direkt bei den jeweiligen Einträgen.
+Installationsanleitungen und ausführliche Praxisvergleiche können später folgen.</p>
+<h2 id="besonderheit-bei-webframeworks"><a class="header" href="#besonderheit-bei-webframeworks">Besonderheit bei Webframeworks</a></h2>
+<p>Bei Browser-Frameworks gilt die Auswahl für die ausdrücklich beschriebene
+Kombination mit einem PostgreSQL-Backend. Es wird kein nativer Datenbankzugriff
+des Frontends behauptet. Die <a href="webframeworks.html#speicherwege-fuer-webframeworks">Speicherwege für Webframeworks</a>
+erläutern die erforderliche Eigenentwicklung und die Grenzen der Prüfung.</p>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Datenschutz.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="quellen.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Datenschutz.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="quellen.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

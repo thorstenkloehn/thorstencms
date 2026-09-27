@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Terminal-Schleifen, Test-Runner und Workspace-Sandboxing - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="terminal-schleifen-test-runner-und-workspace-sandboxing"><a class="header" href="#terminal-schleifen-test-runner-und-workspace-sandboxing">Terminal-Schleifen, Test-Runner und Workspace-Sandboxing</a></h1>
+<p><a href="../ide-ki-integration.html">Übergeordnete Kategorie: IDEs, Code-Editoren und KI-Framework-SDKs</a></p>
+<p>Moderne Entwicklungsumgebungen beschränken sich nicht auf das passive Bearbeiten von Quellcode. Sie integrieren interaktive Terminals, Debugger und Test-Runner. Autonome In-IDE-Agenten nutzen diese Werkzeuge über KI-Framework-SDKs, um Codeänderungen direkt gegen Compiler und automatisierte Test-Suiten zu validieren. Dieser mächtige Hebel birgt jedoch erhebliche Sicherheitsrisiken für das lokale Entwicklungssystem.</p>
+<hr />
+<h2 id="die-autonome-test-fix-schleife-tdd-agentur"><a class="header" href="#die-autonome-test-fix-schleife-tdd-agentur">Die autonome Test-Fix-Schleife (TDD-Agentur)</a></h2>
+<p>Anstatt den Entwickler als manuellen Tester einzuspannen, schließt das KI-SDK die Schleife zwischen Codeänderung und Feedback selbstständig:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│ 1. KI-SDK modifiziert Quellcode im Editor-Puffer           │
+└──────────────────────────────┬──────────────────────────────┘
+                               │
+┌──────────────────────────────▼──────────────────────────────┐
+│ 2. IDE-Terminal führt Test-Runner aus                       │
+│    Befehl: `cargo test` / `pytest` / `npm test`             │
+└──────────────────────────────┬──────────────────────────────┘
+                               │
+               ┌───────────────┴───────────────┐
+               │ Test erfolgreich (Exit 0)?    │
+               ▼                               ▼
+       [Nein: Exit &gt; 0]                 [Ja: Exit 0]
+               │                               │
+┌──────────────▼──────────────┐                ▼
+│ 3. Stacktrace-Analyse       │    ┌──────────────────────────┐
+│    SDK parst Terminal-Fehler│    │ 4. Aufgabe abgeschlossen │
+│    und Zeilennummern        │    │    Entwickler informieren│
+└──────────────┬──────────────┘    └──────────────────────────┘
+               │ Gezielter Reparatur-Patch
+               └───────────────► Zurück zu Schritt 1 (max. 4 Zyklen)
+</code></pre>
+<h3 id="vorteile-der-test-runner-kopplung"><a class="header" href="#vorteile-der-test-runner-kopplung">Vorteile der Test-Runner-Kopplung:</a></h3>
+<ol>
+<li><strong>Verifikation vor Entwicklersichtung:</strong> Der Entwickler wird erst dann über eine fertige Implementierung benachrichtigt, wenn alle Unit- und Integrationstests grün sind.</li>
+<li><strong>Präzise Fehlerlokalisierung:</strong> Durch das Parsen des Terminal-Outputs erhält das Modell die exakte Assertion-Fehlermeldung (z. B. <code>expected 200 OK, got 403 Forbidden</code>) und den Ausführungspfad des Stacktraces.</li>
+</ol>
+<hr />
+<h2 id="workspace-sandboxing-und-schutz-vor-bösartigen-repositories"><a class="header" href="#workspace-sandboxing-und-schutz-vor-bösartigen-repositories">Workspace-Sandboxing und Schutz vor bösartigen Repositories</a></h2>
+<p>Erhält ein KI-SDK die Erlaubnis, im Terminal beliebige Shell-Befehle auszuführen, verwandelt sich ein infiziertes Quellcode-Repository (z. B. durch versteckte Prompts in Quelltext-Kommentaren oder Issue-Beschreibungen) in einen Angriffsvektor (Prompt-Injection):</p>
+<h3 id="technische-schutzvorkehrungen-in-der-ide"><a class="header" href="#technische-schutzvorkehrungen-in-der-ide">Technische Schutzvorkehrungen in der IDE:</a></h3>
+<ul>
+<li><strong>Workspace Trust:</strong> Beim Öffnen unbekannter Repositories schaltet die IDE standardmäßig in den eingeschränkten Modus. Automatische Terminal-Ausführungen und unbestätigte Dateimodifikationen sind hardwarenah gesperrt.</li>
+<li><strong>Befehls-Whitelisting und -Blacklisting:</strong>
+<ul>
+<li><strong>Erlaubt:</strong> Reine Diagnose- und Testbefehle (<code>pytest</code>, <code>npm test</code>, <code>git diff</code>, <code>cargo check</code>).</li>
+<li><strong>Strikt gesperrt:</strong> Zerstörerische oder sicherheitskritische Befehle (<code>rm -rf</code>, Manipulation von <code>.git/hooks</code>, Zugriff auf private SSH-Schlüssel in <code>~/.ssh</code> oder Manipulation von Netzwerkinterfaces).</li>
+</ul>
+</li>
+<li><strong>Containerisierte Ausführung:</strong> Testläufe und Skripte sollten bevorzugt in isolierten Umgebungen (z. B. Docker-Containern oder Linux-Namespaces) ausgeführt werden, um das Host-Dateisystem vor ungewollten Nebeneffekten zu schützen.</li>
+<li><strong>Human-in-the-Loop-Freigaben:</strong> Vor dem Ausführen von Befehlen mit dauerhafter Außenwirkung (z. B. Paketinstallationen wie <code>npm install</code> oder Datenbankmigrationen) muss die IDE zwingend eine explizite Bestätigung im UI vom Entwickler anfordern.</li>
+</ul>
+<hr />
+<h2 id="projektweite-konfigurationsdateien-agentsmd-cursorrules"><a class="header" href="#projektweite-konfigurationsdateien-agentsmd-cursorrules">Projektweite Konfigurationsdateien (<code>AGENTS.md</code>, <code>.cursorrules</code>)</a></h2>
+<p>Um das Verhalten des KI-SDKs im Projekt deterministisch zu steuern, hinterlegen Entwicklungsteams verbindliche Konfigurationsdateien im Wurzelverzeichnis des Repositories:</p>
+<ul>
+<li><strong>Stil- und Framework-Vorgaben:</strong> Definition erlaubter Bibliotheken und verbotener Hilfsfunktionen.</li>
+<li><strong>Build- und Test-Konventionen:</strong> Exakte Angabe, welche Test-Kommandos vor dem Abschluss einer Aufgabe auszuführen sind.</li>
+<li><strong>Rechtliche und redaktionelle Richtlinien:</strong> Vorgaben zur Einhaltung von Urheberrechten, Dokumentationsintegrität und Vermeidung von redundanten Code-Dubletten.</li>
+</ul>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Die allgemeinen Kriterien zur Softwareauswahl und die Bewertung offener Editoren finden sich unter <a href="sprachmodelle/ide-code-editoren.html">Sprachmodelle in IDEs und Code-Editoren</a> und <a href="../software.html">Softwareauswahl und Reifegrade</a>.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ide-ki-integration/inline-diff-patching.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../apps-ki-integration.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ide-ki-integration/inline-diff-patching.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../apps-ki-integration.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

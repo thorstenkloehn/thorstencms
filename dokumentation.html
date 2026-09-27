@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dokumentenerstellung, Wikis und interaktive Dokumente - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="dokumentenerstellung-wikis-und-interaktive-dokumente"><a class="header" href="#dokumentenerstellung-wikis-und-interaktive-dokumente">Dokumentenerstellung, Wikis und interaktive Dokumente</a></h1>
+<p>Ein Handbuch für neue Mitarbeitende braucht eine andere Leseführung als die
+Referenz einer Programmierschnittstelle. Vor der Werkzeugwahl hilft deshalb
+eine konkrete Frage: Was soll jemand mit dem fertigen Inhalt tun können?</p>
+<h2 id="vom-anwendungsfall-zur-dokumentationsform"><a class="header" href="#vom-anwendungsfall-zur-dokumentationsform">Vom Anwendungsfall zur Dokumentationsform</a></h2>
+<p>Für eine Einarbeitung bietet sich eine feste Kapitelreihenfolge an. Zum
+Nachschlagen sind kurze, direkt verlinkbare Themenseiten sinnvoll. Wenn das
+Ergebnis von Berechnungen überprüfbar bleiben soll, können Notebooks Text,
+Code und Ausgabe zusammenhalten. In einem Wiki können mehrere Menschen
+Begriffe, Erfahrungen und Entscheidungen über Seitenverweise verbinden.</p>
+<p>Diese Formen lassen sich kombinieren. Ein Projekt kann ein Einstiegshandbuch,
+eine API-Referenz und eine Sammlung von Betriebsnotizen pflegen. Entscheidend
+ist, wo Änderungen vorgenommen werden und wer ihre fachliche Prüfung übernimmt.
+Ein zusätzliches Such- oder RAG-System erschließt den Bestand, ersetzt seine
+Pflege aber nicht. Automatisch erzeugte Antworten können fehlerhaft sein.</p>
+<h2 id="beispiel-betriebsanleitung-für-einen-dienst"><a class="header" href="#beispiel-betriebsanleitung-für-einen-dienst">Beispiel: Betriebsanleitung für einen Dienst</a></h2>
+<p>Eine neue Konfigurationsoption erhält eine Referenzseite mit zulässigen Werten.
+Das Einstiegskapitel zeigt einen typischen Einsatz. Ein Notebook kann eine
+Messung dokumentieren. Alle drei verweisen auf denselben Versionsstand.
+So entsteht ein zusammenhängender Bestand, ohne denselben Erklärungstext in
+mehreren Kapiteln unabhängig pflegen zu müssen.</p>
+<h2 id="unterkategorien-gefilterte-softwareauswahl"><a class="header" href="#unterkategorien-gefilterte-softwareauswahl">Unterkategorien: gefilterte Softwareauswahl</a></h2>
+<ul>
+<li><a href="dokumentation/book-first.html">Bücher und Handbücher</a></li>
+<li><a href="dokumentation/docs-first.html">Dokumentationsportale</a></li>
+<li><a href="dokumentation/notebooks.html">Notebooks</a></li>
+<li><a href="dokumentation/webseiten-generatoren.html">Webseiten-Generatoren</a></li>
+<li><a href="dokumentation/wikis.html">Wikis</a></li>
+<li><a href="dokumentation/rag.html">RAG und Wissenssuche</a></li>
+<li><a href="dokumentation/dokumentenerstellung.html">Programmatische Dokumentenerstellung</a></li>
+</ul>
+<h2 id="open-source-auswahl-nach-reifegrad"><a class="header" href="#open-source-auswahl-nach-reifegrad">Open-Source-Auswahl nach Reifegrad</a></h2>
+<p><strong>5 Einträge:</strong> für den jeweils beschriebenen Speicherumfang ausgewählt.</p>
+<p>Redaktioneller Stand: 27. September 2026. Auswahl nach der
+<a href="software.html">gemeinsamen Bewertungsmethode</a>. Die Reihenfolge priorisiert
+Reife und anschließend die Eignung für diese Kategorie.</p>
+<div class="table-wrapper"><table><thead><tr><th>Rang</th><th>Software</th><th>Lizenz des Kerns</th><th>Reifegrad</th><th>Schwerpunkt</th><th>Passender Speicherweg und Nachweis</th></tr></thead><tbody>
+<tr><td>1</td><td><a href="https://github.com/sphinx-doc/sphinx">Sphinx</a></td><td>BSD-2-Clause</td><td>Sehr hoch</td><td>Handbücher und technische Referenzen</td><td>Dateien: <a href="https://github.com/sphinx-doc/sphinx">reStructuredText-/Markdown-Quellen und HTML-Dateien</a></td></tr>
+<tr><td>2</td><td><a href="https://github.com/jgm/pandoc">Pandoc</a></td><td>GPL-2.0-or-later</td><td>Sehr hoch</td><td>Dokumentkonvertierung und Veröffentlichung</td><td>Dateien: <a href="https://github.com/jgm/pandoc">Markup- und Dokumentdateien</a></td></tr>
+<tr><td>3</td><td><a href="https://www.doxygen.nl/manual/index.html">Doxygen</a></td><td>GPL-2.0</td><td>Sehr hoch</td><td>Quellcode- und API-Dokumentation</td><td>Dateien: <a href="https://www.doxygen.nl/manual/index.html">Quellcode-/Textdateien und generierte Referenzen</a></td></tr>
+<tr><td>4</td><td><a href="https://github.com/jupyterlab/jupyterlab">JupyterLab</a></td><td>BSD-3-Clause</td><td>Sehr hoch</td><td>Interaktive Notebooks</td><td>Dateien: <a href="https://github.com/jupyterlab/jupyterlab">Notebook-Dateien (.ipynb)</a></td></tr>
+<tr><td>5</td><td><a href="https://github.com/rust-lang/mdBook">mdBook</a></td><td>MPL-2.0</td><td>Hoch</td><td>Markdown-Bücher</td><td>Dateien: <a href="https://github.com/rust-lang/mdBook">Markdown- und HTML-Dateien</a></td></tr>
+</tbody></table>
+</div>
+<h3 id="1-sphinx"><a class="header" href="#1-sphinx">1. Sphinx</a></h3>
+<p><strong>Begründung:</strong> Umfangreiche Querverweise, mehrere Ausgabeformate und ein etabliertes Erweiterungssystem.</p>
+<p><strong>Einordnung:</strong> Erweiterungen und Ausgabeformate erhöhen den Konfigurationsaufwand.</p>
+<p>Offizielle Grundlage: <a href="https://github.com/sphinx-doc/sphinx">Sphinx</a>.</p>
+<h3 id="2-pandoc"><a class="header" href="#2-pandoc">2. Pandoc</a></h3>
+<p><strong>Begründung:</strong> Breite Formatunterstützung, ausführliches Handbuch und nachvollziehbare Entwicklung.</p>
+<p><strong>Einordnung:</strong> Konverter; keine gemeinsame Redaktionsoberfläche.</p>
+<p>Offizielle Grundlage: <a href="https://github.com/jgm/pandoc">Pandoc</a>.</p>
+<h3 id="3-doxygen"><a class="header" href="#3-doxygen">3. Doxygen</a></h3>
+<p><strong>Begründung:</strong> Langjähriger Einsatz in Softwareprojekten; detailliertes Handbuch und dokumentierte Ausgabeformate.</p>
+<p><strong>Einordnung:</strong> Schwerpunkt auf Quellcode; redaktionelle Inhalte brauchen zusätzliche Struktur.</p>
+<p>Offizielle Grundlage: <a href="https://www.doxygen.nl/manual/index.html">Doxygen</a>.</p>
+<h3 id="4-jupyterlab"><a class="header" href="#4-jupyterlab">4. JupyterLab</a></h3>
+<p><strong>Begründung:</strong> Etabliertes Notebook-Ökosystem mit Dokumentation, Erweiterungen und Gemeinschaftsstrukturen.</p>
+<p><strong>Einordnung:</strong> Reproduzierbare Ausführung hängt zusätzlich von Kerneln und Abhängigkeiten ab.</p>
+<p>Offizielle Grundlage: <a href="https://github.com/jupyterlab/jupyterlab">JupyterLab</a>.</p>
+<h3 id="5-mdbook"><a class="header" href="#5-mdbook">5. mdBook</a></h3>
+<p><strong>Begründung:</strong> Fokussierter Buchgenerator mit eigenem Benutzerhandbuch, Änderungsverlauf und überschaubarer Struktur.</p>
+<p><strong>Einordnung:</strong> Für komplexe Publikationsformate sind zusätzliche Werkzeuge nötig.</p>
+<p>Offizielle Grundlage: <a href="https://github.com/rust-lang/mdBook">mdBook</a>.</p>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="dokumentation/book-first.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="dokumentation/book-first.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Webframeworks und KI-Framework-SDKs - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="webframeworks-und-ki-framework-sdks"><a class="header" href="#webframeworks-und-ki-framework-sdks">Webframeworks und KI-Framework-SDKs</a></h1>
+<p>Das Zusammenspiel moderner Webframeworks mit spezialisierten KI-Framework-SDKs bildet das architektonische Fundament zeitgemäßer KI-Anwendungen. Während Webframeworks den verlässlichen Rahmen für HTTP-Routing, Sicherheit, Authentifizierung und Datenbanktransaktionen bereitstellen, kapseln KI-SDKs den Zugriff auf Inferenz-Endpunkte, Vektormodelle und Agentenlogik.</p>
+<p>Die zentrale architektonische Herausforderung liegt im Aufeinandertreffen zweier gegensätzlicher Paradigmen:</p>
+<ul>
+<li><strong>Klassische Webarchitekturen</strong> basieren auf kurzlebigen, zustandslosen Request-Response-Zyklen. Controller erwarten Antworten innerhalb von Millisekunden bis wenigen Sekunden, um Web-Worker schnell für neue Anfragen freizugeben.</li>
+<li><strong>Sprachmodelle und Agenten-Frameworks</strong> arbeiten hingegen mit variabler Latenz, kontinuierlichen Token-Datenströmen oder mehrstufigen Denkprozessen, die Sekunden oder gar Minuten beanspruchen können.</li>
+</ul>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                      Client / Frontend                      │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ HTTP / SSE / WebStreams
+┌──────────────────────────────▼──────────────────────────────┐
+│ Webframework (FastAPI, Django, Next.js, Spring Boot, etc.)   │
+│  ├─ Controller / Routing (HTTP-Endpunkte, Session, Auth)     │
+│  ├─ Sicherheitsgrenze (RBAC, Rate Limiting, Input Sanitize) │
+│  └─ Protokoll-Adapter (SSE-Streaming, Background-Dispatch)  │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ Typsichere Methodenaufrufe
+┌──────────────────────────────▼──────────────────────────────┐
+│ KI-Framework-SDK (Provider-SDK, Fullstack-SDK, Agent-Graph) │
+│  ├─ Token-Generierung &amp; Streaming-Schnittstellen             │
+│  ├─ Kontext-Orchestrierung &amp; Retrieval (RAG)                │
+│  └─ Strukturierte Vorschläge für Werkzeugaufrufe            │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ SQL / pgvector
+┌──────────────────────────────▼──────────────────────────────┐
+│ Persistenzschicht: PostgreSQL (Relationen, Vektoren, State) │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="kernaufgaben-der-schichtentrennung"><a class="header" href="#kernaufgaben-der-schichtentrennung">Kernaufgaben der Schichtentrennung</a></h2>
+<p>Um robuste, skalierbare und sichere Systeme zu bauen, dürfen KI-SDKs niemals ungefiltert an den HTTP-Client exponiert werden. Das Webframework übernimmt als Schutzschicht vier unverzichtbare Aufgaben:</p>
+<ol>
+<li><strong>Autorisierung und Mandantenfähigkeit:</strong> Ein Sprachmodell besitzt von sich aus kein Konzept von Benutzerrechten. Das Webframework muss sicherstellen, dass dem Modell ausschließlich Daten übergeben werden, auf die der anfragende Benutzer Zugriff hat.</li>
+<li><strong>Entkopplung langer Laufzeiten:</strong> Blockierende Aufrufe müssen entweder über Streaming schrittweise sichtbar gemacht oder über asynchrone Warteschlangen aus dem synchronen Web-Thread ausgelagert werden.</li>
+<li><strong>Validierung und Sandboxing:</strong> Vom Modell vorgeschlagene Funktionsaufrufe (Function Calling) müssen strikt typisiert und vor der Ausführung autorisiert werden.</li>
+<li><strong>Schutz der Datenverbindung:</strong> Datenbanktransaktionen dürfen nicht über langanhaltende Modellaufrufe hinweg offen gehalten werden, um eine Erschöpfung des Verbindungspools (Connection Pool Exhaustion) zu vermeiden.</li>
+</ol>
+<hr />
+<h2 id="unterkategorien-dieses-kapitels"><a class="header" href="#unterkategorien-dieses-kapitels">Unterkategorien dieses Kapitels</a></h2>
+<p>Die folgenden Abschnitte vertiefen die technischen Umsetzungsdetails dieser Architektur:</p>
+<ul>
+<li><a href="web-ki-integration/streaming-transport.html">Streaming und Transportprotokolle</a>: Latenzarmes Ausliefern generierter Tokens über Server-Sent Events, WebSockets und Web Streams sowie die Behandlung von Client-Abbrüchen.</li>
+<li><a href="web-ki-integration/workflows-persistenz.html">Asynchrone Workflows, Queues und Persistenz</a>: Entkopplung langlaufender Agentenprozesse mittels Job-Queues, Session-Checkpointing und getrennte Speicherpfade in PostgreSQL.</li>
+<li><a href="web-ki-integration/tool-sandboxing.html">Sichere Werkzeugausführung und Sandboxing</a>: Absicherung von Tool-Calling-Mechanismen, Schemavalidierung und Human-in-the-Loop-Freigaben zum Schutz vor Prompt-Injection.</li>
+</ul>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Die Einordnung konkreter Modellanbindungen und Bibliotheken findet sich in den Abschnitten <a href="sprachmodelle/frameworks.html">Sprachmodelle in Webframeworks &amp; Backend</a> und <a href="sprachmodelle/bibliotheken.html">KI-Integrations- und Modellbibliotheken</a>.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="sprachmodelle/office-autorentools.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="web-ki-integration/streaming-transport.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="sprachmodelle/office-autorentools.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="web-ki-integration/streaming-transport.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

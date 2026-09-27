@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>IDEs, Code-Editoren und KI-Framework-SDKs - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="ides-code-editoren-und-ki-framework-sdks"><a class="header" href="#ides-code-editoren-und-ki-framework-sdks">IDEs, Code-Editoren und KI-Framework-SDKs</a></h1>
+<p>Integrierte Entwicklungsumgebungen (IDEs) und moderne Code-Editoren (wie VSCodium, Zed, Continue, Eclipse Theia oder Neovim) sind die anspruchsvollsten Arbeitsumgebungen für KI-Framework-SDKs. Während ein Fließtext in Autorentools oder CMS semantisch fehlertolerant ist, muss Quellcode syntaktisch exakt sein, Typregeln des Compilers einhalten und sich bruchlos in bestehende Modulhierarchien und Build-Systeme einfügen.</p>
+<p>Die Anbindung von KI-Framework-SDKs an IDEs hebt die Programmierung auf eine neue Abstraktionsebene:</p>
+<ul>
+<li><strong>Vom reinen Text zum semantischen Symbolgraphen:</strong> Das Modell operiert nicht auf unstrukturierten Textdateien, sondern nutzt das Language Server Protocol (LSP) und Syntaxbäume (Tree-sitter), um Klassen, Schnittstellen, Typen und Funktionsaufrufe dateiübergreifend zu verstehen.</li>
+<li><strong>In-Buffer-Manipulation und visuelle Diffs:</strong> Code-Vorschläge werden nicht in getrennten Fenstern isoliert, sondern direkt im aktiven Editor-Puffer als interaktive Inline-Diffs gerendert, die Entwickler zeilen- oder blockweise annehmen oder verwerfen können.</li>
+<li><strong>Agentische Test- und Reparaturschleifen:</strong> Die IDE stellt dem KI-SDK Werkzeuge zur Verfügung: Compiler-Diagnosen, Terminal-Befehle und Test-Runner (<code>cargo test</code>, <code>pytest</code>, <code>npm test</code>). Scheitert ein Test, analysiert das SDK den Stacktrace und korrigiert den Code autonom, bis die Suite fehlerfrei durchläuft.</li>
+</ul>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                 Editor-UI / Entwickler-Arbeitsplatz         │
+│         (Code-Puffer, Inline-Diffs, Terminal, Gutter)       │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ Editor-Event-Bus / Plugin-API
+┌──────────────────────────────▼──────────────────────────────┐
+│ IDE-Kontext-Engine (LSP-Client &amp; Tree-sitter)               │
+│  ├─ Symbolauflösung (`goToDefinition`, `findReferences`)   │
+│  ├─ AST-Extraktion &amp; Scope-Pruning (Aktuelle Funktion)      │
+│  └─ Aktive Compiler-Fehler &amp; Diagnosen (Linter / LSP)       │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ Strukturierte Kontext-Payload
+┌──────────────────────────────▼──────────────────────────────┐
+│ KI-Integrations-Schicht (Framework-SDK)                     │
+│  ├─ Prompt-Kompilierung (Code, Typen, Fehlermeldungen)      │
+│  ├─ AST-Patching &amp; Search-Replace-Block-Generierung         │
+│  └─ Werkzeugausführung (Terminal-Sandbox &amp; Test-Runner)     │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ Lokales Dateisystem / Git
+┌──────────────────────────────▼──────────────────────────────┐
+│ Repository: Quellcode, Testdateien, Projektkonfiguration    │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="kernaufgaben-der-ide-integration"><a class="header" href="#kernaufgaben-der-ide-integration">Kernaufgaben der IDE-Integration</a></h2>
+<ol>
+<li><strong>Semantische Relevanz vor Token-Flut:</strong> Das bloße Übergeben des gesamten Workspace sprengt jedes Kontextfenster und erzeugt Halluzinationen. Die IDE muss über LSP-Abfragen präzise jene Schnittstellendefinitionen ermitteln, die der aktuelle Codeabschnitt tatsächlich importiert.</li>
+<li><strong>Deterministisches Patching:</strong> Code-Generatoren müssen Änderungen so formulieren, dass der Editor sie eindeutig im Quelltext lokalisieren und anwenden kann (Search-and-Replace-Blöcke oder AST-Node-Replacement), ohne benachbarte Codezeilen zu beschädigen.</li>
+<li><strong>Sicheres Workspace-Sandboxing:</strong> Wird dem KI-SDK erlaubt, Terminal-Befehle auszuführen, muss die IDE zerstörerische Kommandos oder Datenabflüsse durch granulare Rechteprofile (Workspace Trust) unterbinden.</li>
+</ol>
+<hr />
+<h2 id="unterkategorien-dieses-kapitels"><a class="header" href="#unterkategorien-dieses-kapitels">Unterkategorien dieses Kapitels</a></h2>
+<p>Die konkreten Implementierungsmuster gliedern sich in drei Schwerpunkte:</p>
+<ul>
+<li><a href="ide-ki-integration/lsp-treesitter-kontext.html">LSP, Tree-sitter und symbolbewusste Kontextanalyse</a>: Die Kopplung von Sprachservern und Syntaxbäumen mit KI-SDKs zur präzisen Kontextaufbereitung.</li>
+<li><a href="ide-ki-integration/inline-diff-patching.html">In-Editor-Diffs, AST-Patching und Puffer-Synchronisation</a>: Übertragung von Modell-Outputs in den aktiven Puffer, Search-and-Replace-Muster und verzögerungsfreie Inline-Diff-Darstellung.</li>
+<li><a href="ide-ki-integration/terminal-agenten-sandboxing.html">Terminal-Schleifen, Test-Runner und Workspace-Sandboxing</a>: Autonome Test-Korrektur-Zyklen in der IDE, Abfangen von Compiler-Fehlern und Schutzmechanismen vor gefährlichen Systembefehlen.</li>
+</ul>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Die redaktionelle Bewertung von Open-Source-Editoren und -Plugins (VSCodium, Zed, Continue, Theia, avante.nvim) findet sich im Kapitel <a href="sprachmodelle/ide-code-editoren.html">Sprachmodelle in IDEs und Code-Editoren</a>. CLI-basierte Terminal-Agenten wie Aider werden unter <a href="cli-agenten.html">KI- und CLI-Coding-Agenten im Vergleich</a> gegenübergestellt.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="autorentools-ki-integration/datensouveraenitaet-lokale-modelle.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ide-ki-integration/lsp-treesitter-kontext.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="autorentools-ki-integration/datensouveraenitaet-lokale-modelle.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ide-ki-integration/lsp-treesitter-kontext.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

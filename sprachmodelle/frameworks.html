@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Sprachmodelle in Webframeworks &amp; Backend - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="sprachmodelle-in-webframeworks--backend"><a class="header" href="#sprachmodelle-in-webframeworks--backend">Sprachmodelle in Webframeworks &amp; Backend</a></h1>
+<p><a href="../sprachmodell-integration.html">Übergeordnete Kategorie: Integration von Sprachmodellen in Software-Architekturen</a></p>
+<p>Modellanbindung auf Service- und Controller-Ebene, Token-Streaming (SSE), sichere Werkzeugausführung (Tool Calling) und Datenbankspeicherung.</p>
+<h2 id="integrationsarchitektur-webframework-und-ki-laufzeit"><a class="header" href="#integrationsarchitektur-webframework-und-ki-laufzeit">Integrationsarchitektur: Webframework und KI-Laufzeit</a></h2>
+<p>Ein Webframework ist für den HTTP-Lebenszyklus, Authentifizierung, Autorisierung (RBAC), Eingabevalidierung und Datenbanktransaktionen zuständig. KI-Frameworks oder Modell-SDKs steuern hingegen Prompts, Modellinferenz, Einbettungen und RAG-Pipelines. Die Kopplung beider Welten erfordert eine klare Schichtentrennung:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                      Client / Browser                       │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ HTTP / SSE (Event Stream)
+┌──────────────────────────────▼──────────────────────────────┐
+│ Webframework-Backend (Controller / Middleware)               │
+│  ├─ Authentifizierung &amp; Session-Validierung                  │
+│  ├─ Ratenbegrenzung &amp; Eingabe-Sanitizing (Pydantic / Zod)   │
+│  └─ Asynchrones Streaming oder Dispatch an Job-Queue        │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ Interne Methodenaufrufe
+┌──────────────────────────────▼──────────────────────────────┐
+│ Service-Schicht (KI-Framework / Modell-SDK)                 │
+│  ├─ Prompt-Zusammenstellung &amp; Modell-Inferenz               │
+│  ├─ RAG-Logik (Retrieval &amp; Kontextbegrenzung)               │
+│  └─ Strukturierte Vorschläge für Werkzeugaufrufe            │
+└──────────────────────────────▲──────────────────────────────┘
+                               │ SQL / pgvector
+┌──────────────────────────────▼──────────────────────────────┐
+│ Persistenz: PostgreSQL (Relationale Daten, Vektoren, Logs) │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="vier-kernmuster-der-integration"><a class="header" href="#vier-kernmuster-der-integration">Vier Kernmuster der Integration</a></h2>
+<h3 id="1-token-streaming-über-server-sent-events-sse"><a class="header" href="#1-token-streaming-über-server-sent-events-sse">1. Token-Streaming über Server-Sent Events (SSE)</a></h3>
+<p>Für dialogorientierte Schnittstellen (Chat, interaktive Zusammenfassung) ist das blockierende Warten auf vollständige Antworten ungeeignet.</p>
+<ul>
+<li><strong>Protokollwahl:</strong> Server-Sent Events (<code>text/event-stream</code>) bieten gegenüber WebSockets den Vorteil, dass sie auf Standard-HTTP/1.1 oder HTTP/2 aufsetzen, zustandslose Proxies passieren und automatische Wiederverbindungsmechanismen mitbringen.</li>
+<li><strong>Umsetzung:</strong> Der Controller ruft die asynchrone Stream-Schnittstelle des KI-Frameworks oder SDKs auf (<code>async for</code> bzw. reaktive Streams) und gibt jeden generierten Token-Chunk unmittelbar im HTTP-Ausgabestrom an den Client weiter.</li>
+</ul>
+<h3 id="2-entkopplung-über-hintergrund-warteschlangen-worker-pattern"><a class="header" href="#2-entkopplung-über-hintergrund-warteschlangen-worker-pattern">2. Entkopplung über Hintergrund-Warteschlangen (Worker-Pattern)</a></h3>
+<p>Komplexe Agenten-Workflows, mehrstufige Recherchen oder die Indizierung umfangreicher Dokumentenmengen übersteigen reguläre HTTP-Request-Timeouts (häufig 30 bis 60 Sekunden).</p>
+<ul>
+<li><strong>Entkopplung:</strong> Der Webserver nimmt den Auftrag entgegen, speichert die Metadaten in PostgreSQL und übergibt die Ausführung an eine nachgelagerte Task-Queue (z. B. Celery, BullMQ oder ein In-Memory-Warteschlangensystem).</li>
+<li><strong>Rückmeldung:</strong> Der HTTP-Endpunkt antwortet unmittelbar mit <code>202 Accepted</code> und einer Auftrags-ID. Das Frontend erfährt den Fortschritt über Polling, WebSocket-Events oder SSE-Statusbenachrichtigungen.</li>
+</ul>
+<h3 id="3-sichere-werkzeugausführung-tool-calling-sandbox"><a class="header" href="#3-sichere-werkzeugausführung-tool-calling-sandbox">3. Sichere Werkzeugausführung (Tool Calling Sandbox)</a></h3>
+<p>Sprachmodelle führen Aktionen nicht selbst aus; sie formulieren lediglich den strukturierten Vorschlag für einen Funktionsaufruf (JSON mit Argumenten).</p>
+<ul>
+<li><strong>Schutzmechanismen:</strong> Das Webframework muss diesen Vorschlag vor der Ausführung isolieren.</li>
+<li><strong>Validierung:</strong> Prüfung der übergebenen Argumente gegen ein striktes Typenschema (z. B. Pydantic, Zod oder JSON-Schema).</li>
+<li><strong>Rechteprüfung:</strong> Sicherstellung, dass der aktuell angemeldete Benutzer über die nötigen Rollenberechtigungen für die angeforderte Aktion verfügt.</li>
+<li><strong>Fehlerbehandlung:</strong> Fehlschläge oder ungültige Parameter werden als strukturierte Fehlermeldung an das Modell zurückgespielt, damit es den Aufruf korrigieren kann.</li>
+</ul>
+<h3 id="4-getrennte-persistenz-und-vektorspeicher"><a class="header" href="#4-getrennte-persistenz-und-vektorspeicher">4. Getrennte Persistenz und Vektorspeicher</a></h3>
+<p>Die Datenhaltung teilt sich in drei funktionale Bereiche auf, die sich in PostgreSQL abbilden lassen:</p>
+<ul>
+<li><strong>Transaktionale Anwendungsdaten:</strong> Benutzerprofile, Berechtigungen und Abrechnungsdaten in relationalen Standardtabellen.</li>
+<li><strong>Semantische Einbettungen:</strong> Dokumenten-Chunks und Vektordaten über die Erweiterung <code>pgvector</code>.</li>
+<li><strong>Konversations- und Agentenzustand:</strong> Serialisierte Sitzungsverläufe und Zwischenzustände (Checkpoints) für unterbrochene oder mehrstufige Arbeitsabläufe.</li>
+</ul>
+<hr />
+<h2 id="open-source-auswahl-nach-reifegrad"><a class="header" href="#open-source-auswahl-nach-reifegrad">Open-Source-Auswahl nach Reifegrad</a></h2>
+<p><strong>5 Einträge:</strong> für den jeweils beschriebenen Speicherumfang ausgewählt.</p>
+<p>Redaktioneller Stand: <strong>27. September 2026</strong>;
+<a href="../software.html">Bewertungskriterien und Grenzen</a> gelten auch hier.
+Die Rangfolge priorisiert Reife und danach die Passung zum Thema.</p>
+<p>| Rang | Software und offizielle Quelle | Lizenz des betrachteten Kerns | Reifegrad | Begründung | Passender Speicherweg und Nachweis |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | <a href="https://github.com/dotnet/aspnetcore">ASP.NET Core</a> | MIT | Sehr hoch | Webframework-Kern; Modellaufrufe in eigener Anwendung ergänzen. | PostgreSQL: <a href="https://www.npgsql.org/efcore/">EF Core mit Npgsql</a> |
+| 2 | <a href="https://github.com/django/django">Django</a> | BSD-3-Clause | Sehr hoch | Webframework-Kern mit ORM; Modell- und Vektoranbindung zusätzlich entwickeln. | PostgreSQL: <a href="https://docs.djangoproject.com/en/stable/ref/databases/#postgresql-notes">Offizielles PostgreSQL-Backend</a> |
+| 3 | <a href="https://github.com/fastapi/fastapi">FastAPI</a> | MIT | Sehr hoch | Asynchrones Python-API-Framework für latenzarmes Token-Streaming und Modell-Gateways. | PostgreSQL: <a href="https://docs.sqlalchemy.org/en/20/dialects/postgresql.html">Eigene SQLAlchemy-Anbindung über PostgreSQL-Dialekt</a> |
+| 4 | <a href="https://github.com/symfony/symfony">Symfony</a> | MIT | Sehr hoch | PHP-Webframework; Modellaufrufe in eigenen Diensten ergänzen. | PostgreSQL: <a href="https://symfony.com/doc/current/doctrine.html">Doctrine und PostgreSQL-Anbindung</a> |
+| 5 | <a href="https://github.com/spring-projects/spring-boot">Spring Boot</a> / <a href="https://github.com/spring-projects/spring-ai">Spring AI</a> | Apache-2.0 | Hoch | Dokumentierte Java-Abstraktion für Chat-Clients, Prompt-Templates und pgvector-Stores. | PostgreSQL: <a href="https://docs.spring.io/spring-ai/reference/api/vectordbs/pgvector.html">pgvector-Integration via Spring AI</a> |</p>
+<hr />
+<h2 id="einsatz-und-abgrenzung-der-frameworks"><a class="header" href="#einsatz-und-abgrenzung-der-frameworks">Einsatz und Abgrenzung der Frameworks</a></h2>
+<p>Die Tabelle unterscheidet den Webframework-Kern von einer selbst entwickelten Modellanbindung. Bei Spring AI ist eine konkrete KI-Bibliothek benannt; bei den übrigen Frameworks müssen Modellaufruf, Fehlerbehandlung und Berechtigungen in der Anwendung ergänzt werden:</p>
+<ul>
+<li><strong>ASP.NET Core:</strong> Erlaubt über Minimal APIs und <code>IAsyncEnumerable&lt;T&gt;</code> ein direktes Token-Streaming. Für die Modellanbindung kann Microsoft Semantic Kernel oder ein dediziertes Provider-SDK genutzt werden. Persistenz erfolgt über Entity Framework Core mit dem Npgsql-Treiber.</li>
+<li><strong>Django:</strong> Traditionell synchron aufgebaut, bietet aber mit Channels und asynchronen Views Anknüpfungspunkte für Modell-Streams. Für aufwendige KI-Workflows empfiehlt sich die Auslagerung an Celery-Worker. Vektoren lassen sich über <code>pgvector-python</code> in Django-Modelle einbinden.</li>
+<li><strong>FastAPI:</strong> Nativ asynchron konzipiert auf Basis von Starlette und Pydantic. Eignet sich durch minimale Overhead-Latenz und asynchrone Generatoren (<code>StreamingResponse</code>) optimal als API-Gateway vor Python-basierten Frameworks wie LangGraph oder LlamaIndex.</li>
+<li><strong>Symfony:</strong> Ermöglicht über den Symfony HttpClient und den Messenger-Bus eine klare Trennung zwischen synchroner HTTP-Auslieferung und asynchroner Worker-Verarbeitung von KI-Aufträgen. Daten und Vektor-Metadaten werden über Doctrine ORM in PostgreSQL verwaltet.</li>
+<li><strong>Spring Boot / Spring AI:</strong> Bietet eine integrierte Java-Abstraktionsschicht für Chat-Clients, Embedding-Modelle und Vektorspeicher. Das reaktive Modul (WebFlux) unterstützt gestreamte HTTP-Antworten über <code>Flux&lt;ServerSentEvent&gt;</code>.</li>
+</ul>
+<p>Zu den zugrunde liegenden Modellbibliotheken, Provider-SDKs und Gateways siehe <a href="bibliotheken.html">KI-Integrations- und Modellbibliotheken</a>. Weiterführende Details zu autonomen Coding-Agenten finden sich unter <a href="../webframeworks/ki-agenten.html">KI-native Bausteine und agentengestützte Entwicklung</a>.</p>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../sprachmodelle/cms.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../sprachmodelle/bibliotheken.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../sprachmodelle/cms.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../sprachmodelle/bibliotheken.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

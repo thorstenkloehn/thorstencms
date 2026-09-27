@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Das Model Context Protocol (MCP) und Schnittstellenstandards - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="das-model-context-protocol-mcp-und-schnittstellenstandards"><a class="header" href="#das-model-context-protocol-mcp-und-schnittstellenstandards">Das Model Context Protocol (MCP) und Schnittstellenstandards</a></h1>
+<p><a href="../multi-agenten-ki-integration.html">Übergeordnete Kategorie: Multi-Agenten-Systeme und Protokolle</a></p>
+<p>Vor der Einführung offener Protokolle glich die Anbindung von Werkzeugen an KI-Modelle einem $M \times N$-Integrationsproblem: Jeder Agenten-Entwickler und jeder IDE-Hersteller musste eigene, herstellerspezifische Schnittstellen für GitHub, PostgreSQL, Slack oder Dateisysteme programmieren. Das von Anthropic initiierte und als offener Industriestandard geführte <strong>Model Context Protocol (MCP)</strong> löst dieses Problem durch eine standardisierte Client-Server-Architektur auf Basis von JSON-RPC 2.0.</p>
+<hr />
+<h2 id="architektur-und-komponenten-von-mcp"><a class="header" href="#architektur-und-komponenten-von-mcp">Architektur und Komponenten von MCP</a></h2>
+<p>MCP trennt die Ausführungsebene des Modells strikt von der Bereitstellung von Daten und Werkzeugen:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                       MCP-Host                              │
+│       (IDE, Antigravity, Claude Desktop, Agent-Service)     │
+│                                                             │
+│   ┌────────────────────┐            ┌───────────────────┐   │
+│   │ MCP-Client 1       │            │ MCP-Client 2      │   │
+└─────┬──────────────────┴──────────────┬───────────────────┴───┘
+      │ stdio (Lokaler Prozess)          │ SSE / HTTP (Netzwerk)
+      ▼                                  ▼
+┌────────────────────────┐         ┌────────────────────────┐
+│ MCP-Server: Filesystem │         │ MCP-Server: PostgreSQL │
+│ (Liest lokale Dateien, │         │ (Führt Abfragen aus,   │
+│  erstellt Verzeichnisse│         │  liefert Datenbankschem│
+└────────────────────────┘         └────────────────────────┘
+</code></pre>
+<h3 id="die-drei-funktionsträger"><a class="header" href="#die-drei-funktionsträger">Die drei Funktionsträger:</a></h3>
+<ol>
+<li><strong>MCP-Host:</strong> Die übergeordnete Anwendung, die den Benutzerkontext verwaltet und das Sprachmodell instanziiert.</li>
+<li><strong>MCP-Client:</strong> Eine Protokollinstanz innerhalb des Hosts, die eine exklusive 1:1-Verbindung zu einem bestimmten MCP-Server unterhält.</li>
+<li><strong>MCP-Server:</strong> Ein isolierter, spezialisierter Prozess, der Zugriff auf eine konkrete Ressource (Dateisystem, Datenbank, Git-Repository, Web-Scraper) gewährt.</li>
+</ol>
+<hr />
+<h2 id="die-drei-kernprimitiven-von-mcp"><a class="header" href="#die-drei-kernprimitiven-von-mcp">Die drei Kernprimitiven von MCP</a></h2>
+<p>Ein MCP-Server deklariert seine Fähigkeiten gegenüber dem Client über drei standardisierte Primitiven:</p>
+<h3 id="1-resources-kontextdaten-zum-lesen"><a class="header" href="#1-resources-kontextdaten-zum-lesen">1. Resources (Kontextdaten zum Lesen)</a></h3>
+<p>Resources sind passive, datei- oder dokumentenähnliche Datenquellen. Sie verändern den Systemzustand nicht und können sicher gelesen werden:</p>
+<ul>
+<li><strong>URI-basiertes Schema:</strong> z. B. <code>file:///workspace/src/main.rs</code> oder <code>postgres://analytics/tables/users/schema</code>.</li>
+<li><strong>Subskriptionen:</strong> MCP-Clients können Ressourcen abonnieren und werden vom Server automatisch per Push benachrichtigt, wenn sich eine Quelldatei ändert.</li>
+</ul>
+<h3 id="2-tools-ausführbare-funktionen-mit-nebeneffekten"><a class="header" href="#2-tools-ausführbare-funktionen-mit-nebeneffekten">2. Tools (Ausführbare Funktionen mit Nebeneffekten)</a></h3>
+<p>Tools sind aktive Funktionen, die das Sprachmodell aufrufen kann, um Operationen auszuführen:</p>
+<ul>
+<li><strong>Typsichere Deklaration:</strong> Jedes Tool definiert seinen Namen, eine präzise Beschreibung und seine Eingabeparameter über ein standardisiertes JSON-Schema.</li>
+<li><strong>Ergebnisrückgabe:</strong> Nach der Ausführung liefert das Tool strukturierte Text- oder Bilddaten an den Agenten zurück.</li>
+</ul>
+<h3 id="3-prompts-vordefinierte-interaktionsmuster"><a class="header" href="#3-prompts-vordefinierte-interaktionsmuster">3. Prompts (Vordefinierte Interaktionsmuster)</a></h3>
+<p>Prompts sind wiederverwendbare, vom Server bereitgestellte Vorlagen:</p>
+<ul>
+<li>Ein Git-MCP-Server kann beispielsweise einen Prompt <code>generate_release_notes</code> bereitstellen, der vordefinierte Kontextparameter wie Tags oder Commit-Spannen abfragt.</li>
+</ul>
+<hr />
+<h2 id="transportprotokolle-stdio-vs-sse"><a class="header" href="#transportprotokolle-stdio-vs-sse">Transportprotokolle: stdio vs. SSE</a></h2>
+<p>MCP definiert zwei verbindliche Transportmechanismen:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Kriterium</th><th style="text-align: left">Standard-I/O (<code>stdio</code>)</th><th style="text-align: left">Server-Sent Events (<code>SSE</code>) über HTTP</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Betriebsort</strong></td><td style="text-align: left">Lokale Prozesse auf demselben Rechner</td><td style="text-align: left">Verteilte Server, Container oder Cloud-Dienste</td></tr>
+<tr><td style="text-align: left"><strong>Kommunikation</strong></td><td style="text-align: left">Standard-Input/Output-Streams des OS-Prozesses</td><td style="text-align: left">HTTP-Post-Anfragen mit asynchronem SSE-Stream</td></tr>
+<tr><td style="text-align: left"><strong>Latenz</strong></td><td style="text-align: left">Extrem gering (&lt; 1 ms); keine Netzwerk-Overheads</td><td style="text-align: left">Gering; abhängig von der Netzwerklatenz</td></tr>
+<tr><td style="text-align: left"><strong>Sicherheit</strong></td><td style="text-align: left">Prozessisolation über Betriebssystem-Rechte</td><td style="text-align: left">Authentifizierung über HTTPS, API-Tokens oder mTLS</td></tr>
+<tr><td style="text-align: left"><strong>Typischer Einsatz</strong></td><td style="text-align: left">Lokale IDE-Werkzeuge, Dateisystem-Zugriff</td><td style="text-align: left">Unternehmensdatenbanken, Cloud-APIs, Microservices</td></tr>
+</tbody></table>
+</div>
+<p>Durch diese Trennung kann derselbe MCP-Server für PostgreSQL sowohl von einem lokalen Entwickler im Terminal als auch von einem serverseitigen Multi-Agenten-Workflow im Rechenzentrum genutzt werden.</p>
+<hr />
+<blockquote>
+<p>[!NOTE]
+Wie mehrere Agenten untereinander koordiniert werden und welche Topologien sich in der Praxis bewährt haben, zeigt die Unterkategorie <a href="topologien-orchestrierung.html">Agenten-Topologien, Koordination und Rollenmodelle</a>.</p>
+</blockquote>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../multi-agenten-ki-integration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../multi-agenten-ki-integration/topologien-orchestrierung.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../multi-agenten-ki-integration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../multi-agenten-ki-integration/topologien-orchestrierung.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

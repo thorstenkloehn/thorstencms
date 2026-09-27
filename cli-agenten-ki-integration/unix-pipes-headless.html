@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html lang="de" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Unix-Pipes, Headless-Betrieb und Standard-Streams - Digitale Dokumentation und Wissenssysteme</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Grundlagen und Evolution von Dokumentation, Wissenssystemen, CMS und Docs-as-Code">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <style>
+            .ai-transparency-notice {
+                margin: 1.5em 0;
+            }
+            .ai-transparency-notice blockquote {
+                margin: 0;
+                padding: 0.75em 1.25em;
+                font-size: 0.88em;
+                line-height: 1.5;
+                color: var(--fg);
+                background-color: var(--quote-bg);
+                border-left: 4px solid var(--quote-border);
+                border-block-start: none;
+                border-radius: 4px;
+            }
+            .ai-transparency-notice blockquote p {
+                margin: 0;
+            }
+        </style>
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Digitale Dokumentation und Wissenssysteme</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="ai-transparency-notice ai-header-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                        <h1 id="unix-pipes-headless-betrieb-und-standard-streams"><a class="header" href="#unix-pipes-headless-betrieb-und-standard-streams">Unix-Pipes, Headless-Betrieb und Standard-Streams</a></h1>
+<p>Die Unix-Philosophie – Programme zu entwerfen, die genau eine Aufgabe beherrschen, textbasierte Datenströme verarbeiten und nahtlos über Pipes verkettet werden können – behält auch im Zeitalter generativer Sprachmodelle ihre Gültigkeit. Wenn Entwickler und CI/CD-Pipelines KI-gestützte Werkzeuge auf der Kommandozeile einsetzen, scheitern viele existierende Tools daran, dass sie unkontrolliert Statusmeldungen, ANSI-Farben oder Ladebalken in den Datenstrom mischen.</p>
+<p>Ein robuster CLI-Agent, der auf einem modernen KI-Framework-SDK aufbaut, muss sich als verlässliches Werkzeug in Shell-Pipelines einfügen. Das verlangt eine saubere Trennung der Standard-Streams, die automatische Erkennung des Ausführungskontexts (TTY vs. Pipe) sowie maschinenlesbare Streaming-Formate.</p>
+<hr />
+<h2 id="architektur-des-headless-datenstroms"><a class="header" href="#architektur-des-headless-datenstroms">Architektur des Headless-Datenstroms</a></h2>
+<p>Im Headless- und Pipeline-Modus interagiert der CLI-Agent nicht mit einer menschlichen Tastatur, sondern konsumiert Daten aus dem Standard-Eingabekanal (<code>stdin</code>) und leitet die Inferenz-Ergebnisse direkt an nachgelagerte UNIX-Werkzeuge weiter (<code>stdout</code>).</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│ UNIX-Pipeline-Architektur                                              │
+│                                                                        │
+│   [ git diff / cat file ]                                              │
+│              │                                                         │
+│              ▼ (stdin)                                                 │
+│   ┌────────────────────────────────────────────────────────────┐       │
+│   │ CLI-Agent (Headless-Modus)                                 │       │
+│   │  ├─ TTY-Erkennung: `isatty(stdin) == false`                │       │
+│   │  ├─ Deaktivierung von Farben &amp; Cursor-Sequenzen           │       │
+│   │  ├─ Aggregation oder Streaming des Payloads                │       │
+│   │  └─ Framework-SDK: Typsichere Prompt-Inferenz              │       │
+│   └───┬────────────────────────────────────────────────────┬───┘       │
+│       │ (stdout: Reiner Nutzdatenstrom)                    │           │
+│       ▼                                                    ▼           │
+│   [ jq / sponge / git apply ]                   [ stderr: Logging ]    │
+│   Maschinenlesbare Weiterverarbeitung           Metadaten, Token/s,    │
+│   (Reiner Code, JSON, Plaintext)                Fehler &amp; Kosten-Warnung│
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="tty-erkennung-und-kontext-umschaltung"><a class="header" href="#tty-erkennung-und-kontext-umschaltung">TTY-Erkennung und Kontext-Umschaltung</a></h2>
+<p>Ein KI-CLI-Werkzeug muss beim Prozessstart feststellen, ob Ein- und Ausgänge mit einem interaktiven Benutzerterminal (Teletypewriter / TTY) verbunden sind oder ob Daten über Pipes umgeleitet werden.</p>
+<h3 id="erkennungsmechanismus"><a class="header" href="#erkennungsmechanismus">Erkennungsmechanismus</a></h3>
+<p>In modernen Programmiersprachen erfolgt die Prüfung über Low-Level-Systemaufrufe:</p>
+<ul>
+<li><strong>Python:</strong> <code>sys.stdin.isatty()</code> und <code>sys.stdout.isatty()</code></li>
+<li><strong>Node.js:</strong> <code>Boolean(process.stdin.isTTY)</code> und <code>Boolean(process.stdout.isTTY)</code></li>
+<li><strong>Rust:</strong> <code>std::io::stdin().is_terminal()</code> (ab Rust 1.70)</li>
+<li><strong>Go:</strong> <code>term.IsTerminal(int(os.Stdin.Fd()))</code></li>
+</ul>
+<h3 id="verhaltensregeln-nach-erkennung"><a class="header" href="#verhaltensregeln-nach-erkennung">Verhaltensregeln nach Erkennung</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Zustand</th><th style="text-align: left">Erkennung</th><th style="text-align: left">Eingabequelle</th><th style="text-align: left">Ausgabeformat</th><th style="text-align: left">Logging / Fortschritt</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Interaktiver Modus</strong></td><td style="text-align: left"><code>stdin.isatty() == true</code></td><td style="text-align: left">Tastatur (REPL / Prompt)</td><td style="text-align: left">ANSI-Farben, Markdown, TUI</td><td style="text-align: left">In TUI integriert</td></tr>
+<tr><td style="text-align: left"><strong>Consumer-Pipe</strong></td><td style="text-align: left"><code>stdin.isatty() == false</code></td><td style="text-align: left">Eingangs-Pipe (<code>cat | agent</code>)</td><td style="text-align: left">Gemäß Flag (<code>--raw</code>, <code>--json</code>)</td><td style="text-align: left"><code>stderr</code> (kein Spinner)</td></tr>
+<tr><td style="text-align: left"><strong>Producer-Pipe</strong></td><td style="text-align: left"><code>stdout.isatty() == false</code></td><td style="text-align: left">Beliebig</td><td style="text-align: left">Reiner Text / JSON (keine ANSI-Codes)</td><td style="text-align: left">Strikt <code>stderr</code></td></tr>
+<tr><td style="text-align: left"><strong>Reines Scripting</strong></td><td style="text-align: left">Beide <code>false</code></td><td style="text-align: left">Skript / Datei-Deskriptor</td><td style="text-align: left">Deterministic Plaintext / NDJSON</td><td style="text-align: left">Strikt <code>stderr</code></td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="strikte-kanaltrennung-stdout-vs-stderr"><a class="header" href="#strikte-kanaltrennung-stdout-vs-stderr">Strikte Kanaltrennung: <code>stdout</code> vs. <code>stderr</code></a></h2>
+<p>Die goldene Regel robuster Shell-Programmierung besagt: <strong>Niemals diagnostische Ausgaben auf <code>stdout</code> schreiben.</strong></p>
+<ol>
+<li><strong><code>stdout</code> (File Descriptor 1):</strong> Dient ausschließlich dem Nutzdaten-Ergebnis des Modells. Wenn der Agent aufgefordert wird, ein Refactoring vorzunehmen oder ein JSON-Objekt zu erzeugen, darf auf <code>stdout</code> kein einziges zusätzliches Zeichen (wie <code>Lade Modell...</code> oder <code>Antwort empfangen:</code>) ausgegeben werden. Jedes unerwartete Zeichen zerstört nachfolgende Parser wie <code>jq</code>, <code>patch</code> oder Compiler.</li>
+<li><strong><code>stderr</code> (File Descriptor 2):</strong> Hierhin gehören alle Diagnosen, Kostenkalkulationen, Token-Zähler (z. B. <code>Inferenz: 42 tokens/s</code>), Warnhinweise und Fehler. Auch Ladebalken oder Fortschrittsanzeigen (sofern im Batch-Modus überhaupt gewünscht) dürfen ausschließlich nach <code>stderr</code> geschrieben werden.</li>
+</ol>
+<h3 id="pufferung-und-flushing-bei-streaming"><a class="header" href="#pufferung-und-flushing-bei-streaming">Pufferung und Flushing bei Streaming</a></h3>
+<p>Wird das Modell-Ergebnis zeichen- oder tokenweise gestreamt, muss der CLI-Agent beachten, dass Standard-C-Bibliotheken Ausgaben auf blockorientierten Geräten (wie Pipes) puffern (meist 4 KB bis 8 KB Puffergröße). Ohne explizites Leeren (<code>flush()</code>) nach jedem Token-Chunk empfängt das nachgelagerte Programm die Daten stoßweise statt kontinuierlich:</p>
+<ul>
+<li>Nach jedem geschriebenen Streaming-Fragment muss ein expliziter Flush auf den Ausgabekanal erfolgen (<code>sys.stdout.flush()</code> bzw. <code>fflush(stdout)</code>).</li>
+</ul>
+<hr />
+<h2 id="maschinenlesbare-austauschformate-ndjson"><a class="header" href="#maschinenlesbare-austauschformate-ndjson">Maschinenlesbare Austauschformate: NDJSON</a></h2>
+<p>Für komplexe Agenten-Workflows, bei denen der CLI-Agent Zwischenschritte, Tool-Aufrufe und finale Antworten zurückliefert, eignet sich <strong>Newline-Delimited JSON (NDJSON)</strong> oder JSON-Lines (<code>.jsonl</code>). Jedes Ereignis wird als vollständiges JSON-Objekt in einer einzelnen Zeile ausgegeben:</p>
+<pre><code class="language-json">{"type": "step_start", "step": 1, "tool": "file_search"}
+{"type": "tool_call", "name": "ripgrep", "query": "auth_token"}
+{"type": "tool_result", "matches": 3}
+{"type": "content_delta", "delta": "Ich habe die Token-Definition gefunden."}
+{"type": "done", "total_tokens": 842, "cost_usd": 0.0012}
+</code></pre>
+<p>Nachfolgende Programme in der Pipe können diese Zeilen streaming-fähig mit Werkzeugen wie <code>jq --unbuffered</code> oder benutzerdefinierten Parsern verarbeiten, ohne auf das Ende der gesamten Generierung warten zu müssen.</p>
+<hr />
+<h2 id="exit-codes-und-signal-behandlung"><a class="header" href="#exit-codes-und-signal-behandlung">Exit-Codes und Signal-Behandlung</a></h2>
+<p>Ein sauberes CLI-Werkzeug signalisiert Erfolg oder Misserfolg über standardisierte Unix-Rückgabewerte (Exit-Codes):</p>
+<ul>
+<li><strong><code>0</code> (Success):</strong> Die Inferenz bzw. Transformation wurde fehlerfrei abgeschlossen.</li>
+<li><strong><code>1</code> (General Error):</strong> Unerwarteter Laufzeitfehler (z. B. Modell-API nicht erreichbar).</li>
+<li><strong><code>2</code> (Usage Error):</strong> Ungültige CLI-Argumente, fehlende Umgebungsvariablen oder inkompatible Flag-Kombinationen.</li>
+<li><strong><code>124</code> (Timeout):</strong> Das Modell oder ein Subprozess hat das konfigurierte Zeitlimit überschritten.</li>
+<li><strong><code>130</code> (Interrupted by SIGINT):</strong> Der Benutzer oder ein Prozess-Manager hat die Ausführung mit <code>Ctrl + C</code> bzw. Signal 2 abgebrochen.</li>
+</ul>
+<p>Durch die Einhaltung dieser Codes können Orchestrierungswerkzeuge wie Makefiles, Bash-Skripte oder CI-Runner zuverlässig über <code>set -e</code> oder <code>|| exit $?</code> auf Fehler reagieren.</p>
+<hr />
+<h2 id="querverweise-und-vertiefung"><a class="header" href="#querverweise-und-vertiefung">Querverweise und Vertiefung</a></h2>
+<ul>
+<li>Für interaktive Benutzeroberflächen im Terminal mit Cursor-Steuerung und TUI-Frameworks siehe <a href="tui-repl-terminal-streaming.html">TUI-Schnittstellen, REPL-Loops und Token-Streaming</a>.</li>
+<li>Zur sicheren Ausführung von Systemkommandos durch den Agenten siehe <a href="subprozess-pty-sicherheit.html">Subprozess-Steuerung, PTYs und Shell-Sicherheit</a>.</li>
+<li>Den konzeptionellen Vergleich populärer Terminal-Agenten (Aider, Claude Code, Gemini CLI) behandelt das Kapitel <a href="../cli-agenten.html">KI- und CLI-Coding-Agenten im Vergleich</a>.</li>
+</ul>
+
+                        <div class="ai-transparency-notice ai-footer-notice">
+                            <blockquote>
+                                <p><em>Diese Inhalte wurden mit Unterstützung von Künstlicher Intelligenz erstellt und redaktionell überprüft (Transparenzhinweis gemäß Art. 50 EU AI Act).</em></p>
+                            </blockquote>
+                        </div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../cli-agenten-ki-integration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../cli-agenten-ki-integration/tui-repl-terminal-streaming.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../cli-agenten-ki-integration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../cli-agenten-ki-integration/tui-repl-terminal-streaming.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
