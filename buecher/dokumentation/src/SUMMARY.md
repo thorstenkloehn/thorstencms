@@ -91,6 +91,10 @@
   - [In-line-Assistenz, Cursor-Kontexte und Ghost-Text](autorentools-ki-integration/inline-assistenz-cursor.md)
   - [Änderungsverfolgung, Revisionsmodi und Stilprüfung](autorentools-ki-integration/aenderungsverfolgung-revision.md)
   - [Vertraulichkeit, Manuskriptschutz und lokale Inferenz](autorentools-ki-integration/datensouveraenitaet-lokale-modelle.md)
+- [IDEs, Code-Editoren und KI-Framework-SDKs](ide-ki-integration.md)
+  - [LSP, Tree-sitter und symbolbewusste Kontextanalyse](ide-ki-integration/lsp-treesitter-kontext.md)
+  - [In-Editor-Diffs, AST-Patching und Puffer-Synchronisation](ide-ki-integration/inline-diff-patching.md)
+  - [Terminal-Schleifen, Test-Runner und Workspace-Sandboxing](ide-ki-integration/terminal-agenten-sandboxing.md)
 
 ---
 
