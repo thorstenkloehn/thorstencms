@@ -17,7 +17,7 @@
   "scripts": {
     "build": "mdbook build buecher/dokumentation",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d buecher/dokumentation/book --dotfiles",
+    "ver": "gh-pages -d buecher/dokumentation/book/ --nojekyll --cname thorsten.wissen-ahrensburg.de --no-history",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
