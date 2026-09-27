@@ -103,6 +103,10 @@
   - [Das Model Context Protocol (MCP) und Schnittstellenstandards](multi-agenten-ki-integration/mcp-protokoll-standards.md)
   - [Agenten-Topologien, Koordination und Rollenmodelle](multi-agenten-ki-integration/topologien-orchestrierung.md)
   - [Persistente Zustandsgraphen, Time-Travel und Human-in-the-Loop](multi-agenten-ki-integration/zustandsgraphen-human-in-the-loop.md)
+- [CLI-Agenten und KI-Framework-SDKs](cli-agenten-ki-integration.md)
+  - [Unix-Pipes, Headless-Betrieb und Standard-Streams](cli-agenten-ki-integration/unix-pipes-headless.md)
+  - [TUI-Schnittstellen, REPL-Loops und Token-Streaming](cli-agenten-ki-integration/tui-repl-terminal-streaming.md)
+  - [Subprozess-Steuerung, PTYs und Shell-Sicherheit](cli-agenten-ki-integration/subprozess-pty-sicherheit.md)
 
 ---
 

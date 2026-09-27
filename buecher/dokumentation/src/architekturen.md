@@ -15,6 +15,7 @@ Das folgende Schichtenmodell veranschaulicht, wie die in den Einzelkapiteln beha
 │                             Client- & Autorenebene                          │
 │  ├─ Web-Browser (SSE / Streams)        ├─ Mobile / Desktop-Apps (Local-First)│
 │  ├─ IDEs & Editoren (LSP / Inline-Diff)├─ Autorentools (Track Changes / FIM)│
+│  └─ CLI & Terminal (Pipes / TUIs / PTY)                                     │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ Protokolle (HTTP, SSE, LTI 1.3, WebSockets)
 ┌──────────────────────────────────────▼──────────────────────────────────────┐
@@ -55,6 +56,7 @@ Jede behandelte Architekturdomäne erfüllt eine spezifische didaktische und tec
 | **[LMS](lms-ki-integration.md)** | PostgreSQL & LRS (xAPI) | Wie wird nachhaltiges Verstehen gefördert? | Sokratischer Tutor (Scaffolding), interaktive Übungen | Didaktische Guardrails, Verbot autonomer Benotung |
 | **[Autorentools](autorentools-ki-integration.md)** | Lokale Dateien (DOCX, ODT, MD) | Wie wird der Schreib- und Denkprozess gestützt? | In-line-Vervollständigung (FIM), Ghost-Text, Stilprüfung | Native Änderungsverfolgung (Track Changes), Manuskriptschutz |
 | **[IDEs & Editoren](ide-ki-integration.md)** | Projekt-Workspace / Git | Wie wird Code präzise entwickelt und getestet? | LSP-Kontextanalyse, AST-Patching, TDD-Testschleifen | Workspace Trust, Terminal-Whitelisting, Code-Skelette |
+| **[CLI-Agenten](cli-agenten-ki-integration.md)** | Unix-Pipes / `stdout` / PTY | Wie werden Shell-Skripte und Entwickler im Terminal unterstützt? | Non-interaktives Streaming (NDJSON), TUI-REPLs, PTY-Spawning | Striktes Argument-Vectoring (`argv`), TTY-Erkennung, Timeouts |
 | **[Apps (Mobile/Desktop)](apps-ki-integration.md)** | Lokale SQLite (`sqlite-vec`) | Wie funktioniert Software offline und mobil? | On-Device-Inferenz (CoreML, ExecuTorch), Offline-RAG | Asymmetrisches Hybrid-Routing, Battery Guard |
 | **[Multi-Agenten](multi-agenten-ki-integration.md)** | PostgreSQL (`checkpoints`) | Wie lösen vernetzte Spezialisten Großaufgaben? | Supervisor-Planung, Werkzeugaufrufe über offene MCP-Server | Relationales Checkpointing, Time-Travel, Interrupts |
 
