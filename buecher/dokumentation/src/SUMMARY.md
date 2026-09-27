@@ -99,6 +99,10 @@
   - [On-Device-Inferenz und Hardwarebeschleunigung](apps-ki-integration/on-device-hardwarebeschleunigung.md)
   - [Local-First-Architekturen, Offline-RAG und CRDT-Sync](apps-ki-integration/local-first-offline-rag.md)
   - [Hybrid-Routing, Modellkaskadierung und Energiemanagement](apps-ki-integration/hybrid-routing-energiemanagement.md)
+- [Multi-Agenten-Systeme und Protokolle](multi-agenten-ki-integration.md)
+  - [Das Model Context Protocol (MCP) und Schnittstellenstandards](multi-agenten-ki-integration/mcp-protokoll-standards.md)
+  - [Agenten-Topologien, Koordination und Rollenmodelle](multi-agenten-ki-integration/topologien-orchestrierung.md)
+  - [Persistente Zustandsgraphen, Time-Travel und Human-in-the-Loop](multi-agenten-ki-integration/zustandsgraphen-human-in-the-loop.md)
 
 ---
 
